@@ -1,12 +1,14 @@
 [
-  "MEM001": {
+  {
+    "id": "MEM001",
     "name": "Anurag Kasaudhan",
     "role": "Volunteer",
     "phone": "9999999999",
     "photo": "/verify/photos/Anurag.jpg",
     "orgLogo": "/verify/photos/LOGO-4.png"
   },
-  "MEM002": {
+  {
+    "id": "MEM002",
     "name": "Shashi Kapoor Verma",
     "role": "Committee Member",
     "phone": "8888888888",
@@ -14,6 +16,7 @@
     "orgLogo": "/verify/photos/LOGO-4.png"
   }
 ]
+
 
 
 
