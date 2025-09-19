@@ -1,116 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Member Verification</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ffcccc, #ffffff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-    }
-    .card {
-      position: relative;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      width: 350px;
-      padding: 20px;
-      text-align: center;
-      border: 4px solid #d32f2f;
-    }
-    .card h2 {
-      margin: 10px 0;
-      color: #b71c1c;
-    }
-    .card img.photo {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #d32f2f;
-    }
-    .seal {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 80px;
-      opacity: 0.8;
-    }
-    .qr {
-      margin-top: 15px;
-    }
-    .print-btn {
-      margin-top: 15px;
-      background: #d32f2f;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      font-size: 14px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    @media print {
-      body {
-        background: #fff;
-      }
-      .print-btn {
-        display: none;
-      }
-      .card {
-        box-shadow: none;
-        border: 2px solid #000;
-      }
-    }
-  </style>
+<meta charset="utf-8" />
+<title>Member Verification — बाल दुर्गा पूजा समिति</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon:#9b2226; --dark:#6f1d1b; --gold:#e9c46a; --card-bg:#fff;
+  }
+  html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;}
+  body{
+    display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent 10%),
+      linear-gradient(135deg, var(--dark), var(--maroon));
+    padding:30px;
+    -webkit-print-color-adjust:exact;
+  }
+
+  /* Center container to allow print cropping */
+  .wrap{width:380px;max-width:92%;}
+
+  .card{
+    background:var(--card-bg);
+    border-radius:18px;
+    border:3px solid var(--gold);
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,0.25);
+    position:relative;
+  }
+
+  /* Verified seal (top-right) */
+  .seal{
+    position:absolute;right:14px;top:14px;
+    width:84px;height:84px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #fff8de, var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 14px rgba(0,0,0,0.15);
+    border:3px solid rgba(0,0,0,0.06);
+    z-index:6;
+  }
+  .seal svg{width:60px;height:60px;display:block;}
+
+  .header{background:var(--maroon);padding:28px 20px 64px 20px;text-align:center;color:var(--gold);}
+  .header img.logo{width:92px;height:92px;border-radius:50%;border:4px solid var(--gold);background:#fff;object-fit:contain;}
+  .header h3{margin:10px 0 0;font-size:20px;font-weight:700;text-shadow:1px 1px 2px rgba(0,0,0,0.35);}
+
+  .photo{margin-top:-62px;display:flex;justify-content:center;}
+  .photo img{width:124px;height:124px;border-radius:50%;border:6px solid #fff;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,0.2);}
+
+  .info{padding:18px 22px 12px 22px;text-align:left;}
+  .info h2{text-align:center;margin:6px 0 12px;color:var(--dark);font-size:20px;}
+  .info .row{display:flex;gap:10px;align-items:center;margin:6px 0;font-size:15px;color:#333;}
+  .label{width:95px;font-weight:600;color:var(--maroon);}
+
+  .qrcode{padding:16px 22px 26px;text-align:center;}
+  .qrcode .box{display:inline-block;padding:10px;border:4px solid var(--gold);background:#fff;}
+
+  /* Print button */
+  .controls{display:flex;justify-content:center;padding:12px 0 0;gap:10px}
+  .btn{background:var(--maroon);color:var(--gold);padding:8px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+
+  /* Print rules: remove shadows/bg, size card for printing */
+  @media print{
+    body{background:white!important;padding:0;margin:0}
+    .controls{display:none}
+    .card{box-shadow:none;border:2px solid #d4b94b;border-radius:6px;overflow:visible}
+    /* Crop to card size for single-card print (approx A6) */
+    @page { size: 88mm 125mm; margin: 6mm; }
+    body>*{display:flex;align-items:flex-start;justify-content:center}
+  }
+
+  /* responsive */
+  @media(max-width:420px){
+    .header{padding:22px 14px 56px 14px}
+  }
+</style>
 </head>
 <body>
-  <div class="card" id="memberCard">
-    <img class="seal" src="https://i.ibb.co/dMc4y5f/verified-seal.png" alt="Verified Seal">
-    <img class="photo" id="memberPhoto" src="" alt="Photo">
-    <h2 id="memberName"></h2>
-    <p><b>DOB:</b> <span id="memberDOB"></span></p>
-    <p><b>Role:</b> <span id="memberRole"></span></p>
-    <p><b>Phone:</b> <span id="memberPhone"></span></p>
-    <div class="qr">
-      <img id="qrCode" src="" alt="QR Code">
+  <div class="wrap">
+    <div class="card" id="card">
+      <div class="seal" title="Verified">
+        <!-- gold check seal SVG -->
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#b07f21" stroke-width="4"/>
+          <path d="M28 52 L44 68 L74 34" fill="none" stroke="#6b2b1f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="header">
+        <img class="logo" id="logo" src="https://baal-durga-puja-samiti.netlify.app/verify/photos/LOGO-4.png" alt="logo">
+        <h3>बाल दुर्गा पूजा समिति</h3>
+      </div>
+
+      <div class="photo">
+        <img id="photo" src="" alt="Member Photo">
+      </div>
+
+      <div class="info">
+        <h2 id="name">Loading...</h2>
+
+        <div class="row"><div class="label">Role</div><div id="role"></div></div>
+        <div class="row"><div class="label">Phone</div><div id="phone"></div></div>
+      </div>
+
+      <div class="qrcode" id="qrcode"><div class="box">QR</div></div>
     </div>
-    <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+
+    <div class="controls">
+      <button class="btn" onclick="window.print()">Print ID</button>
+      <button class="btn" id="downloadQR">Download QR</button>
+    </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
-    // URL से ID पकड़ना
-    const urlParams = new URLSearchParams(window.location.search);
-    const memberId = urlParams.get("id");
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
 
-    // JSON से data लाना
-    fetch("members.json")
-      .then(res => res.json())
+    fetch('members.json')
+      .then(r => r.json())
       .then(data => {
-        const member = data.find(m => m.id == memberId);
-        if(member){
-          document.getElementById("memberPhoto").src = member.photo;
-          document.getElementById("memberName").textContent = member.name;
-          document.getElementById("memberDOB").textContent = member.dob;
-          document.getElementById("memberRole").textContent = member.role;
-          document.getElementById("memberPhone").textContent = member.phone;
-
-          // QR code generate API
-          document.getElementById("qrCode").src =
-            `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${window.location.href}`;
-        } else {
-          document.getElementById("memberCard").innerHTML =
-            "<h2 style='color:red;'>⚠️ डेटा नहीं मिला</h2>";
+        const m = data[id];
+        if(!m){
+          document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;">❌ सदस्य नहीं मिला</div>';
+          return;
         }
+        document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120';
+        document.getElementById('name').textContent = m.name + ' (' + id + ')';
+        document.getElementById('dob').textContent = m.dob;
+        document.getElementById('role').textContent = m.role;
+        document.getElementById('phone').textContent = m.phone;
+
+        // generate QR
+        const qdiv = document.getElementById('qrcode');
+        qdiv.innerHTML = '<div class="box" id="qbox"></div>';
+        const qr = new QRCode(document.getElementById('qbox'), {
+          text: window.location.href,
+          width: 140, height: 140,
+          colorDark:"#000000", colorLight:"#ffffff", correctLevel: QRCode.CorrectLevel.H
+        });
+
+        // download QR functionality
+        document.getElementById('downloadQR').onclick = () => {
+          // find the generated img or canvas inside qbox
+          const box = document.getElementById('qbox');
+          let img = box.querySelector('img');
+          if(img){
+            const link = document.createElement('a');
+            link.href = img.src;
+            link.download = `QR-${id}.png`;
+            link.click();
+            return;
+          }
+          // qrcode lib may create canvas
+          const canvas = box.querySelector('canvas');
+          if(canvas){
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = `QR-${id}.png`;
+            link.click();
+          }
+        };
       })
-      .catch(() => {
-        document.getElementById("memberCard").innerHTML =
-          "<h2 style='color:red;'>⚠️ डेटा लोड करने में त्रुटि</h2>";
+      .catch(err => {
+        document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;">⚠️ डेटा लोड करने में त्रुटि</div>';
       });
   </script>
 </body>
