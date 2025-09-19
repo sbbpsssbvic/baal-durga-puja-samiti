@@ -4,14 +4,15 @@
     "role": "Volunteer",
     "phone": "9999999999",
     "photo": "https://via.placeholder.com/120",
-    "orgLogo": "verify/photos/LOGO-4.png"
+    "orgLogo": "/verify/photos/LOGO-4.png"
   },
   "MEM002": {
     "name": "Shashi Kapoor Verma",
     "role": "Committee Member",
     "phone": "8888888888",
     "photo": "https://via.placeholder.com/120",
-    "orgLogo": "verify/photos/LOGO-4.png"
+    "orgLogo": "/verify/photos/LOGO-4.png"
   }
 }
+
 
