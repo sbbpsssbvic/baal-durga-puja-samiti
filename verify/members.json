@@ -1,4 +1,4 @@
-{
+[
   "MEM001": {
     "name": "Anurag Kasaudhan",
     "role": "Volunteer",
@@ -13,7 +13,8 @@
     "photo": "https://via.placeholder.com/120",
     "orgLogo": "/verify/photos/LOGO-4.png"
   }
-}
+]
+
 
 
 
