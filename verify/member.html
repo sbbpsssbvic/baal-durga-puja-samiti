@@ -1,201 +1,188 @@
 <!doctype html>
 <html lang="hi">
+
 <head>
-<meta charset="utf-8">
-<title>Member Verification</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg,#4b0000,#800000,#b22222);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-  padding: 20px;
-}
-.card {
-  background: #fff;
-  border-radius: 25px;
-  border: 3px solid #ffd700;
-  width: 360px;
-  overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-  position: relative;
-  animation: fadeSlide 0.8s ease;
-}
-@keyframes fadeSlide {
-  from { opacity:0; transform: translateY(40px);}
-  to { opacity:1; transform: translateY(0);}
-}
-.header {
-  background: #900000;
-  padding: 40px 20px 70px 20px;
-  text-align: center;
-  color: #ffd700;
-  position: relative;
-}
-.header img.logo {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  border-radius: 50%;
-  border: 4px solid #ffd700;
-  box-shadow: 0 0 15px rgba(255,215,0,0.5);
-  background: #fff;
-  transition: transform 0.3s;
-}
-.header img.logo:hover{
-  transform: scale(1.1) rotate(-5deg);
-}
-.header h3 {
-  margin-top: 12px;
-  font-size: 22px;
-  font-weight: 700;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-}
-.photo {
-  margin-top: -70px;
-  display: flex;
-  justify-content: center;
-}
-.photo img {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  border: 5px solid #ffd700;
-  object-fit: cover;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.photo img:hover{
-  transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
-}
-.info {
-  padding: 20px;
-  text-align: left;
-}
-.info h2 {
-  margin: 0 0 15px 0;
-  text-align: center;
-  color: #600000;
-  font-size: 20px;
-  font-weight: 600;
-}
-.info p {
-  margin: 8px 0;
-  font-size: 15px;
-  color: #333;
-}
-.info p span.label {
-  font-weight: 600;
-  color: #900000;
-}
-.qrcode {
-  text-align: center;
-  padding: 20px;
-  position: relative;
-}
-.qrcode canvas, .qrcode img.qrimg {
-  border-radius: 15px;
-  border: 3px solid #ffd700;
-  padding: 10px;
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-}
-.verified-stamp {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 65px;
-  height: 65px;
-  transform: rotate(-15deg);
-  opacity: 0.9;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-@media print{
-  body{
-    background:white!important;
-    padding:0;
-    margin:0;
-  }
-  .card{
-    box-shadow:none;
-    border:2px solid #d4b94b;
-    border-radius:6px;
-    overflow:visible;
-  }
-  .qrcode canvas, .qrcode img.qrimg {
-    width: 120px !important;
-    height: 120px !important;
-  }
-  .verified-stamp{
-    width: 60px !important;
-    height: 60px !important;
-    top: -5px !important;
-    right: -5px !important;
-  }
-  @page { size: 88mm 125mm; margin: 6mm; }
-  body>*{
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-  }
-}
-</style>
+    <meta charset="utf-8">
+    <title>Member Verification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #800000, #b22222, #ff4d4d);
+            /* Premium aesthetic gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            border: 3px solid #e9c46a;
+            width: 360px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: #9b2226;
+            padding: 30px 20px 60px 20px;
+            text-align: center;
+            color: #e9c46a;
+        }
+
+        .header img.logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 4px solid #e9c46a;
+            background: #fff;
+        }
+
+        .header h3 {
+            margin-top: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .photo {
+            margin-top: -60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .photo img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .info {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .info h2 {
+            margin: 0 0 15px 0;
+            text-align: center;
+            color: #6f1d1b;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .info p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .info p span.label {
+            font-weight: 600;
+            color: #9b2226;
+        }
+
+        .qrcode {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .qrcode canvas,
+        .qrcode img.qrimg {
+            border: 4px solid #e9c46a;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .verified-stamp {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 65px;
+            height: 65px;
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                padding: 0;
+                margin: 0;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 2px solid #d4b94b;
+                border-radius: 6px;
+                overflow: visible;
+            }
+
+            .qrcode canvas,
+            .qrcode img.qrimg {
+                width: 120px !important;
+                height: 120px !important;
+            }
+
+            .verified-stamp {
+                width: 60px !important;
+                height: 60px !important;
+                top: -5px !important;
+                right: -5px !important;
+            }
+
+            @page {
+                size: 88mm 125mm;
+                margin: 6mm;
+            }
+
+            body>* {
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div class="card" id="card">
-  <div class="header">
-    <img class="logo" id="logo" src="https://baal-durga-puja-samiti.netlify.app/verify/photos/LOGO-4.png" alt="Committee Logo">
-    <h3>बाल दुर्गा पूजा समिति</h3>
-  </div>
-  <div class="photo">
-    <img id="photo" src="" alt="Member Photo">
-  </div>
-  <div class="info">
-    <h2 id="name">Loading...</h2>
-    <p><span class="label">Role:</span> <span id="role"></span></p>
-    <p><span class="label">Phone:</span> <span id="phone"></span></p>
-  </div>
-  <div class="qrcode" id="qrcode">
-    <img class="verified-stamp" src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" alt="Verified Seal">
-  </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-const params = new URLSearchParams(location.search);
-const id = params.get('id');
-
-fetch('members.json')
-  .then(r => r.json())
-  .then(data => {
-    const m = data[id];
-    if(!m){
-      document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;">❌ सदस्य नहीं मिला</div>';
-      return;
-    }
-    document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120';
-    document.getElementById('name').textContent = m.name + ' (' + id + ')';
-    document.getElementById('role').textContent = m.role;
-    document.getElementById('phone').textContent = m.phone;
-
-    const qrcodeDiv = document.getElementById('qrcode');
-    new QRCode(qrcodeDiv,{
-      text: window.location.href,
-      width: 120,
-      height: 120,
-      colorDark:"#000000",
-      colorLight:"#ffffff",
-      correctLevel: QRCode.CorrectLevel.H
-    });
-  })
-  .catch(err=>{
-    document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;">⚠️ डेटा लोड करने में त्रुटि</div>';
-  });
-</script>
+    <div class="card" id="card">
+        <div class="header"> <img class="logo" id="logo"
+                src="https://baal-durga-puja-samiti.netlify.app/verify/photos/LOGO-4.png" alt="Committee Logo">
+            <h3>बाल दुर्गा पूजा समिति</h3>
+        </div>
+        <div class="photo"> <img id="photo" src="" alt="Member Photo"> </div>
+        <div class="info">
+            <h2 id="name">Loading...</h2>
+            <p><span class="label">Role:</span> <span id="role"></span></p>
+            <p><span class="label">Phone:</span> <span id="phone"></span></p>
+        </div>
+        <div class="qrcode" id="qrcode"> <img class="verified-stamp"
+                src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png"
+                alt="Verified Seal"> </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script> const params = new URLSearchParams(location.search); const id = params.get('id'); fetch('members.json').then(r => r.json()).then(data => { const m = data[id]; if (!m) { document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;">❌ सदस्य नहीं मिला</div>'; return; } document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120'; document.getElementById('name').textContent = m.name + ' (' + id + ')'; document.getElementById('role').textContent = m.role; document.getElementById('phone').textContent = m.phone; const qrcodeDiv = document.getElementById('qrcode'); new QRCode(qrcodeDiv, { text: window.location.href, width: 120, height: 120, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H }); }).catch(err => { document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;">⚠️ डेटा लोड करने में त्रुटि</div>'; }); </script>
 </body>
+
 </html>
