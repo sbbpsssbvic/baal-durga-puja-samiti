@@ -164,7 +164,6 @@ fetch('members.json')
     }
     document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120';
     document.getElementById('name').textContent = m.name + ' (' + id + ')';
-    document.getElementById('dob').textContent = m.dob;
     document.getElementById('role').textContent = m.role;
     document.getElementById('phone').textContent = m.phone;
 
@@ -184,3 +183,4 @@ fetch('members.json')
 </script>
 </body>
 </html>
+
