@@ -151,7 +151,7 @@
             .verified-stamp {
                 width: 60px !important;
                 height: 60px !important;
-                bottom: -10px !important;
+                
                 right: -5px !important;
             }
 
@@ -181,16 +181,16 @@
             <p><span class="label">Role:</span> <span id="role"></span></p>
             <p><span class="label">Phone:</span> <span id="phone"></span></p>
         </div>
-        <div class="qrcode" id="qrcode" style="border: 3px solid #e9c46a;
-            border-radius: 10px;">  </div> <img class="verified-stamp"
+        <div class="qrcode" id="qrcode" > <img class="verified-stamp"
                 src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png"
-                alt="Verified Seal">
+                alt="Verified Seal"> </div> 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script> const params = new URLSearchParams(location.search); const id = params.get('id'); fetch('members.json').then(r => r.json()).then(data => { const m = data[id]; if (!m) { document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;">❌ सदस्य नहीं मिला</div>'; return; } document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120'; document.getElementById('name').textContent = m.name + ' (' + id + ')'; document.getElementById('role').textContent = m.role; document.getElementById('phone').textContent = m.phone; const qrcodeDiv = document.getElementById('qrcode'); new QRCode(qrcodeDiv, { text: window.location.href, width: 120, height: 120, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H }); }).catch(err => { document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;">⚠️ डेटा लोड करने में त्रुटि</div>'; }); </script>
 </body>
 
 </html>
+
 
 
 
