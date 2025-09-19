@@ -7,7 +7,7 @@
 <style>
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #9b1d1b, #c1121f, #e63946);
+  background: linear-gradient(135deg,#9b1d1b,#c1121f,#e63946);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,16 +94,39 @@ body {
 }
 .verified-stamp {
   position: absolute;
-  top: -10px;
-  right: -10px;
-  width: 60px;
-  height: 60px;
+  top: -8px;
+  right: -8px;
+  width: 65px;
+  height: 65px;
 }
 @media print{
-  body{background:white!important;padding:0;margin:0}
-  .card{box-shadow:none;border:2px solid #d4b94b;border-radius:6px;overflow:visible}
+  body{
+    background:white!important;
+    padding:0;
+    margin:0;
+  }
+  .card{
+    box-shadow:none;
+    border:2px solid #d4b94b;
+    border-radius:6px;
+    overflow:visible;
+  }
+  .qrcode canvas, .qrcode img.qrimg {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  .verified-stamp{
+    width: 60px !important;
+    height: 60px !important;
+    top: -5px !important;
+    right: -5px !important;
+  }
   @page { size: 88mm 125mm; margin: 6mm; }
-  body>*{display:flex;align-items:flex-start;justify-content:center}
+  body>*{
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+  }
 }
 </style>
 </head>
@@ -122,7 +145,6 @@ body {
     <p><span class="label">Phone:</span> <span id="phone"></span></p>
   </div>
   <div class="qrcode" id="qrcode">
-    <!-- Verified Stamp Image -->
     <img class="verified-stamp" src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" alt="Verified Seal">
   </div>
 </div>
