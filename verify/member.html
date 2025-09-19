@@ -7,7 +7,7 @@
 <style>
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg,#800000,#b22222,#ff4d4d); /* Premium aesthetic gradient */
+  background: linear-gradient(135deg,#4b0000,#800000,#b22222);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,50 +17,61 @@ body {
 }
 .card {
   background: #fff;
-  border-radius: 20px;
-  border: 3px solid #e9c46a;
+  border-radius: 25px;
+  border: 3px solid #ffd700;
   width: 360px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
   position: relative;
-  animation: slideUp 0.8s ease;
+  animation: fadeSlide 0.8s ease;
 }
-@keyframes slideUp {
-  from { opacity:0; transform: translateY(30px);}
+@keyframes fadeSlide {
+  from { opacity:0; transform: translateY(40px);}
   to { opacity:1; transform: translateY(0);}
 }
 .header {
-  background: #9b2226;
-  padding: 30px 20px 60px 20px;
+  background: #900000;
+  padding: 40px 20px 70px 20px;
   text-align: center;
-  color: #e9c46a;
+  color: #ffd700;
+  position: relative;
 }
 .header img.logo {
   width: 100px;
   height: 100px;
   object-fit: contain;
   border-radius: 50%;
-  border: 4px solid #e9c46a;
+  border: 4px solid #ffd700;
+  box-shadow: 0 0 15px rgba(255,215,0,0.5);
   background: #fff;
+  transition: transform 0.3s;
+}
+.header img.logo:hover{
+  transform: scale(1.1) rotate(-5deg);
 }
 .header h3 {
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 22px;
   font-weight: 700;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 .photo {
-  margin-top: -60px;
+  margin-top: -70px;
   display: flex;
   justify-content: center;
 }
 .photo img {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  border: 5px solid #fff;
+  border: 5px solid #ffd700;
   object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.photo img:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
 }
 .info {
   padding: 20px;
@@ -69,7 +80,7 @@ body {
 .info h2 {
   margin: 0 0 15px 0;
   text-align: center;
-  color: #6f1d1b;
+  color: #600000;
   font-size: 20px;
   font-weight: 600;
 }
@@ -80,7 +91,7 @@ body {
 }
 .info p span.label {
   font-weight: 600;
-  color: #9b2226;
+  color: #900000;
 }
 .qrcode {
   text-align: center;
@@ -88,9 +99,11 @@ body {
   position: relative;
 }
 .qrcode canvas, .qrcode img.qrimg {
-  border: 4px solid #e9c46a;
+  border-radius: 15px;
+  border: 3px solid #ffd700;
   padding: 10px;
   background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 .verified-stamp {
   position: absolute;
@@ -98,6 +111,9 @@ body {
   right: -8px;
   width: 65px;
   height: 65px;
+  transform: rotate(-15deg);
+  opacity: 0.9;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 @media print{
   body{
