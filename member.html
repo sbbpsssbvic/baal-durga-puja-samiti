@@ -75,7 +75,6 @@
     </div>
     <div class="info">
       <h2 id="name">Loading...</h2>
-      <p id="dob"></p>
       <p id="role"></p>
       <p id="phone"></p>
     </div>
@@ -96,7 +95,6 @@
         document.getElementById('logo').src = m.orgLogo || '';
         document.getElementById('photo').src = m.photo || '';
         document.getElementById('name').textContent = m.name + ' (' + id + ')';
-        document.getElementById('dob').innerHTML = `<b>DOB:</b> ${m.dob}`;
         document.getElementById('role').innerHTML = `<b>Role:</b> ${m.role}`;
         document.getElementById('phone').innerHTML = `<b>Phone:</b> ${m.phone}`;
       })
