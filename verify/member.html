@@ -37,27 +37,13 @@
 /* ---------- HEADER ---------- */
 .header {
   background: #9b2226;
-  padding: 55px 15px 50px 15px; /* ⬆️ Extra top space for ribbon/hole */
+  padding: 50px 15px 50px 15px; /* ⬆️ Extra top space for ribbon/hole */
   text-align: center;
   color: #e9c46a;
   overflow: hidden; /* Cutout stays inside the card */
   z-index: 1; /* Ensure header stays above other sections */
 }
 
-/* ---------- PREMIUM HOLE CUTOUT ---------- */
-.header::before {
-  content: '';
-  position: relative;
-  top: 0; /* Exact top */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 38px;
-  height: 10px;
-  background: #fff; /* Same as card background */
-  border-radius: 0 0 20px 20px; /* Semi-circle cutout */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15); /* Subtle shadow for realistic effect */
-  z-index: 2; /* Always above the header background */
-}
 
 /* ---------- PREMIUM ID CARD TITLE ---------- */
 .id-card-title {
@@ -317,6 +303,7 @@
   </script>
 </body>
 </html>
+
 
 
 
