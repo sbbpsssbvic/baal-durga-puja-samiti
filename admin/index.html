@@ -54,4 +54,97 @@
       margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-
+      font-size: 14px;
+    }
+
+    /* ---------- BUTTON ---------- */
+    .login-container button {
+      background: #9b2226;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.3s ease;
+    }
+
+    .login-container button:hover {
+      background: #7f1a1d;
+    }
+
+    /* ---------- ERROR MESSAGE ---------- */
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer-text {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .footer-text span {
+      color: #9b2226;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Samiti Logo -->
+    <img src="photos/LOGO-4.png" alt="Samiti Logo" class="logo">
+
+    <h2>बाल दुर्गा पूजा समिति</h2>
+    
+    <div class="error" id="error"></div>
+    
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+
+    <p class="footer-text">
+      Managed by <span>Admin Panel</span>
+    </p>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const error = document.getElementById('error');
+
+      // Fetch admin credentials
+      fetch('admins.json')
+        .then(response => response.json())
+        .then(data => {
+          let valid = false;
+          let adminData = null;
+
+          for (let key in data) {
+            const admin = data[key];
+            if (admin.username === username && admin.password === password) {
+              valid = true;
+              adminData = admin;
+              break;
+            }
+          }
+
+          if (valid) {
+            localStorage.setItem('loggedInAdmin', JSON.stringify(adminData));
+            window.location.href = "dashboard.html";
+          } else {
+            error.textContent = "Invalid username or password!";
+          }
+        })
+        .catch(() => {
+          error.textContent = "Error loading admin data!";
+        });
+    }
+  </script>
+</body>
+</html>
