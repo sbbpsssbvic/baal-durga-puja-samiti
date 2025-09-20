@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <style>
+    /* ---------- Global Styles ---------- */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6f0000, #200122);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      width: 300px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #9b2226;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #9b2226;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #7f1a1d;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <input type="text" id="username" placeholder="Username" autocomplete="off">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <div class="error" id="error-msg">Invalid username or password</div>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorMsg = document.getElementById('error-msg');
+
+      // Fetch JSON file
+      fetch('admins.json')
+        .then(response => response.json())
+        .then(admins => {
+          console.log("Admins JSON Loaded:", admins);
+          let found = false;
+
+          // Loop through each admin
+          for (let key in admins) {
+            const admin = admins[key];
+            if (admin.username === username && admin.password === password) {
+              found = true;
+              alert("Login Successful! Role: " + admin.role);
+
+              // Save session info to localStorage
+              localStorage.setItem('loggedInAdmin', JSON.stringify(admin));
+
+              // Redirect to dashboard
+              window.location.href = "dashboard.html";
+              break;
+            }
+          }
+
+          if (!found) {
+            errorMsg.style.display = 'block';
+          } else {
+            errorMsg.style.display = 'none';
+          }
+        })
+        .catch(err => {
+          console.error("Error loading admins.json:", err);
+          alert("Unable to load admin data.");
+        });
+    }
+  </script>
+
+</body>
+</html>

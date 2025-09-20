@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Members Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{font-family:Arial, sans-serif;background:#f6f7fb;margin:0;padding:20px}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    h2{margin:0}
+    .btn{padding:8px 12px;border:none;border-radius:8px;background:#9b2226;color:#fff;cursor:pointer}
+    .btn:hover{background:#7f1a1d}
+    .search{width:100%;max-width:420px;padding:10px;border:1px solid #ddd;border-radius:8px}
+    table{width:100%;border-collapse:collapse;background:#fff;margin-top:16px;border-radius:12px;overflow:hidden}
+    thead th{background:#9b2226;color:#fff;padding:10px}
+    tbody td{padding:10px;border-bottom:1px solid #eee;text-align:center}
+    tr:hover{background:#fff6f6;cursor:pointer}
+    .muted{color:#666;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <h2>All Members</h2>
+    <div>
+      <button class="btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+  <input id="q" class="search" placeholder="Search by name, phone or ID..." oninput="filterTable()" />
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Phone</th><th>Role</th></tr>
+    </thead>
+    <tbody id="rows">
+      <tr><td colspan="4" class="muted">Loading...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    const ID_PAGE_BASE = 'https://baal-durga-puja-samiti.netlify.app/verify/member.html?id=';
+    let members = {}; // raw map keyed by id
+    let flatList = []; // array for rendering
+
+    // guard
+    (function guard(){
+      if(!localStorage.getItem('loggedInAdmin')){
+        location.href = 'index.html';
+      }
+    })();
+
+    // load
+    (async function loadMembers(){
+      try{
+        // same site par members.json rakho (preferably /verify/members.json)
+        const res = await fetch('/verify/members.json', {cache:'no-store'});
+        members = await res.json();
+        flatList = Object.values(members);
+        render(flatList);
+      }catch(e){
+        document.getElementById('rows').innerHTML =
+          '<tr><td colspan="4" class="muted">Failed to load members.json</td></tr>';
+      }
+    })();
+
+    function render(list){
+      const tbody = document.getElementById('rows');
+      if(!list.length){
+        tbody.innerHTML = '<tr><td colspan="4" class="muted">No results</td></tr>';
+        return;
+      }
+      tbody.innerHTML = '';
+      list.forEach(m=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${m.id||''}</td><td>${m.name||''}</td><td>${m.phone||''}</td><td>${m.role||''}</td>`;
+        tr.onclick = ()=> {
+          // ✅ open your live ID card page
+          location.href = ID_PAGE_BASE + encodeURIComponent(m.id);
+        };
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterTable(){
+      const q = document.getElementById('q').value.toLowerCase().trim();
+      const filtered = flatList.filter(m=>{
+        return (m.id||'').toLowerCase().includes(q) ||
+               (m.name||'').toLowerCase().includes(q) ||
+               (m.phone||'').toLowerCase().includes(q);
+      });
+      render(filtered);
+    }
+
+    function logout(){
+      localStorage.removeItem('loggedInAdmin');
+      location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
