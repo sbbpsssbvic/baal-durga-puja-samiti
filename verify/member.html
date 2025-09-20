@@ -91,6 +91,7 @@
     }
     .verified-stamp {
       position: absolute;
+      border: none !important;
       top: 30%;
       left: 110%;
       width: 70px;
@@ -160,7 +161,7 @@
       .then(data => {
         const m = data[id]; // ✅ correct fetch
         if (!m) {
-          document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;background:#9b2226;">❌ सदस्य नहीं मिला</div>';
+          document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#9b2226;"><b>❌ सदस्य नहीं मिला</b></div>';
           return;
         }
         document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120';
@@ -180,8 +181,9 @@
         });
       })
       .catch(err => {
-        document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;background:#9b2226;">⚠️ डेटा लोड करने में त्रुटि</div>';
+        document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#9b2226;">⚠️ डेटा लोड करने में त्रुटि</div>';
       });
   </script>
 </body>
 </html>
+
