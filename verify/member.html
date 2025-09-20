@@ -1,203 +1,135 @@
-<!doctype html>
-<html lang="hi">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Member Verification</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg,#4b0000,#800000,#b22222);
-            /* Premium aesthetic gradient */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Verification</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #8e0e00, #1f1c18);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      width: 350px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    .logo {
+      width: 80px;
+      margin: 0 auto 15px;
+    }
+    .info h2 {
+      margin: 10px 0;
+      font-size: 20px;
+      color: #8e0e00;
+    }
+    .info p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+    .label {
+      font-weight: bold;
+      color: #8e0e00;
+    }
+    .qr-container {
+      margin-top: 15px;
+      position: relative;
+      display: inline-block;
+      padding: 10px;
+      border: 3px solid #e9c46a; /* golden border */
+      border-radius: 10px;
+      background: #fff;
+    }
+    #qrcode {
+      width: 120px;
+      height: 120px;
+    }
+    .verified-stamp {
+      position: absolute;
+      top: 35%;
+      left: 105%;   /* QR ke thoda side me */
+      width: 70px;
+      transform: rotate(-10deg);
+    }
+    .print-btn {
+      margin-top: 15px;
+      padding: 8px 15px;
+      border: none;
+      background: #8e0e00;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-        .card {
-            background: #fff;
-            border-radius: 20px;
-            border: 3px solid #e9c46a;
-            width: 360px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            animation: slideUp 0.8s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .header {
-            background: #9b2226;
-            padding: 30px 20px 60px 20px;
-            text-align: center;
-            color: #e9c46a;
-        }
-
-        .header img.logo {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            border-radius: 50%;
-            border: 3px solid #e9c46a;
-            background: #fff;
-        }
-
-        .header h3 {
-            margin-top: 10px;
-            font-size: 22px;
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .photo {
-            margin-top: -60px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .photo img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-        }
-
-        .info {
-            padding: 20px;
-            text-align: left;
-        }
-
-        .info h2 {
-            margin: 0 0 15px 0;
-            text-align: center;
-            color: #6f1d1b;
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .info p {
-            margin: 8px 0;
-            font-size: 15px;
-            color: #333;
-        }
-
-        .info p span.label {
-            font-weight: 600;
-            color: #9b2226;
-        }
-
-        .qrcode {
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            
-            
-        }
-
-        .qrcode canvas,
-        .qrcode img.qrimg {
-            
-            border: 3px solid #fff;
-            padding: 10px;
-            
-        }
-
-        .verified-stamp {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 65px;
-            height: 65px;
-        }
-
-        @media print {
-            body {
-                background: white !important;
-                padding: 0;
-                margin: 0;
-            }
-
-            .card {
-                box-shadow: none;
-                border: 2px solid #d4b94b;
-                border-radius: 6px;
-                overflow: visible;
-            }
-
-            .qrcode canvas,
-            .qrcode img.qrimg {
-                width: 120px !important;
-                height: 120px !important;
-                 
-            }
-
-            .verified-stamp {
-                width: 60px !important;
-                height: 60px !important;
-                
-                right: -5px !important;
-            }
-
-            @page {
-                size: 88mm 125mm;
-                margin: 6mm;
-            }
-
-            body>* {
-                display: flex;
-                align-items: flex-start;
-                justify-content: center;
-            }
-        }
-    </style>
+    /* Print styles */
+    @media print {
+      body {
+        background: #fff !important;
+      }
+      .print-btn {
+        display: none;
+      }
+      .card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        margin: 0 auto;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="card" id="card">
-        <div class="header"> <img class="logo" id="logo"
-                src="https://baal-durga-puja-samiti.netlify.app/verify/photos/LOGO-4.png" alt="Committee Logo">
-            <h3>बाल दुर्गा पूजा समिति</h3>
-        </div>
-        <div class="photo"> <img id="photo" src="" alt="Member Photo"> </div>
-        <div class="info">
-            <h2 id="name">Loading...</h2>
-            <p><span class="label">Role:</span> <span id="role"></span></p>
-            <p><span class="label">Phone:</span> <span id="phone"></span></p>
-        </div>
-        <div class="qrcode" id="qrcode" > <img class="verified-stamp"
-                src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png"
-                alt="Verified Seal"> </div> 
+  <div class="card" id="card">
+    <img src="photos/LOGO-4.png" class="logo" alt="Logo">
+    <div class="info">
+      <h2 id="name">Loading...</h2>
+      <p><span class="label">Role:</span> <span id="role"></span></p>
+      <p><span class="label">Phone:</span> <span id="phone"></span></p>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script> const params = new URLSearchParams(location.search); const id = params.get('id'); fetch('members.json').then(r => r.json()).then(data => { const m = data[id]; if (!m) { document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;">❌ <b>सदस्य नहीं मिला</b></div>'; return; } document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120'; document.getElementById('name').textContent = m.name + ' (' + id + ')'; document.getElementById('role').textContent = m.role; document.getElementById('phone').textContent = m.phone; const qrcodeDiv = document.getElementById('qrcode'); new QRCode(qrcodeDiv, { text: window.location.href, width: 120, height: 120, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H }); }).catch(err => { document.getElementById('card').innerHTML = '<div style="padding:40px;text-align:center;color:#fff;font-size:18px;">⚠️ डेटा लोड करने में त्रुटि</div>'; }); </script>
+    <div class="qr-container">
+      <div id="qrcode"></div>
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" 
+           alt="Verified" class="verified-stamp">
+    </div>
+    <button class="print-btn" onclick="window.print()">Print Card</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+
+    fetch("members.json")
+      .then(r => r.json())
+      .then(data => {
+        const m = data.members.find(x => x.id === id);
+        if (!m) {
+          document.getElementById("card").innerHTML =
+            "<p style='color:red'>⚠️ Member not found</p>";
+          return;
+        }
+        document.getElementById("name").textContent = m.name + " (" + id + ")";
+        document.getElementById("role").textContent = m.role;
+        document.getElementById("phone").textContent = m.phone;
+
+        const qrcodeDiv = document.getElementById("qrcode");
+        new QRCode(qrcodeDiv, {
+          text: window.location.href,
+          width: 120,
+          height: 120,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      });
+  </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
