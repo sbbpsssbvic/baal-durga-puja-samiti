@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ✅ Mobile Scaling Added -->
   <title>Member Verification</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ---------- GLOBAL ---------- */
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #6f0000, #200122);
@@ -16,27 +18,34 @@
       padding: 20px;
     }
 
+    /* ---------- CARD ---------- */
     .card {
       background: #fff;
       border-radius: 20px;
       border: 3px solid #e9c46a;
-      width: 360px;
+      width: 90%;
+      max-width: 380px; /* ✅ Mobile-friendly */
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       animation: slideUp 0.8s ease;
+      transition: transform 0.3s ease;
+    }
+
+    .card:active {
+      transform: scale(0.98); /* ✅ Mobile tap feedback */
     }
 
     /* ---------- HEADER ---------- */
     .header {
       background: #9b2226;
-      padding: 30px 20px 60px 20px;
+      padding: 25px 15px 55px 15px;
       text-align: center;
       color: #e9c46a;
     }
 
     .header img.logo {
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       object-fit: contain;
       border-radius: 50%;
       border: 4px solid #e9c46a;
@@ -44,22 +53,22 @@
     }
 
     .header h3 {
-      margin-top: 10px;
-      font-size: 22px;
+      margin-top: 8px;
+      font-size: 20px;
       font-weight: 700;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
 
     /* ---------- PHOTO ---------- */
     .photo {
-      margin-top: -60px;
+      margin-top: -55px;
       display: flex;
       justify-content: center;
     }
 
     .photo img {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       border: 5px solid #fff;
       object-fit: cover;
@@ -68,21 +77,21 @@
 
     /* ---------- INFO ---------- */
     .info {
-      padding: 20px;
+      padding: 15px;
       text-align: left;
     }
 
     .info h2 {
-      margin: 0 0 15px 0;
+      margin: 0 0 12px 0;
       text-align: center;
       color: #6f1d1b;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
     }
 
     .info p {
-      margin: 8px 0;
-      font-size: 15px;
+      margin: 6px 0;
+      font-size: 14px;
       color: #333;
     }
 
@@ -94,17 +103,16 @@
     /* ---------- QR + VERIFIED ---------- */
     .qrcode-container {
       display: flex;
-      justify-content: space-between; /* QR left, stamp right */
-      align-items: center;            /* Vertically center alignment */
+      justify-content: space-between;
+      align-items: center;
       width: 100%;
-      max-width: 300px;
+      max-width: 280px;
       margin: 0 auto;
-      margin-bottom: 15px; /* niche space */
+      margin-bottom: 15px;
       padding: 5px 10px;
       position: relative;
     }
 
-    /* QR wrapper with perfect border */
     .qrcode-wrapper {
       border: 3px solid #e9c46a;
       padding: 5px;
@@ -116,36 +124,71 @@
     }
 
     .qrcode canvas {
-      width: 100px !important;
-      height: 100px !important;
+      width: 90px !important;
+      height: 90px !important;
       display: block;
     }
 
-    /* Verified Stamp */
     .verified-stamp {
-      width: 80px;
-      transform: rotate(-10deg); /* Tilted classic stamp look */
+      width: 70px;
+      transform: rotate(-10deg);
       opacity: 0.9;
-      margin-left: -10px;
-      margin-right: 20px;
+      margin-left: -5px;
+      margin-right: 15px;
     }
 
     /* ---------- PRINT BUTTON ---------- */
     .print-btn {
       margin: 10px auto 20px auto;
       display: block;
-      padding: 8px 15px;
+      padding: 10px 20px;
       border: none;
       background: #9b2226;
       color: #fff;
-      border-radius: 8px;
+      font-size: 14px;
+      border-radius: 10px;
       cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .print-btn:hover {
+      background: #7f1a1d;
     }
 
     /* ---------- ANIMATION ---------- */
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 500px) {
+      .header img.logo {
+        width: 70px;
+        height: 70px;
+      }
+      .photo img {
+        width: 90px;
+        height: 90px;
+      }
+      .info h2 {
+        font-size: 16px;
+      }
+      .info p {
+        font-size: 13px;
+      }
+      .qrcode canvas {
+        width: 70px !important;
+        height: 70px !important;
+      }
+      .verified-stamp {
+        width: 55px;
+        margin-right: 10px;
+      }
+      .print-btn {
+        font-size: 13px;
+        padding: 8px 15px;
+      }
     }
 
     /* ---------- PRINT VIEW ---------- */
@@ -186,19 +229,15 @@
 
     <!-- QR Code + Verified Stamp -->
     <div class="qrcode-container">
-      <!-- QR Code Left -->
       <div class="qrcode-wrapper">
         <div class="qrcode" id="qrcode"></div>
       </div>
-
-      <!-- Verified Stamp Right -->
       <img 
         src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" 
         alt="Verified" 
         class="verified-stamp">
     </div>
 
-    <!-- Print Button -->
     <button class="print-btn" onclick="window.print()">Print Card</button>
   </div>
 
@@ -226,11 +265,11 @@
 
         // Generate QR Code
         const qrcodeDiv = document.getElementById('qrcode');
-        qrcodeDiv.innerHTML = ''; // Clear old QR
+        qrcodeDiv.innerHTML = '';
         new QRCode(qrcodeDiv, {
           text: window.location.href,
-          width: 100,
-          height: 100,
+          width: 90,
+          height: 90,
           colorDark: "#000000",
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel.H
