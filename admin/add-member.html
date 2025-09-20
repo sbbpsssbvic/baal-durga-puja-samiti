@@ -36,7 +36,6 @@
     }
 
     form input,
-    form select,
     form button {
       width: 100%;
       padding: 10px;
@@ -97,29 +96,29 @@
     <div class="status" id="statusMsg"></div>
   </div>
 
-  <!-- Firebase Scripts -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+  <!-- Firebase Scripts (Compat version for v8 style code) -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 
   <script>
     /* ---------------------- FIREBASE CONFIG ---------------------- */
-const firebaseConfig = {
-  apiKey: "AIzaSyDHzkE5CtKL--MsguovrjqIYphCy48seEY",
-  authDomain: "baaldurgapujasamiti.firebaseapp.com",
-  databaseURL: "https://baaldurgapujasamiti-default-rtdb.firebaseio.com",
-  projectId: "baaldurgapujasamiti",
-  storageBucket: "baaldurgapujasamiti.firebasestorage.app",
-  messagingSenderId: "158315013465",
-  appId: "1:158315013465:web:8a185574b043c65e1c1848",
-  measurementId: "G-L6GZVMJGVB"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyDHzkE5CtKL--MsguovrjqIYphCy48seEY",
+      authDomain: "baaldurgapujasamiti.firebaseapp.com",
+      databaseURL: "https://baaldurgapujasamiti-default-rtdb.firebaseio.com",
+      projectId: "baaldurgapujasamiti",
+      storageBucket: "baaldurgapujasamiti.appspot.com",
+      messagingSenderId: "158315013465",
+      appId: "1:158315013465:web:8a185574b043c65e1c1848",
+      measurementId: "G-L6GZVMJGVB"
+    };
 
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
 
     /* ---------------------- CLOUDINARY CONFIG ---------------------- */
-    const CLOUD_NAME = "db1vdejok";  // Replace with your Cloudinary cloud name
-    const UPLOAD_PRESET = "member-photos"; // Replace with your unsigned preset name
+    const CLOUD_NAME = "db1vdejok";
+    const UPLOAD_PRESET = "member-photos";
 
     const photoFileInput = document.getElementById('photoFile');
     const previewBox = document.getElementById('previewBox');
@@ -188,10 +187,10 @@ const firebaseConfig = {
 
           if (snapshot.exists()) {
             snapshot.forEach(childSnapshot => {
-              const lastKey = childSnapshot.key; // e.g., MEM002
+              const lastKey = childSnapshot.key;
               const lastNumber = parseInt(lastKey.replace('MEM', ''), 10);
               const nextNumber = lastNumber + 1;
-              newId = "MEM" + String(nextNumber).padStart(3, '0'); // MEM003
+              newId = "MEM" + String(nextNumber).padStart(3, '0');
             });
           }
 
