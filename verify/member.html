@@ -77,11 +77,14 @@
       font-weight: 600;
       color: #9b2226;
     }
-    .qrcode-container {
+.qrcode-container {
   position: relative;
-  display: inline-block;
-  text-align: center;
-  margin: 0 10%;
+  display: flex;
+  align-items: center;      /* QR aur stamp ko vertically center karega */
+  justify-content: center; /* Center me rakhega */
+  gap: 15px;               /* QR aur stamp ke beech me spacing */
+  margin: 0 auto;
+  padding: 10px 0;
 }
 
 /* QR wrapper to keep border and QR perfectly aligned */
@@ -101,12 +104,10 @@
   display: block;
 }
 
+/* Verified stamp perfect side alignment */
 .verified-stamp {
-  position: absolute;
-  bottom: 0px;       /* Adjust this to move vertically */
-  right: 40px;        /* Adjust this to move horizontally */
-  width: 60px;
-  transform: rotate(-15deg);
+  width: 65px;
+  transform: rotate(-10deg);
   opacity: 0.9;
 }
 
@@ -158,13 +159,16 @@
       <p><span class="label">Role:</span> <span id="role"></span></p>
       <p><span class="label">Phone:</span> <span id="phone"></span></p>
     </div>
-    <div class="qrcode-container">
+   <div class="qrcode-container">
   <div class="qrcode-wrapper">
     <div class="qrcode" id="qrcode"></div>
   </div>
-  <img src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png"
-       alt="Verified" class="verified-stamp">
+  <img 
+    src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" 
+    alt="Verified" 
+    class="verified-stamp">
 </div>
+
 
 
     <button class="print-btn" onclick="window.print()">Print Card</button>
@@ -211,6 +215,7 @@
   </script>
 </body>
 </html>
+
 
 
 
