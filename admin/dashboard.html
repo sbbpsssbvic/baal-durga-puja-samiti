@@ -2,158 +2,224 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-
-  <title>Members Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Members Dashboard</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
   <style>
-    body{font-family:Arial, sans-serif;background:#f6f7fb;margin:0;padding:20px}
-    .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-    h2{margin:0}
-    .btn{padding:8px 12px;border:none;border-radius:8px;background:#9b2226;color:#fff;cursor:pointer}
-    .btn:hover{background:#7f1a1d}
-    .search{width:100%;max-width:420px;padding:10px;border:1px solid #ddd;border-radius:8px}
-    table{width:100%;border-collapse:collapse;background:#fff;margin-top:16px;border-radius:12px;overflow:hidden}
-    thead th{background:#9b2226;color:#fff;padding:10px}
-    tbody td{padding:10px;border-bottom:1px solid #eee;text-align:center}
-    tr:hover{background:#fff6f6;cursor:pointer}
-    .muted{color:#666;font-size:13px}
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f7fb;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    .btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      background: #9b2226;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #7f1a1d;
+    }
+
+    .search {
+      width: 100%;
+      max-width: 420px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      margin-top: 16px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead th {
+      background: #9b2226;
+      color: #fff;
+      padding: 10px;
+    }
+
+    tbody td {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    tr:hover {
+      background: #fff6f6;
+      cursor: pointer;
+    }
+
+    .muted {
+      color: #666;
+      font-size: 13px;
+    }
+
+    img.member-photo {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    a.view-card {
+      color: #9b2226;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a.view-card:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="top">
     <h2>All Members</h2>
-    <div>
-      <button class="btn" onclick="logout()">Logout</button>
-    </div>
+    <button class="btn" onclick="logout()">Logout</button>
   </div>
+
+  <!-- Search Box -->
   <input id="q" class="search" placeholder="Search by name, phone or ID..." oninput="filterTable()" />
 
+  <!-- Members Table -->
   <table>
     <thead>
-      <tr><th>ID</th><th>Name</th><th>Phone</th><th>Role</th></tr>
+      <tr>
+        <th>ID</th>
+        <th>Photo</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
     </thead>
     <tbody id="rows">
-      <tr><td colspan="4" class="muted">Loading...</td></tr>
+      <tr><td colspan="6" class="muted">Loading...</td></tr>
     </tbody>
   </table>
 
   <script>
+    /* ---------------------- FIREBASE CONFIG ---------------------- */
+    const firebaseConfig = {
+      apiKey: "AIzaSyDHzkE5CtKL--MsguovrjqIYphCy48seEY",
+      authDomain: "baaldurgapujasamiti.firebaseapp.com",
+      databaseURL: "https://baaldurgapujasamiti-default-rtdb.firebaseio.com",
+      projectId: "baaldurgapujasamiti",
+      storageBucket: "baaldurgapujasamiti.appspot.com",
+      messagingSenderId: "158315013465",
+      appId: "1:158315013465:web:8a185574b043c65e1c1848",
+      measurementId: "G-L6GZVMJGVB"
+    };
 
-
-
-    <script>
-  /* ---------------------- FIREBASE CONFIG ---------------------- */
-  const firebaseConfig = {
-    apiKey: "AIzaSyDHzkE5CtKL--MsguovrjqIYphCy48seEY",
-    authDomain: "baaldurgapujasamiti.firebaseapp.com",
-    databaseURL: "https://baaldurgapujasamiti-default-rtdb.firebaseio.com",
-    projectId: "baaldurgapujasamiti",
-    storageBucket: "baaldurgapujasamiti.appspot.com",
-    messagingSenderId: "158315013465",
-    appId: "1:158315013465:web:8a185574b043c65e1c1848",
-    measurementId: "G-L6GZVMJGVB"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const database = firebase.database();
-
-  /* ---------------------- FETCH MEMBERS ---------------------- */
-  const membersTable = document.getElementById('membersTableBody'); // <tbody> ke liye
-
-  function loadMembers() {
-    database.ref('members').once('value')
-      .then(snapshot => {
-        membersTable.innerHTML = ""; // Clear previous data
-
-        snapshot.forEach(childSnapshot => {
-          const memberId = childSnapshot.key;
-          const member = childSnapshot.val();
-
-          // Add row dynamically
-          const row = `
-            <tr>
-              <td>${memberId}</td>
-              <td>${member.name}</td>
-              <td>${member.phone}</td>
-              <td>${member.role}</td>
-              <td><img src="${member.photo}" alt="${member.name}" width="50" style="border-radius:6px;"></td>
-              <td>
-                <a href="https://baal-durga-puja-samiti.netlify.app/verify/member.html?id=${memberId}" target="_blank">View Card</a>
-              </td>
-            </tr>
-          `;
-          membersTable.innerHTML += row;
-        });
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  }
-
-  // Load data on page load
-  window.onload = loadMembers;
-</script>
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
 
     const ID_PAGE_BASE = 'https://baal-durga-puja-samiti.netlify.app/verify/member.html?id=';
-    let members = {}; // raw map keyed by id
-    let flatList = []; // array for rendering
+    let flatList = [];
 
-    // guard
-    (function guard(){
-      if(!localStorage.getItem('loggedInAdmin')){
+    /* ---------------------- LOGIN GUARD ---------------------- */
+    (function guard() {
+      if (!localStorage.getItem('loggedInAdmin')) {
         location.href = 'index.html';
       }
     })();
 
-    // load
-    (async function loadMembers(){
-      try{
-        // same site par members.json rakho (preferably /verify/members.json)
-        const res = await fetch('/verify/members.json', {cache:'no-store'});
-        members = await res.json();
-        flatList = Object.values(members);
-        render(flatList);
-      }catch(e){
-        document.getElementById('rows').innerHTML =
-          '<tr><td colspan="4" class="muted">Failed to load members.json</td></tr>';
-      }
-    })();
+    /* ---------------------- LOAD MEMBERS ---------------------- */
+    function loadMembers() {
+      database.ref('members').once('value')
+        .then(snapshot => {
+          flatList = [];
+          snapshot.forEach(childSnapshot => {
+            const memberId = childSnapshot.key;
+            const memberData = childSnapshot.val();
+            flatList.push({
+              id: memberId,
+              ...memberData
+            });
+          });
+          render(flatList);
+        })
+        .catch(error => {
+          console.error("Error loading members:", error);
+          document.getElementById('rows').innerHTML =
+            '<tr><td colspan="6" class="muted">❌ Failed to load members.</td></tr>';
+        });
+    }
 
-    function render(list){
+    /* ---------------------- RENDER TABLE ---------------------- */
+    function render(list) {
       const tbody = document.getElementById('rows');
-      if(!list.length){
-        tbody.innerHTML = '<tr><td colspan="4" class="muted">No results</td></tr>';
+      if (!list.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="muted">No members found</td></tr>';
         return;
       }
+
       tbody.innerHTML = '';
-      list.forEach(m=>{
+      list.forEach(m => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${m.id||''}</td><td>${m.name||''}</td><td>${m.phone||''}</td><td>${m.role||''}</td>`;
-        tr.onclick = ()=> {
-          // ✅ open your live ID card page
-          location.href = ID_PAGE_BASE + encodeURIComponent(m.id);
-        };
+        tr.innerHTML = `
+          <td>${m.id || ''}</td>
+          <td><img src="${m.photo || ''}" class="member-photo" alt="${m.name || 'Member'}"></td>
+          <td>${m.name || ''}</td>
+          <td>${m.phone || ''}</td>
+          <td>${m.role || ''}</td>
+          <td>
+            <a class="view-card" href="${ID_PAGE_BASE + encodeURIComponent(m.id)}" target="_blank">View Card</a>
+          </td>
+        `;
         tbody.appendChild(tr);
       });
     }
 
-    function filterTable(){
+    /* ---------------------- SEARCH FILTER ---------------------- */
+    function filterTable() {
       const q = document.getElementById('q').value.toLowerCase().trim();
-      const filtered = flatList.filter(m=>{
-        return (m.id||'').toLowerCase().includes(q) ||
-               (m.name||'').toLowerCase().includes(q) ||
-               (m.phone||'').toLowerCase().includes(q);
+      const filtered = flatList.filter(m => {
+        return (m.id || '').toLowerCase().includes(q) ||
+               (m.name || '').toLowerCase().includes(q) ||
+               (m.phone || '').toLowerCase().includes(q) ||
+               (m.role || '').toLowerCase().includes(q);
       });
       render(filtered);
     }
 
-    function logout(){
+    /* ---------------------- LOGOUT ---------------------- */
+    function logout() {
       localStorage.removeItem('loggedInAdmin');
       location.href = 'index.html';
     }
+
+    /* ---------------------- INIT ---------------------- */
+    window.onload = loadMembers;
   </script>
 </body>
 </html>
-
