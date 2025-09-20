@@ -38,11 +38,23 @@
     /* ---------- HEADER ---------- */
     .header {
       background: #9b2226;
-      padding: 25px 15px 50px 15px;
+      padding: 40px 15px 50px 15px;
       text-align: center;
       color: #e9c46a;
     }
-
+/* Optional: A subtle cutout indicator for the hole */
+.header::before {
+  content: '';
+  position: absolute;
+  top: 12px; /* Distance from very top */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 15px;
+  background: #fff;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
 /* Premium ID CARD styling */
 .id-card-title {
   margin-top: -10px; /* 🔹 Space between heading and border line */
@@ -301,6 +313,7 @@
   </script>
 </body>
 </html>
+
 
 
 
