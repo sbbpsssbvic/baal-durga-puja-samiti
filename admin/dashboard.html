@@ -2,12 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Members Dashboard</title>
-
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+  <title>Members Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
     body {
@@ -27,6 +25,7 @@
 
     h2 {
       margin: 0;
+      color: #333;
     }
 
     .btn {
@@ -36,10 +35,22 @@
       background: #9b2226;
       color: #fff;
       cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease;
     }
 
     .btn:hover {
       background: #7f1a1d;
+    }
+
+    .btn-secondary {
+      background: #e9c46a;
+      color: #333;
+      margin-left: 10px;
+    }
+
+    .btn-secondary:hover {
+      background: #d4af37;
     }
 
     .search {
@@ -70,7 +81,6 @@
       padding: 10px;
       border-bottom: 1px solid #eee;
       text-align: center;
-      vertical-align: middle;
     }
 
     tr:hover {
@@ -83,43 +93,56 @@
       font-size: 13px;
     }
 
-    img.member-photo {
-      width: 50px;
-      height: 50px;
-      border-radius: 6px;
-      object-fit: cover;
-    }
-
-    a.view-card {
-      color: #9b2226;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    a.view-card:hover {
-      text-decoration: underline;
+    /* Responsive */
+    @media (max-width: 600px) {
+      thead {
+        display: none;
+      }
+      table, tbody, tr, td {
+        display: block;
+        width: 100%;
+      }
+      tr {
+        margin-bottom: 15px;
+        background: #fff;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+      td {
+        text-align: left;
+        padding: 8px 5px;
+        border: none;
+      }
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #9b2226;
+        display: block;
+      }
     }
   </style>
 </head>
 <body>
   <div class="top">
     <h2>All Members</h2>
-    <button class="btn" onclick="logout()">Logout</button>
+    <div>
+      <button class="btn btn-secondary" onclick="location.href='add-member.html'">➕ Add Member</button>
+      <button class="btn" onclick="logout()">Logout</button>
+    </div>
   </div>
 
-  <!-- Search Box -->
   <input id="q" class="search" placeholder="Search by name, phone or ID..." oninput="filterTable()" />
 
-  <!-- Members Table -->
   <table>
     <thead>
       <tr>
         <th>ID</th>
-        <th>Photo</th>
         <th>Name</th>
         <th>Phone</th>
         <th>Role</th>
-        <th>Action</th>
+        <th>Photo</th>
+        <th>View</th>
       </tr>
     </thead>
     <tbody id="rows">
@@ -143,73 +166,62 @@
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
 
-    const ID_PAGE_BASE = 'https://baal-durga-puja-samiti.netlify.app/verify/member.html?id=';
-    let flatList = [];
+    /* ---------------------- FETCH MEMBERS ---------------------- */
+    const tbody = document.getElementById('rows');
 
-    /* ---------------------- LOGIN GUARD ---------------------- */
-    (function guard() {
-      if (!localStorage.getItem('loggedInAdmin')) {
-        location.href = 'index.html';
-      }
-    })();
-
-    /* ---------------------- LOAD MEMBERS ---------------------- */
     function loadMembers() {
       database.ref('members').once('value')
         .then(snapshot => {
-          flatList = [];
+          tbody.innerHTML = ""; // Clear old rows
+
+          if (!snapshot.exists()) {
+            tbody.innerHTML = '<tr><td colspan="6" class="muted">No members found</td></tr>';
+            return;
+          }
+
           snapshot.forEach(childSnapshot => {
             const memberId = childSnapshot.key;
-            const memberData = childSnapshot.val();
-            flatList.push({
-              id: memberId,
-              ...memberData
-            });
+            const member = childSnapshot.val();
+
+            const row = `
+              <tr>
+                <td data-label="ID">${memberId}</td>
+                <td data-label="Name">${member.name}</td>
+                <td data-label="Phone">${member.phone}</td>
+                <td data-label="Role">${member.role}</td>
+                <td data-label="Photo"><img src="${member.photo}" alt="${member.name}" width="40" style="border-radius:6px;"></td>
+                <td data-label="View">
+                  <a href="https://baal-durga-puja-samiti.netlify.app/verify/member.html?id=${memberId}" target="_blank">View Card</a>
+                </td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
           });
-          render(flatList);
         })
         .catch(error => {
-          console.error("Error loading members:", error);
-          document.getElementById('rows').innerHTML =
-            '<tr><td colspan="6" class="muted">❌ Failed to load members.</td></tr>';
+          console.error("Error fetching data:", error);
+          tbody.innerHTML = '<tr><td colspan="6" class="muted">Error loading members</td></tr>';
         });
     }
 
-    /* ---------------------- RENDER TABLE ---------------------- */
-    function render(list) {
-      const tbody = document.getElementById('rows');
-      if (!list.length) {
-        tbody.innerHTML = '<tr><td colspan="6" class="muted">No members found</td></tr>';
-        return;
-      }
-
-      tbody.innerHTML = '';
-      list.forEach(m => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${m.id || ''}</td>
-          <td><img src="${m.photo || ''}" class="member-photo" alt="${m.name || 'Member'}"></td>
-          <td>${m.name || ''}</td>
-          <td>${m.phone || ''}</td>
-          <td>${m.role || ''}</td>
-          <td>
-            <a class="view-card" href="${ID_PAGE_BASE + encodeURIComponent(m.id)}" target="_blank">View Card</a>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    /* ---------------------- SEARCH FILTER ---------------------- */
+    /* ---------------------- SEARCH ---------------------- */
     function filterTable() {
-      const q = document.getElementById('q').value.toLowerCase().trim();
-      const filtered = flatList.filter(m => {
-        return (m.id || '').toLowerCase().includes(q) ||
-               (m.name || '').toLowerCase().includes(q) ||
-               (m.phone || '').toLowerCase().includes(q) ||
-               (m.role || '').toLowerCase().includes(q);
+      const query = document.getElementById('q').value.toLowerCase();
+      const rows = tbody.getElementsByTagName('tr');
+
+      Array.from(rows).forEach(row => {
+        const cells = row.getElementsByTagName('td');
+        let match = false;
+
+        for (let i = 0; i < 4; i++) {
+          if (cells[i] && cells[i].innerText.toLowerCase().includes(query)) {
+            match = true;
+            break;
+          }
+        }
+
+        row.style.display = match ? '' : 'none';
       });
-      render(filtered);
     }
 
     /* ---------------------- LOGOUT ---------------------- */
@@ -218,7 +230,7 @@
       location.href = 'index.html';
     }
 
-    /* ---------------------- INIT ---------------------- */
+    // Load members on page load
     window.onload = loadMembers;
   </script>
 </body>
