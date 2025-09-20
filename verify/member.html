@@ -40,7 +40,6 @@
   padding: 55px 15px 50px 15px; /* ⬆️ Extra top space for ribbon/hole */
   text-align: center;
   color: #e9c46a;
-  position: relative; /* Needed for the cutout to position correctly */
   overflow: hidden; /* Cutout stays inside the card */
   z-index: 1; /* Ensure header stays above other sections */
 }
@@ -53,7 +52,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 38px;
-  height: 18px;
+  height: 10px;
   background: #fff; /* Same as card background */
   border-radius: 0 0 20px 20px; /* Semi-circle cutout */
   box-shadow: 0 2px 4px rgba(0,0,0,0.15); /* Subtle shadow for realistic effect */
@@ -318,6 +317,7 @@
   </script>
 </body>
 </html>
+
 
 
 
