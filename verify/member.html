@@ -40,25 +40,43 @@
   padding: 55px 15px 50px 15px; /* ⬆️ Extra top space for ribbon/hole */
   text-align: center;
   color: #e9c46a;
-  position: relative; /* ✅ for absolute cutout positioning */
-  overflow: hidden;   /* ✅ ensures the cutout stays inside card */
+  position: relative; /* Needed for the cutout to position correctly */
+  overflow: hidden; /* Cutout stays inside the card */
+  z-index: 1; /* Ensure header stays above other sections */
 }
 
 /* ---------- PREMIUM HOLE CUTOUT ---------- */
 .header::before {
   content: '';
   position: absolute;
-  top: 8px; /* Distance from top edge */
+  top: 0; /* Exact top */
   left: 50%;
   transform: translateX(-50%);
-  width: 38px; /* Width of the cutout */
-  height: 12px; /* Height of the cutout */
+  width: 38px;
+  height: 18px;
   background: #fff; /* Same as card background */
-  border-radius: 0 0 20px 20px; /* Semi-circle style */
-  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2); /* Inner shadow for realistic effect */
-  z-index: 5; /* Ensure always visible */
+  border-radius: 0 0 20px 20px; /* Semi-circle cutout */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15); /* Subtle shadow for realistic effect */
+  z-index: 2; /* Always above the header background */
 }
 
+/* ---------- PREMIUM ID CARD TITLE ---------- */
+.id-card-title {
+  margin-top: -10px;
+  padding-top: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #e9c46a;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+
+  /* Classy thin divider line */
+  border-top: 1px solid rgba(233, 196, 106, 0.6);
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
     
     .header img.logo {
       width: 90px;
@@ -300,6 +318,7 @@
   </script>
 </body>
 </html>
+
 
 
 
