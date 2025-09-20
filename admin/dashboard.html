@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
   <title>Members Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
@@ -37,6 +40,62 @@
   </table>
 
   <script>
+
+
+
+    <script>
+  /* ---------------------- FIREBASE CONFIG ---------------------- */
+  const firebaseConfig = {
+    apiKey: "AIzaSyDHzkE5CtKL--MsguovrjqIYphCy48seEY",
+    authDomain: "baaldurgapujasamiti.firebaseapp.com",
+    databaseURL: "https://baaldurgapujasamiti-default-rtdb.firebaseio.com",
+    projectId: "baaldurgapujasamiti",
+    storageBucket: "baaldurgapujasamiti.appspot.com",
+    messagingSenderId: "158315013465",
+    appId: "1:158315013465:web:8a185574b043c65e1c1848",
+    measurementId: "G-L6GZVMJGVB"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  /* ---------------------- FETCH MEMBERS ---------------------- */
+  const membersTable = document.getElementById('membersTableBody'); // <tbody> ke liye
+
+  function loadMembers() {
+    database.ref('members').once('value')
+      .then(snapshot => {
+        membersTable.innerHTML = ""; // Clear previous data
+
+        snapshot.forEach(childSnapshot => {
+          const memberId = childSnapshot.key;
+          const member = childSnapshot.val();
+
+          // Add row dynamically
+          const row = `
+            <tr>
+              <td>${memberId}</td>
+              <td>${member.name}</td>
+              <td>${member.phone}</td>
+              <td>${member.role}</td>
+              <td><img src="${member.photo}" alt="${member.name}" width="50" style="border-radius:6px;"></td>
+              <td>
+                <a href="https://baal-durga-puja-samiti.netlify.app/verify/member.html?id=${memberId}" target="_blank">View Card</a>
+              </td>
+            </tr>
+          `;
+          membersTable.innerHTML += row;
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  }
+
+  // Load data on page load
+  window.onload = loadMembers;
+</script>
+
     const ID_PAGE_BASE = 'https://baal-durga-puja-samiti.netlify.app/verify/member.html?id=';
     let members = {}; // raw map keyed by id
     let flatList = []; // array for rendering
@@ -97,3 +156,4 @@
   </script>
 </body>
 </html>
+
