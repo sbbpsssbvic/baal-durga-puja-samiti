@@ -114,21 +114,39 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Print styles */
-    @media print {
-      body {
-        background: #fff !important;
-        padding:0;
-      }
-      .print-btn {
-        display: none;
-      }
-      .card {
-        box-shadow: none;
-        border: 2px solid #000;
-        margin: 0 auto;
-      }
-    }
+    /* Print specific styles */
+@media print {
+  body {
+    background: none !important; /* background हटेगा */
+  }
+
+  .id-card {
+    width: 85.6mm;   /* Standard ID card width */
+    height: 54mm;    /* Standard ID card height */
+    border: 1px solid #000;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    margin: 0 auto;
+  }
+
+  /* QR & seal भी proportion में fix */
+  .qr-code img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .verified-seal {
+    width: 70px;
+    height: auto;
+  }
+
+  /* हर पेज पर सिर्फ card print हो */
+  @page {
+    size: 85.6mm 54mm;
+    margin: 0;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -188,6 +206,7 @@
   </script>
 </body>
 </html>
+
 
 
 
