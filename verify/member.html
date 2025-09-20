@@ -27,9 +27,9 @@
   max-width: 370px;         /* ❗ Compact desktop look */
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  animation: fadeInScale 0.8s ease;
+      animation: slideUp 0.8s ease;
 }
-@keyframes fadeInScale {
+@keyframes slideUp {
   0% { opacity: 0; transform: scale(0.8); }
   100% { opacity: 1; transform: scale(1); }
 }
@@ -164,18 +164,14 @@
     }
 
     .verified-stamp {
-      background: linear-gradient(45deg, #fff, #ddd, #aaa, #fff);
-  background-size: 200% 200%;
-  animation: shine 3s infinite linear;
+
       width: 70px;
       transform: rotate(-10deg);
       opacity: 0.9;
       margin-left: -5px;
       margin-right: 15px;
     }
-@keyframes shine {
-  0% { background-position: 0 0; }
-  100% { background-position: 200% 200%; }
+
 }
     /* ---------- PRINT BUTTON ---------- */
     .print-btn {
@@ -356,6 +352,7 @@
   </script>
 </body>
 </html>
+
 
 
 
