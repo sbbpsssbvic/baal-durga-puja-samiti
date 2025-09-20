@@ -41,23 +41,9 @@
   padding: 55px 15px 50px 15px; /* ⬆️ Extra top space for ribbon/hole */
   text-align: center;
   color: #e9c46a;
-  position: relative;
   overflow: hidden; /* ✅ ensures the hole cut mark stays inside */
 }
-/* Optional: A subtle cutout indicator for the hole */
-.header::before {
-  content: '';
-  position: absolute;
-  top: 8px; /* Distance from top */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 18px;
-  background: #fff; /* White to match card background */
-  border-radius: 0 0 20px 20px; /* Semi-circle cutout */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* 3D realistic effect */
-  z-index: 2; /* ✅ Always on top */
-}
+
 /* Premium ID CARD styling */
 .id-card-title {
   margin-top: -10px; /* 🔹 Space between heading and border line */
@@ -316,6 +302,7 @@
   </script>
 </body>
 </html>
+
 
 
 
