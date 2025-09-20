@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #8e0e00, #1f1c18);
+      background: linear-gradient(135deg, #6f0000, #200122);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -110,7 +110,7 @@
     fetch("members.json")
       .then(r => r.json())
       .then(data => {
-        const m = data.members.find(x => x.id === id);
+        const m = data[id];  // ✅ yahi fix hai
         if (!m) {
           document.getElementById("card").innerHTML =
             "<p style='color:red'>⚠️ Member not found</p>";
@@ -121,6 +121,7 @@
         document.getElementById("phone").textContent = m.phone;
 
         const qrcodeDiv = document.getElementById("qrcode");
+        qrcodeDiv.innerHTML = ""; // purana clear
         new QRCode(qrcodeDiv, {
           text: window.location.href,
           width: 120,
@@ -129,6 +130,10 @@
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel.H
         });
+      })
+      .catch(err => {
+        document.getElementById("card").innerHTML =
+          "<p style='color:red'>⚠️ Data load error</p>";
       });
   </script>
 </body>
