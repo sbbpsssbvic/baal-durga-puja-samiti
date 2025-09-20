@@ -18,50 +18,63 @@
       padding: 20px;
     }
 
-    /* ---------- CARD ---------- */
-    .card {
-      background: #fff;
-      border-radius: 20px;
-      border: 3px solid #e9c46a;
-      width: 50%;
-      max-width: 380px; /* ✅ Mobile-friendly */
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      animation: slideUp 0.8s ease;
-      transition: transform 0.3s ease;
-    }
+/* ---------- CARD ---------- */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  border: 3px solid #e9c46a;
+  width: 85%;              /* Desktop par slightly narrow */
+  max-width: 320px;         /* ❗ Compact desktop look */
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  animation: slideUp 0.8s ease;
+  transition: transform 0.3s ease;
+}
 
-    .card:active {
-      transform: scale(0.98); /* ✅ Mobile tap feedback */
-    }
+.card:active {
+  transform: scale(0.98); /* ✅ Mobile tap feedback */
+}
 /* ---------- HEADER ---------- */
 .header {
   background: #9b2226;
-  padding: 50px 15px 50px 15px; /* ⬆️ Extra top space for ribbon/hole */
+  padding: 50px 15px 45px 15px; /* Extra top space for future ribbon/hook */
   text-align: center;
   color: #e9c46a;
-  overflow: hidden; /* Cutout stays inside the card */
-  z-index: 1; /* Ensure header stays above other sections */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 
-/* ---------- PREMIUM ID CARD TITLE ---------- */
+/* ---------- ID CARD TITLE ---------- */
 .id-card-title {
   margin-top: -10px;
   padding-top: 6px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 3px;
   color: #e9c46a;
   text-transform: uppercase;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-
-  /* Classy thin divider line */
   border-top: 1px solid rgba(233, 196, 106, 0.6);
   width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 500px) {
+  .card {
+    width: 90%;           /* Mobile par thoda bada */
+    max-width: 360px;
+  }
+
+  .header {
+    padding: 55px 15px 50px 15px; /* Mobile par thoda zyada top space */
+  }
+}
+
+
     
     .header img.logo {
       width: 90px;
@@ -303,6 +316,7 @@
   </script>
 </body>
 </html>
+
 
 
 
