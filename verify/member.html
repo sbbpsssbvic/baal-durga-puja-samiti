@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ✅ Mobile Scaling Added -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Member Verification - बाल दुर्गा पूजा समिति</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     /* ---------- GLOBAL ---------- */
     body {
@@ -18,66 +19,38 @@
       padding: 20px;
     }
 
-/* ---------- CARD ---------- */
-.card {
-  background: #fff;
-  border-radius: 20px;
-  border: 3px solid #e9c46a;
-  width: 90%;              /* Desktop par slightly narrow */
-  max-width: 370px;         /* ❗ Compact desktop look */
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    /* ---------- CARD ---------- */
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      border: 3px solid #e9c46a;
+      width: 90%;
+      max-width: 370px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       animation: slideUp 0.8s ease;
-    transition: transform 0.3s ease;
-}
-  @keyframes slideUp {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
-}
-.card:active {
-  transform: scale(0.98); /* ✅ Mobile tap feedback */
-}
-/* ---------- HEADER ---------- */
-.header {
-  background: #9b2226;
-  padding: 50px 15px 45px 15px; /* Extra top space for future ribbon/hook */
-  text-align: center;
-  color: #e9c46a;
-  overflow: hidden;
-  z-index: 1;
-}
+      transition: transform 0.3s ease;
+    }
 
+    @keyframes slideUp {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
 
-/* ---------- ID CARD TITLE ---------- */
-.id-card-title {
-  margin-top: -10px;
-  padding-top: 6px;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: #e9c46a;
-  text-transform: uppercase;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  border-top: 1px solid rgba(233, 196, 106, 0.6);
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-}
+    .card:active {
+      transform: scale(0.98);
+    }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 500px) {
-  .card {
-    width: 90%;           /* Mobile par thoda bada */
-    max-width: 360px;
-  }
+    /* ---------- HEADER ---------- */
+    .header {
+      background: #9b2226;
+      padding: 50px 15px 45px 15px;
+      text-align: center;
+      color: #e9c46a;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-  .header {
-    padding: 55px 15px 50px 15px; /* Mobile par thoda zyada top space */
-  }
-}
-
-
-    
     .header img.logo {
       width: 93px;
       height: 93px;
@@ -92,6 +65,22 @@
       font-size: 22px;
       font-weight: 700;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* ---------- ID CARD TITLE ---------- */
+    .id-card-title {
+      margin-top: -10px;
+      padding-top: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #e9c46a;
+      text-transform: uppercase;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+      border-top: 1px solid rgba(233, 196, 106, 0.6);
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* ---------- PHOTO ---------- */
@@ -142,10 +131,8 @@
       align-items: center;
       width: 100%;
       max-width: 280px;
-      margin: 0 auto;
-      margin-bottom: 15px;
+      margin: 0 auto 15px auto;
       padding: 5px 10px;
-      position: relative;
     }
 
     .qrcode-wrapper {
@@ -153,24 +140,20 @@
       padding: 5px;
       background: #fff;
       border-radius: 10px;
-      display: inline-block;
-      width: fit-content;
-      height: fit-content;
     }
 
     .qrcode canvas {
       width: 90px !important;
       height: 90px !important;
-      display: block;
     }
-.verified-stamp {
-  width: 70px; 
-  transform: rotate(-10deg); 
-  opacity: 0.9; 
-  margin-left: -5px; 
-  margin-right: 15px; 
-}
 
+    .verified-stamp {
+      width: 70px;
+      transform: rotate(-10deg);
+      opacity: 0.9;
+      margin-left: -5px;
+      margin-right: 15px;
+    }
 
     /* ---------- PRINT BUTTON ---------- */
     .print-btn {
@@ -190,90 +173,51 @@
       background: #7f1a1d;
     }
 
-    /* ---------- ANIMATION ---------- */
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 500px) {
-      .header img.logo {
-        width: 81px;
-        height: 81px;
-      }
-      .photo img {
-        width: 93px;
-        height: 93px;
-      }
-      .info h2 {
-        font-size: 16px;
-      }
-      .info p {
-        font-size: 13px;
-      }
-      .qrcode canvas {
-        width: 70px !important;
-        height: 70px !important;
-      }
-      .verified-stamp {
-        width: 55px;
-        margin-right: 10px;
-      }
-      .print-btn {
-        font-size: 13px;
-        padding: 8px 15px;
-      }
+      .header img.logo { width: 81px; height: 81px; }
+      .photo img { width: 93px; height: 93px; }
+      .info h2 { font-size: 16px; }
+      .info p { font-size: 13px; }
+      .qrcode canvas { width: 70px !important; height: 70px !important; }
+      .verified-stamp { width: 55px; margin-right: 10px; }
+      .print-btn { font-size: 13px; padding: 8px 15px; }
     }
 
-/* ---------- PRINT VIEW ---------- */
-@media print {
-  body {
-    background: #fff !important;
-    margin: 0;
-    padding: 0;
-  }
+    /* ---------- PRINT VIEW ---------- */
+    @media print {
+      body {
+        background: #fff !important;
+        margin: 0;
+        padding: 0;
+      }
 
-  /* Sirf card ko center aur perfect size me rakhe */
-  .card {
-    position: relative;
-    margin: 0 auto;
-    box-shadow: none;
-    border: 2px solid #000;
-    width: 350px; /* Fixed width for proper scaling */
-    max-width: 350px;
-    page-break-inside: avoid;
-    transform: none;
-  }
+      .card {
+        position: relative;
+        margin: 0 auto;
+        box-shadow: none;
+        border: 2px solid #000;
+        width: 350px;
+        max-width: 350px;
+        page-break-inside: avoid;
+        transform: none;
+      }
 
-  /* Gradient aur red header ke liye forced print colors */
-  .header {
-    background: #9b2226 !important; /* Dark red header */
-    color: #e9c46a !important;      /* Golden text */
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
+      .header {
+        background: #9b2226 !important;
+        color: #e9c46a !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
 
-  /* Golden divider under "ID CARD" */
-  .id-card-title {
-    border-top: 1px solid rgba(233, 196, 106, 0.8) !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
+      .id-card-title {
+        border-top: 1px solid rgba(233, 196, 106, 0.8) !important;
+      }
 
-  /* Print button hide kare */
-  .print-btn {
-    display: none !important;
-  }
-
-  /* Mobile par proper zoom aur scaling */
-  html, body {
-    height: auto;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-}
-
+      .print-btn {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -301,99 +245,83 @@
       <div class="qrcode-wrapper">
         <div class="qrcode" id="qrcode"></div>
       </div>
-      <img 
-        src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" 
-        alt="Verified" 
-        class="verified-stamp">
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" 
+           alt="Verified" class="verified-stamp">
     </div>
 
     <button class="print-btn" onclick="window.print()">Print Card</button>
   </div>
 
-  <!-- QR Code Library -->
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
   <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDHzkE5CtKL--MsguovrjqIYphCy48seEY",
+      authDomain: "baaldurgapujasamiti.firebaseapp.com",
+      databaseURL: "https://baaldurgapujasamiti-default-rtdb.firebaseio.com",
+      projectId: "baaldurgapujasamiti",
+      storageBucket: "baaldurgapujasamiti.appspot.com",
+      messagingSenderId: "158315013465",
+      appId: "1:158315013465:web:8a185574b043c65e1c1848",
+      measurementId: "G-L6GZVMJGVB"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // URL se member ID nikalna
     const params = new URLSearchParams(location.search);
     const id = params.get('id');
 
-    fetch('members.json')
-      .then(r => r.json())
-      .then(data => {
-        const m = data[id];
-        if (!m) {
-          document.getElementById('card').innerHTML =
-            '<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;"><b>❌ सदस्य नहीं मिला</b></div>';
-          return;
-        }
+    const cardDiv = document.getElementById('card');
 
-        // Update member data
-        document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120';
-        document.getElementById('name').textContent = `${m.name} (${id})`;
-        document.getElementById('role').textContent = m.role;
-        document.getElementById('phone').textContent = m.phone;
+    if (!id) {
+      cardDiv.innerHTML = `<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;">
+        ❌ Member ID not provided!
+      </div>`;
+    } else {
+      loadMember(id);
+    }
 
-        // Generate QR Code
-        const qrcodeDiv = document.getElementById('qrcode');
-        qrcodeDiv.innerHTML = '';
-        new QRCode(qrcodeDiv, {
-          text: window.location.href,
-          width: 90,
-          height: 90,
-          colorDark: "#000000",
-          colorLight: "#ffffff",
-          correctLevel: QRCode.CorrectLevel.H
+    function loadMember(memberId) {
+      db.ref('members/' + memberId).once('value')
+        .then(snapshot => {
+          if (!snapshot.exists()) {
+            cardDiv.innerHTML = `<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;">
+              ❌ Member not found!
+            </div>`;
+            return;
+          }
+
+          const m = snapshot.val();
+          document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120';
+          document.getElementById('name').textContent = `${m.name} (${memberId})`;
+          document.getElementById('role').textContent = m.role;
+          document.getElementById('phone').textContent = m.phone;
+
+          // QR Code Generate
+          const qrDiv = document.getElementById('qrcode');
+          qrDiv.innerHTML = '';
+          new QRCode(qrDiv, {
+            text: window.location.href,
+            width: 90,
+            height: 90,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+          });
+        })
+        .catch(err => {
+          console.error("Error fetching member:", err);
+          cardDiv.innerHTML = `<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;">
+            ⚠️ Error loading member data
+          </div>`;
         });
-      })
-      .catch(() => {
-        document.getElementById('card').innerHTML =
-          '<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;">⚠️ डेटा लोड करने में त्रुटि</div>';
-      });
+    }
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
