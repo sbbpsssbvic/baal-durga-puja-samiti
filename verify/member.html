@@ -223,21 +223,54 @@
       }
     }
 
-    /* ---------- PRINT VIEW ---------- */
-    @media print {
-      body {
-        background: #fff !important;
-        padding: 0;
-      }
-      .print-btn {
-        display: none;
-      }
-      .card {
-        box-shadow: none;
-        border: 2px solid #000;
-        margin: 0 auto;
-      }
-    }
+/* ---------- PRINT VIEW ---------- */
+@media print {
+  body {
+    background: #fff !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Sirf card ko center aur perfect size me rakhe */
+  .card {
+    position: relative;
+    margin: 0 auto;
+    box-shadow: none;
+    border: 2px solid #000;
+    width: 320px; /* Fixed width for proper scaling */
+    max-width: 320px;
+    page-break-inside: avoid;
+    transform: none;
+  }
+
+  /* Gradient aur red header ke liye forced print colors */
+  .header {
+    background: #9b2226 !important; /* Dark red header */
+    color: #e9c46a !important;      /* Golden text */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Golden divider under "ID CARD" */
+  .id-card-title {
+    border-top: 1px solid rgba(233, 196, 106, 0.8) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Print button hide kare */
+  .print-btn {
+    display: none !important;
+  }
+
+  /* Mobile par proper zoom aur scaling */
+  html, body {
+    height: auto;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -315,6 +348,7 @@
   </script>
 </body>
 </html>
+
 
 
 
