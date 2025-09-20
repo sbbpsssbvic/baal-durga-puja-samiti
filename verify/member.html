@@ -78,16 +78,17 @@
       color: #9b2226;
     }
 .qrcode-container {
-  position: relative;
   display: flex;
-  align-items: center;      /* QR aur stamp ko vertically center karega */
-  justify-content: center; /* Center me rakhega */
-  gap: 25px;               /* QR aur stamp ke beech me spacing */
-  margin: 0 auto;
-  padding: 10px 0;
+  justify-content: space-between; /* QR left, stamp right */
+  align-items: center;            /* Vertical center alignment */
+  width: 100%;
+  max-width: 300px;               /* Card ke andar perfect fit */
+  margin: 0 auto;                  /* Center the whole container */
+  padding: 5px 10px;
+  position: relative;
 }
 
-/* QR wrapper to keep border and QR perfectly aligned */
+/* QR wrapper with perfect border */
 .qrcode-wrapper {
   border: 3px solid #e9c46a;
   padding: 5px;
@@ -104,11 +105,12 @@
   display: block;
 }
 
-/* Verified stamp perfect side alignment */
+/* Verified stamp on right side */
 .verified-stamp {
   width: 65px;
-  transform: rotate(-10deg);
+  transform: rotate(-10deg); /* Classic angled stamp look */
   opacity: 0.9;
+  margin-left: 10px;
 }
 
 
@@ -159,10 +161,13 @@
       <p><span class="label">Role:</span> <span id="role"></span></p>
       <p><span class="label">Phone:</span> <span id="phone"></span></p>
     </div>
-   <div class="qrcode-container">
+<div class="qrcode-container">
+  <!-- QR Code Left -->
   <div class="qrcode-wrapper">
     <div class="qrcode" id="qrcode"></div>
   </div>
+
+  <!-- Verified Stamp Right -->
   <img 
     src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" 
     alt="Verified" 
@@ -215,6 +220,7 @@
   </script>
 </body>
 </html>
+
 
 
 
