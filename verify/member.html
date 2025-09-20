@@ -245,8 +245,10 @@
       <div class="qrcode-wrapper">
         <div class="qrcode" id="qrcode"></div>
       </div>
-      <img src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" 
-           alt="Verified" class="verified-stamp">
+      <img 
+        src="https://static.vecteezy.com/system/resources/thumbnails/021/433/013/small_2x/verified-rubber-stamp-free-png.png" 
+        alt="Verified" 
+        class="verified-stamp">
     </div>
 
     <button class="print-btn" onclick="window.print()">Print Card</button>
@@ -255,10 +257,12 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+  <!-- QR Code Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <script>
-    // Firebase Configuration
+    /* ---------- Firebase Config ---------- */
     const firebaseConfig = {
       apiKey: "AIzaSyDHzkE5CtKL--MsguovrjqIYphCy48seEY",
       authDomain: "baaldurgapujasamiti.firebaseapp.com",
@@ -273,40 +277,34 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // URL se member ID nikalna
-    const params = new URLSearchParams(location.search);
-    const id = params.get('id');
+    /* ---------- Fetch Member Data ---------- */
+    const params = new URLSearchParams(window.location.search);
+    const memberId = params.get('id');
 
-    const cardDiv = document.getElementById('card');
-
-    if (!id) {
-      cardDiv.innerHTML = `<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;">
-        ❌ Member ID not provided!
-      </div>`;
+    if (!memberId) {
+      document.getElementById('card').innerHTML =
+        '<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;"><b>❌ Invalid Member ID</b></div>';
     } else {
-      loadMember(id);
-    }
-
-    function loadMember(memberId) {
       db.ref('members/' + memberId).once('value')
         .then(snapshot => {
           if (!snapshot.exists()) {
-            cardDiv.innerHTML = `<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;">
-              ❌ Member not found!
-            </div>`;
+            document.getElementById('card').innerHTML =
+              '<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;"><b>❌ Member Not Found</b></div>';
             return;
           }
 
           const m = snapshot.val();
+
+          // Update Member Data
           document.getElementById('photo').src = m.photo || 'https://via.placeholder.com/120';
           document.getElementById('name').textContent = `${m.name} (${memberId})`;
           document.getElementById('role').textContent = m.role;
           document.getElementById('phone').textContent = m.phone;
 
-          // QR Code Generate
-          const qrDiv = document.getElementById('qrcode');
-          qrDiv.innerHTML = '';
-          new QRCode(qrDiv, {
+          // Generate QR Code
+          const qrcodeDiv = document.getElementById('qrcode');
+          qrcodeDiv.innerHTML = '';
+          new QRCode(qrcodeDiv, {
             text: window.location.href,
             width: 90,
             height: 90,
@@ -315,11 +313,10 @@
             correctLevel: QRCode.CorrectLevel.H
           });
         })
-        .catch(err => {
-          console.error("Error fetching member:", err);
-          cardDiv.innerHTML = `<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;">
-            ⚠️ Error loading member data
-          </div>`;
+        .catch(error => {
+          console.error(error);
+          document.getElementById('card').innerHTML =
+            '<div style="padding:40px;text-align:center;color:#6f1d1b;font-size:18px;background:#fff;">⚠️ Error loading data</div>';
         });
     }
   </script>
