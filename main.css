@@ -1,0 +1,773 @@
+        :root {
+            --maroon: #6f0000;
+            --wine: #200122;
+            --gold: #e9c46a;
+            --red: #9b2226;
+            --ink: #0f172a;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(1200px 1200px at 75% 10%, #38000f 0%, #1a0014 50%, #0b0008 100%), linear-gradient(135deg, var(--maroon), var(--wine));
+            color: #fff
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        /* =========================
+   Header Base
+   ========================= */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(6px);
+            background: linear-gradient(90deg, rgba(15, 0, 10, .75), rgba(10, 0, 12, .55));
+            border-bottom: 1px solid rgba(233, 196, 106, .25);
+        }
+
+        .nav .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav.shrink {
+            background: rgba(15, 0, 10, 0.85);
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            letter-spacing: .5px;
+        }
+
+        .brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            background: #fff;
+        }
+
+        .brand span {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .menu {
+            margin-left: auto;
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #fff;
+            opacity: .9;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu a:hover {
+            opacity: 1;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #f59e0b, #eab308);
+            color: #2b1000;
+            font-weight: 700;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* =========================
+   Daan Peti Button Special
+   ========================= */
+        .menu .daan-btn {
+            background: #b91c1c;
+            color: #fff !important;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 8px 14px;
+        }
+
+        /* =========================
+   Mobile Menu (Below Navbar)
+   ========================= */
+        /* Mobile Menu Wrapper */
+        .mobile-menu-wrapper {
+            display: none;
+            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            z-index: 40;
+        }
+
+        /* Mobile Menu Row */
+        .mobile-menu {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 0 12px;
+            /* 👈 left-right padding added */
+            gap: 10px;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+
+        .mobile-menu::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Menu Links */
+        .mobile-menu a {
+            flex: 0 0 auto;
+            text-align: center;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Daan Button Special */
+        .mobile-menu .daan-btn {
+            background: #b91c1c;
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            padding: 8px 14px;
+        }
+
+        /* Show Mobile Menu on Small Screens */
+        @media (max-width: 480px) {
+            .desktop-menu {
+                display: none !important;
+            }
+
+            .mobile-menu-wrapper {
+                display: block;
+            }
+        }
+
+
+
+
+
+
+        /* ===== HERO SLIDER IMPROVED ===== */
+        .hero {
+            position: relative;
+            max-width: 1100px;
+            margin: 18px auto;
+            border: 2px solid rgba(233, 196, 106, .45);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+        }
+
+        .hero-slide-wrapper {
+            position: relative;
+            width: 100%;
+            height: 58vh;
+            min-height: 360px;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 1s ease, transform 1s ease;
+            z-index: 0;
+            /* Image stays behind overlay */
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 1;
+        }
+
+        .hero-slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: contrast(1.02) saturate(1.02);
+        }
+
+        /* === Overlay Text (Always on Top) === */
+        .hero .overlay {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 26px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .55) 60%, rgba(0, 0, 0, .75) 100%);
+            z-index: 5;
+            /* Overlay always above the image */
+        }
+
+        .overlay h1 {
+            margin: 0 16px;
+            font-size: 34px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .overlay p {
+            margin: 6px 16px 12px;
+            color: #ffe;
+            opacity: .95;
+        }
+
+        .overlay .cta {
+            margin: 0 16px 12px;
+        }
+
+        /* Navigation Arrows */
+        .hero .ar {
+            position: absolute;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1;
+            z-index: 10;
+            /* Arrows stay above everything */
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, .45);
+            border: 1px solid rgba(255, 255, 255, .35);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+        }
+
+        .hero .ar:hover {
+            background: rgba(0, 0, 0, .65);
+        }
+
+        .hero .prev {
+            left: 12px;
+        }
+
+        .hero .next {
+            right: 12px;
+        }
+
+        /* Dots */
+        .dots {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 15px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            z-index: 15;
+            /* Above image but below arrows */
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff7;
+            border: 1px solid #fff8;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: #fff;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--gold);
+            width: 0%;
+            transition: width linear;
+            z-index: 20;
+            /* Topmost layer */
+        }
+
+
+
+
+
+        /* Sections */
+        .section {
+            max-width: 1100px;
+            margin: 40px auto;
+            color: #111;
+            background: #fff;
+            border-radius: 16px;
+            border: 2px solid rgba(233, 196, 106, .45);
+            overflow: hidden
+        }
+
+        .section .pad {
+            padding: 22px
+        }
+
+        .heading {
+            color: var(--red);
+            margin: 0 0 14px 0;
+            font-weight: 800
+        }
+
+        .sub {
+            color: #333;
+            margin: 6px 0 18px 0
+        }
+
+
+
+
+
+
+        /* ===== Daan Peti Button Style ===== */
+        .daan-btn {
+            background: #b91c1c;
+            /* Deep red */
+            color: #fff !important;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .daan-btn:hover {
+            background: #dc2626;
+            /* Brighter red on hover */
+            transform: translateY(-2px);
+        }
+
+        .daan-btn:active {
+            background: #991b1b;
+            /* Darker red on click */
+            transform: translateY(0);
+        }
+
+        /* ===== DONATION MODAL ===== */
+        body.modal-open {
+    overflow: hidden;
+    touch-action: none;
+}
+
+        .donation-modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+.donation-modal-content {
+    background: #fff;
+    color: #111;
+    max-width: 700px;
+    width: 90%;
+    max-height: 90vh; /* 👈 max height set */
+    overflow-y: auto; /* 👈 content scrollable */
+    padding: 20px;
+    border-radius: 14px;
+    position: relative;
+    animation: slideUp 0.3s ease-out;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Close button */
+        .donation-modal .close {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            font-size: 28px;
+            color: #333;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .donation-modal .close:hover {
+            color: var(--red);
+        }
+
+        /* Donation box inside modal */
+        .donation-box {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+            background: #fff;
+            border: 2px solid rgba(233, 196, 106, .45);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .qr-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qr-area img {
+            max-width: 220px;
+            width: 100%;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+        }
+
+        .donation-details {
+            flex: 2;
+        }
+
+        .donation-details h3 {
+            margin-top: 0;
+            font-size: 20px;
+            color: var(--red);
+        }
+
+        .upi-id {
+            font-weight: 700;
+            font-size: 18px;
+            margin: 8px 0;
+            color: #111;
+            background: #faf7ef;
+            padding: 6px 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #9b2226, #6f0000);
+            color: #fff;
+            margin: 8px 0;
+        }
+
+        .pay-btn {
+            display: inline-block;
+            margin-top: 16px;
+            background: linear-gradient(135deg, #f59e0b, #eab308);
+            color: #2b1000;
+            text-align: center;
+        }
+
+        /* Note inside modal */
+        .note {
+            font-size: 14px;
+            color: #333;
+            margin-top: 12px;
+        }
+
+        .note ul {
+            padding-left: 18px;
+            margin: 6px 0 0 0;
+        }
+
+        .note li {
+            list-style: disc;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .donation-box {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .qr-area img {
+                max-width: 160px;
+            }
+
+            .note ul {
+                text-align: left;
+                padding-left: 20px;
+            }
+        }
+
+
+
+
+
+
+
+        /* About split */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0
+        }
+
+        .split img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .split .text {
+            padding: 26px
+        }
+
+        .split .text h2 {
+            color: #b91c1c;
+            margin: 0 0 12px;
+            font-size: 28px
+        }
+
+        .split .text p {
+            color: #333;
+            line-height: 1.9
+        }
+
+
+
+
+
+
+        /* Programme carousel */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .track {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+            will-change: transform;
+        }
+
+        .card {
+            flex: 0 0 calc(33.333% - 14px);
+            /* exactly 3 cards fully visible */
+            margin-right: 14px;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 14px;
+            overflow: hidden;
+            color: #222;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card .cap {
+            padding: 10px 12px;
+            font-weight: 600;
+            text-align: center;
+            color: #111;
+        }
+
+        /* Carousel arrows */
+        .c-ar {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .c-ar:hover {
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .c-prev {
+            left: 10px;
+        }
+
+        .c-next {
+            right: 10px;
+        }
+
+        /* Hide scrollbar */
+        .track::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .card {
+                flex: 0 0 80%;
+            }
+        }
+
+
+        /* YouTube */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+
+        .yt-grid iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: 0;
+            border-radius: 12px
+        }
+
+
+
+
+        /* Table */
+        .table-wrap {
+            overflow: auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        thead th {
+            background: var(--red);
+            color: #fff;
+            padding: 10px;
+            text-align: center
+        }
+
+        tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+            color: #222
+        }
+
+        tfoot td {
+            padding: 10px;
+            background: #faf7ef
+        }
+
+        .note {
+            font-size: 13px;
+            color: #555
+        }
+
+        /* Footer */
+        footer {
+            max-width: 1100px;
+            margin: 30px auto 50px;
+            text-align: center;
+            color: #ddd
+        }
+
+        footer small {
+            opacity: .9
+        }
+
+        /* Responsive */
+        @media (max-width:900px) {
+            .overlay h1 {
+                font-size: 26px
+            }
+
+            .split {
+                grid-template-columns: 1fr
+            }
+
+            .yt-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .card {
+                min-width: 80%
+            }
+        }
+
+        @media (max-width:600px) {
+            .menu {
+                display: none
+            }
+
+            .yt-grid {
+                grid-template-columns: 1fr
+            }
+        }

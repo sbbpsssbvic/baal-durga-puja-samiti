@@ -1,11 +1,258 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="hi">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baal Durga Puja Samiti - Benigaddaupur</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>बाल दुर्गा पूजा समिति – बेनीगद्दौपुर</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="main.css">
 </head>
+
 <body>
-    <h1>Baal Durga Puja Samiti - Benigaddaupur Ayodhya (U.P.) </h1>
+
+    <!-- NAV -->
+<!-- ✅ HEADER -->
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <img src="https://baal-durga-puja-samiti.netlify.app/verify/photos/LOGO-4.png" alt="Logo">
+      <span>बाल दुर्गा पूजा समिति, बेनीगद्दौपुर</span>
+    </div>
+
+    <!-- Desktop Menu -->
+    <nav class="menu desktop-menu">
+      <a href="#home">होम</a>
+      <a href="#about">हमारे बारे में</a>
+      <a href="#programs">कार्यक्रम</a>
+      <a href="#gallery">गैलरी</a>
+      <a href="#contact">संपर्क करें</a>
+      <a href="javascript:void(0)" onclick="openDonation()" class="btn daan-btn">दान पेटी</a>
+
+
+    </nav>
+  </div>
+</header>
+
+<!-- ✅ MOBILE MENU (only visible on phone) -->
+<div class="mobile-menu-wrapper">
+  <div class="mobile-menu">
+    <a href="#home">होम</a>
+    <a href="#about">हमारे बारे में</a>
+    <a href="#programs">कार्यक्रम</a>
+    <a href="#gallery">गैलरी</a>
+    <a href="#contact">संपर्क करें</a>
+      <a href="javascript:void(0)" onclick="openDonation()" class="btn daan-btn">दान पेटी</a>
+  </div>
+</div>
+
+
+ <!-- HERO SLIDER -->
+<section class="hero">
+  <div class="hero-slide-wrapper" id="heroSlider">
+    <div class="hero-slide active">
+      <img src="https://res.cloudinary.com/da0bxa4am/image/fetch/f_auto,q_auto/https://drive.google.com/uc%3Fid%3D10ZzDTUGCib6Tk6UtbQc2pnoVGiMExnjW" alt="Durga Visarjan">
+    </div>
+    <div class="hero-slide">
+      <img src="https://res.cloudinary.com/da0bxa4am/image/fetch/f_auto,q_auto/https://drive.google.com/uc%3Fid%3D10ZzDTUGCib6Tk6UtbQc2pnoVGiMExnjW" alt="Navratri Pandal">
+    </div>
+    <div class="hero-slide">
+      <img src="https://res.cloudinary.com/da0bxa4am/image/fetch/f_auto,q_auto/https://drive.google.com/uc%3Fid%3D10X5D9evBCrPlT9SEsTM8vD-kBbHI20Om" alt="Devi Maa">
+    </div>
+  </div>
+
+  <!-- Navigation arrows -->
+  <button class="ar prev" aria-label="Previous">&#10094;</button>
+  <button class="ar next" aria-label="Next">&#10095;</button>
+
+  <!-- Overlay text -->
+  <div class="overlay">
+    <h1>जय माता दी • बेनीगद्दौपुर की अद्भुत परंपरा</h1>
+    <p>36 वर्षों से निरंतर भव्य नवरात्रि उत्सव, झांकियाँ, जागरण, कथा-कीर्तन और दशमी पर विसर्जन।</p>
+    <div class="cta">
+      <a href="#programs" class="btn">कार्यक्रम देखें</a>
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div class="dots"></div>
+
+  <!-- Progress bar -->
+  <div class="progress-bar"></div>
+</section>
+
+
+
+
+<!-- DONATION MODAL -->
+<div id="donationModal" class="donation-modal">
+  <div class="donation-modal-content">
+    <span class="close" onclick="closeDonation()">&times;</span>
+    <h2>दान एवं सहयोग</h2>
+    <p>आपका योगदान हमारे भव्य नवरात्रि उत्सव को और भी सफल बनाएगा।</p>
+
+    <div class="donation-box">
+      <div class="qr-area">
+        <img src="https://placehold.co/250x250?text=UPI+QR" alt="UPI QR Code" id="upiQR">
+      </div>
+      <div class="donation-details">
+        <h3>समिति का UPI ID</h3>
+        <p class="upi-id" id="upiText">balpujasamiti@upi</p>
+        <button class="btn copy-btn" onclick="copyUPI()">UPI ID कॉपी करें</button>
+
+        <div class="note">
+          <p>आपका सहयोग निम्न कार्यों में उपयोग होगा:</p>
+          <ul>
+            <li>माँ दुर्गा प्रतिमा एवं पंडाल सजावट</li>
+            <li>कथा, भजन, जागरण कार्यक्रम</li>
+            <li>बालभोज एवं विसर्जन शोभायात्रा</li>
+          </ul>
+        </div>
+
+        <a href="upi://pay?pa=balpujasamiti@upi&pn=Baal%20Durga%20Puja%20Samiti&cu=INR"
+           class="btn pay-btn">UPI से सीधा भुगतान करें</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+        <div class="split">
+            <img src="https://res.cloudinary.com/da0bxa4am/image/upload/q_20/v1675508978/1718436_kixmo4.jpg"
+                alt="Durga">
+            <div class="text">
+                <h2>बेनीगद्दौपुर में दुर्गा पूजा परंपरा</h2>
+                <p>
+                    बेनीगद्दौपुर में मुख्यतः <b>बाल दुर्गा पूजा समिति (मेन बाज़ार)</b> द्वारा नवरात्रि का यह पावन पर्व
+                    विगत
+                    <b>36 वर्षों</b> से (सन 1988 से) हर साल विशेष रूप से मनाया जाता है। तहसील बीकापुर से मूर्तियाँ लाने
+                    से लेकर बाबा पल्टूद्वार में
+                    विसर्जन तक पूरा गाँव माता रानी की भक्ति में सराबोर रहता है।
+                </p>
+                <p>
+                    दुर्गा, गणेश, कार्तिकेय, सरस्वती और लक्ष्मी की सुंदर प्रतिमाओं की स्थापना हर साल <b>विभिन्न थीम</b>
+                    पर भव्य पंडालों में की जाती है।
+                    पूजारी चार दिनों तक शास्त्रानुसार संस्कार संपन्न कराते हैं। प्रतिमाएँ स्थापित होने के बाद प्रतिदिन
+                    राति में
+                    <b>कथाएं, झांकी, पंडाल-सिनेमां, जागरण</b> आदि कार्यक्रम आयोजित होते हैं। नवमी के हर्ष परक रात्रि में
+                    <b>बालभोज</b> का आयोजन होता है
+                    एवं दशमी के दिन दुर्गा माँ का <b>भव्य विसर्जन शोभायात्रा</b> के संग में संपन्न होता है।
+                </p>
+            </div>
+        </div>
+    </section>
+
+<!-- PROGRAMME HIGHLIGHTS -->
+<section id="programs" class="section">
+  <div class="pad">
+    <h2 class="heading">नवरात्रि के कार्यक्रमों की झलकियां</h2>
+    <div class="carousel">
+      <button class="c-ar c-prev" aria-label="Prev">‹</button>
+      <div class="track" id="progTrack">
+        <div class="card">
+          <img src="https://placehold.co/400x200?text=Jhanki" alt="Jhanki">
+          <div class="cap">झांकी – थीमैटिक सजावट</div>
+        </div>
+        <div class="card">
+          <img src="https://placehold.co/400x200?text=Jagran" alt="Jagran">
+          <div class="cap">जागरण – भजन संध्या</div>
+        </div>
+        <div class="card">
+          <img src="https://placehold.co/400x200?text=Katha" alt="Katha">
+          <div class="cap">कथा-कीर्तन – धर्म प्रवचन</div>
+        </div>
+        <div class="card">
+          <img src="https://placehold.co/400x200?text=Aarti" alt="Aarti">
+          <div class="cap">आरती एवं पुष्पांजलि</div>
+        </div>
+        <div class="card">
+          <img src="https://placehold.co/400x200?text=Visarjan" alt="Visarjan">
+          <div class="cap">दशमी – विसर्जन शोभायात्रा</div>
+        </div>
+      </div>
+      <button class="c-ar c-next" aria-label="Next">›</button>
+    </div>
+  </div>
+</section>
+
+
+    <!-- YOUTUBE -->
+    <section id="youtube" class="section">
+        <div class="pad">
+            <h2 class="heading">हमारे YouTube चैनल की झलक</h2>
+            <p class="sub">चयनित वीडियो (Placeholder) — इन्हें अपने चैनल के वीडियो links से बदलें।</p>
+            <div class="yt-grid">
+                <iframe src="https://www.youtube.com/embed/QibXoKYFM80" title="YouTube video" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/8ZdpS3pOe2E" title="YouTube video" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/7C2z4GqqS5E" title="YouTube video" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top:12px">
+                <a class="btn" href="https://youtube.com" target="_blank" rel="noopener">सभी वीडियो देखें</a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- COMMITTEES -->
+    <section id="committees" class="section">
+        <div class="pad">
+            <h2 class="heading">बेनीगद्दौपुर में दुर्गा पूजा समितियाँ और उनकी जानकारी</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>क्रमांक</th>
+                            <th>समिति का नाम</th>
+                            <th>अध्यक्ष</th>
+                            <th>मोबाइल</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.</td>
+                            <td>बाल दुर्गा पूजा समिति</td>
+                            <td>समस्त बेनीगद्दौपुर बाजारवासी</td>
+                            <td><a href="tel:8400020058">8400020058</a></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>नव बाल दुर्गा पूजा समिति</td>
+                            <td>विकास विश्वकर्मा</td>
+                            <td><a href="tel:7620199864">7620199864</a></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>शिशु बाल दुर्गा पूजा समिति</td>
+                            <td>मोहित</td>
+                            <td>1000000000</td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>श्री नव दुर्गा पूजा समिति</td>
+                            <td>अनमोल सिंह</td>
+                            <td>1000000000</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="note">ऊपर दी गई जानकारी placeholder है; आवश्यकता अनुसार संपादित करें।
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <small>© 2025 Web Developed by Anurag Kasaudhan • बाल दुर्गा पूजा समिति, बेनीगद्दौपुर</small>
+    </footer>
+
+<script src="main.js"></script>
 </body>
+
 </html>
