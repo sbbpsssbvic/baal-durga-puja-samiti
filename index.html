@@ -353,9 +353,12 @@ window.onclick=function(e){ if(e.target.id==="donationModal") closeDonation(); }
         ...data[key]
       }));
 
-      // Sort alphabetically by name
-      allMembers.sort((a, b) => a.name.localeCompare(b.name));
-
+  // Oldest member first, newest member last
+  allMembers.sort((a, b) => {
+    const numA = parseInt(a.id.replace("MEM", ""), 10);
+    const numB = parseInt(b.id.replace("MEM", ""), 10);
+    return numA - numB;
+  });
       // Initial render
       renderMembers();
     }
