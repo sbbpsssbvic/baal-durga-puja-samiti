@@ -173,665 +173,551 @@ document.addEventListener("keydown", function(e) {
 </script>
 
 
- <!-- ================= CONTACT MODAL ================= -->
+ <!-- PREMIUM CONTACT MODAL -->
 
 <div id="contactModal" class="contact-modal">
 
-  <div class="contact-modal-box">
+  <div class="contact-modal-content">
 
-    <!-- Decorative Glow -->
-    <div class="contact-glow contact-glow-1"></div>
-    <div class="contact-glow contact-glow-2"></div>
+    <span class="close" onclick="closeContact()">&times;</span>
 
-    <!-- Close Button -->
-    <button class="contact-close" onclick="closeContact()" aria-label="Close">
-      &times;
-    </button>
+    <div class="contact-modal-header">
 
-    <!-- Header -->
-    <div class="contact-header">
+      <span class="eyebrow">BAL DURGA PUJA SAMITI</span>
 
-      <div class="contact-icon">
-        ☎
-      </div>
+      <h2>संपर्क करें</h2>
 
-      <div>
-        <h2>संपर्क करें</h2>
-        <p>बाल दुर्गा पूजा समिति, बेनीगद्दौपुर</p>
-      </div>
+      <p>
+        समिति एवं आयोजन से संबंधित जानकारी के लिए
+        हमारे पदाधिकारियों से सीधे संपर्क करें।
+      </p>
 
     </div>
 
-    <div class="contact-divider"></div>
 
-    <!-- Contact Cards -->
-    <div class="contact-cards">
-      <!-- Committee 1 -->
+    <div class="contact-committee-grid">
+
+
+      <!-- CARD 1 -->
+
       <div class="contact-card">
+
         <div class="contact-card-icon">
-          📞
+          ☎
         </div>
-        <div class="contact-card-content">
+
+        <div>
           <h3>बाल दुर्गा पूजा समिति</h3>
-          <p>
-            <span>अध्यक्ष:</span>
+
+          <div class="designation">
+            अध्यक्ष
+          </div>
+
+          <div class="person">
             समस्त बेनीगद्दौपुर बाजारवासी
-          </p>
-          <a href="tel:8400020058" class="contact-action call-action">
-            <span>☎</span>
-            कॉल करें
+          </div>
+        </div>
+
+        <div class="contact-actions">
+
+          <a
+            href="tel:8400020058"
+            class="contact-call">
+            कॉल
           </a>
-          <a href="https://wa.me/918400020058"
-             target="_blank"
-             rel="noopener"
-             class="contact-action whatsapp-action">
-            <span>☘</span>
+
+          <a
+            href="https://wa.me/918400020058"
+            target="_blank"
+            class="contact-whatsapp">
             WhatsApp
           </a>
+
         </div>
+
       </div>
 
 
-      <!-- Committee 2 -->
+      <!-- CARD 2 -->
+
       <div class="contact-card">
+
         <div class="contact-card-icon">
-          📞
+          ☎
         </div>
-        <div class="contact-card-content">
+
+        <div>
           <h3>नव बाल दुर्गा पूजा समिति</h3>
-          <p>
-            <span>अध्यक्ष:</span>
+
+          <div class="designation">
+            अध्यक्ष
+          </div>
+
+          <div class="person">
             विकास विश्वकर्मा
-          </p>
-          <a href="tel:7620199864" class="contact-action call-action">
-            <span>☎</span>
-            कॉल करें
+          </div>
+        </div>
+
+        <div class="contact-actions">
+
+          <a
+            href="tel:7620199864"
+            class="contact-call">
+            कॉल
           </a>
-          <a href="https://wa.me/917620199864"
-             target="_blank"
-             rel="noopener"
-             class="contact-action whatsapp-action">
-            <span>☘</span>
+
+          <a
+            href="https://wa.me/917620199864"
+            target="_blank"
+            class="contact-whatsapp">
             WhatsApp
           </a>
+
         </div>
+
       </div>
-      <!-- Committee 3 -->
+
+
+      <!-- CARD 3 -->
+
       <div class="contact-card">
+
         <div class="contact-card-icon">
-          📞
+          ☎
         </div>
-        <div class="contact-card-content">
+
+        <div>
           <h3>श्री नव दुर्गा पूजा समिति</h3>
-          <p>
-            <span>अध्यक्ष:</span>
+
+          <div class="designation">
+            अध्यक्ष
+          </div>
+
+          <div class="person">
             अनमोल सिंह
-          </p>
-          <a href="tel:1000000000" class="contact-action call-action">
-            <span>☎</span>
-            कॉल करें
-          </a>
+          </div>
         </div>
+
+        <div class="contact-actions">
+
+          <a
+            href="tel:1000000000"
+            class="contact-call">
+            कॉल
+          </a>
+
+          <a
+            href="https://wa.me/911000000000"
+            target="_blank"
+            class="contact-whatsapp">
+            WhatsApp
+          </a>
+
+        </div>
+
       </div>
+
     </div>
 
-    <!-- Bottom Message -->
-    <div class="contact-footer">
-      <span>🙏</span>
-      माता रानी की सेवा एवं आयोजन से संबंधित जानकारी के लिए संपर्क करें
-      <span>🙏</span>
+
+    <div class="contact-modal-footer">
+      <strong>बाल दुर्गा पूजा समिति</strong>
+      · बेनीगद्दौपुर, अयोध्या
     </div>
+
   </div>
-</div> 
+
+</div>
 
   <style>
 
-    /* =========================================================
-   CONTACT MODAL
+/* =========================================================
+   PREMIUM CONTACT MODAL — CLEAN LUXURY THEME
    ========================================================= */
 
-.contact-modal {
-  display: none;
+#contactModal {
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(18, 18, 18, 0.58);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
   z-index: 99999;
 
-  justify-content: center;
-  align-items: center;
-
-  padding: 20px;
-
-  background:
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(155, 34, 38, 0.22),
-      transparent 45%
-    ),
-    rgba(15, 3, 18, 0.82);
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  /* IMPORTANT — NO MODAL SCROLLBAR */
+  overflow: hidden;
 
   opacity: 0;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.3s ease;
 }
 
-
-/* Modal Active */
-
-.contact-modal.show {
+#contactModal.show {
   opacity: 1;
 }
 
 
-/* Main Modal Box */
+/* ---------- MAIN MODAL ---------- */
 
-.contact-modal-box {
-
+.contact-modal-content {
   position: relative;
 
-  width: 100%;
-  max-width: 570px;
-  max-height: 90vh;
+  width: min(920px, calc(100% - 32px));
+  max-height: calc(100vh - 40px);
 
-  overflow-y: auto;
+  background: #f8f6f1;
 
-  padding: 30px;
-
+  border: 1px solid rgba(183, 148, 82, 0.35);
   border-radius: 24px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,0.98),
-      rgba(255,248,242,0.97)
-    );
-
-  border: 2px solid rgba(233, 196, 106, 0.65);
+  padding: 42px;
 
   box-shadow:
-    0 30px 80px rgba(0,0,0,0.55),
-    0 0 40px rgba(233,196,106,0.16);
+    0 30px 80px rgba(0, 0, 0, 0.28),
+    0 8px 30px rgba(0, 0, 0, 0.10);
 
-  color: #321414;
+  overflow: hidden;
 
-  transform:
-    translateY(35px)
-    scale(0.92);
-
-  opacity: 0;
-
+  transform: translateY(25px) scale(0.97);
   transition:
-    transform 0.45s cubic-bezier(.17,.67,.35,1.25),
+    transform 0.35s cubic-bezier(.2,.8,.2,1),
     opacity 0.35s ease;
 
-  animation: contactModalFloat 4s ease-in-out infinite;
+  opacity: 0;
 }
 
-
-/* Opening Animation */
-
-.contact-modal.show .contact-modal-box {
-
-  transform:
-    translateY(0)
-    scale(1);
-
+#contactModal.show .contact-modal-content {
+  transform: translateY(0) scale(1);
   opacity: 1;
 }
 
 
-/* Floating animation */
+/* ---------- TOP DECORATIVE LINE ---------- */
 
-@keyframes contactModalFloat {
+.contact-modal-content::before {
+  content: "";
+  position: absolute;
 
-  0%,
-  100% {
-    box-shadow:
-      0 30px 80px rgba(0,0,0,0.55),
-      0 0 40px rgba(233,196,106,0.16);
-  }
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 
-  50% {
-    box-shadow:
-      0 32px 85px rgba(0,0,0,0.58),
-      0 0 55px rgba(233,196,106,0.28);
-  }
+  width: 110px;
+  height: 3px;
 
+  background: #b89452;
+  border-radius: 0 0 5px 5px;
 }
 
 
-/* =========================================================
-   DECORATIVE GLOW
-   ========================================================= */
+/* ---------- CLOSE BUTTON ---------- */
 
-.contact-glow {
+.contact-modal-content .close {
   position: absolute;
 
-  width: 160px;
-  height: 160px;
+  top: 18px;
+  right: 20px;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   border-radius: 50%;
 
-  pointer-events: none;
+  background: #ffffff;
+  color: #252525;
 
-  filter: blur(55px);
+  border: 1px solid #ded8ca;
 
-  opacity: 0.18;
-
-  z-index: 0;
-}
-
-.contact-glow-1 {
-  top: -70px;
-  left: -70px;
-
-  background: #9b2226;
-}
-
-.contact-glow-2 {
-  bottom: -80px;
-  right: -70px;
-
-  background: #e9c46a;
-}
-
-
-/* =========================================================
-   CLOSE BUTTON
-   ========================================================= */
-
-.contact-close {
-
-  position: absolute;
-
-  top: 15px;
-  right: 17px;
-
-  width: 40px;
-  height: 40px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(155,34,38,0.08);
-
-  color: #9b2226;
-
-  font-size: 30px;
-  line-height: 35px;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
 
   cursor: pointer;
 
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    color 0.3s ease;
+  transition: all 0.25s ease;
 
   z-index: 10;
 }
 
+.contact-modal-content .close:hover {
+  background: #242424;
+  color: #ffffff;
+  border-color: #242424;
 
-.contact-close:hover {
-
-  background: #9b2226;
-  color: white;
-
-  transform: rotate(90deg) scale(1.08);
-
+  transform: rotate(90deg);
 }
 
 
-/* =========================================================
-   HEADER
-   ========================================================= */
+/* ---------- HEADER ---------- */
 
-.contact-header {
-
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 16px;
-
-  padding-right: 35px;
+.contact-modal-header {
+  text-align: center;
+  margin-bottom: 32px;
 }
 
+.contact-modal-header .eyebrow {
+  display: inline-block;
 
-.contact-icon {
+  margin-bottom: 8px;
 
-  width: 58px;
-  height: 58px;
+  font-family: "Poppins", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
 
-  flex-shrink: 0;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 18px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #9b2226,
-      #6f0000
-    );
-
-  color: #fff;
-
-  font-size: 27px;
-
-  box-shadow:
-    0 8px 20px rgba(155,34,38,0.35);
-
-  animation: contactIconPulse 2.5s infinite;
+  color: #a07b3d;
 }
 
-
-@keyframes contactIconPulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.06);
-  }
-
-}
-
-
-.contact-header h2 {
-
+.contact-modal-header h2 {
   margin: 0;
 
-  font-family: 'Tiro Devanagari Hindi', 'Laila', serif;
+  font-family: "Laila", serif;
 
-  font-size: 30px;
+  font-size: clamp(27px, 4vw, 38px);
+  font-weight: 700;
 
-  color: #8f2024;
+  color: #242424;
+
+  letter-spacing: -0.5px;
+}
+
+.contact-modal-header p {
+  max-width: 560px;
+
+  margin: 10px auto 0;
+
+  font-family: "Noto Sans", sans-serif;
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  color: #77736b;
 }
 
 
-.contact-header p {
+/* ---------- COMMITTEE GRID ---------- */
 
-  margin: 4px 0 0;
+.contact-committee-grid {
+  display: grid;
 
-  color: #765b5b;
+  grid-template-columns: repeat(3, 1fr);
 
-  font-size: 13px;
+  gap: 18px;
 
+  width: 100%;
 }
 
 
-/* =========================================================
-   DIVIDER
-   ========================================================= */
-
-.contact-divider {
-
-  height: 1px;
-
-  margin: 22px 0;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #e9c46a,
-      #9b2226,
-      #e9c46a,
-      transparent
-    );
-}
-
-
-/* =========================================================
-   CONTACT CARDS
-   ========================================================= */
-
-.contact-cards {
-
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 14px;
-}
-
+/* ---------- COMMITTEE CARD ---------- */
 
 .contact-card {
+  position: relative;
 
-  display: flex;
+  background: #ffffff;
 
-  align-items: center;
+  border: 1px solid #e7e1d6;
+  border-radius: 18px;
 
-  gap: 15px;
+  padding: 25px 20px 21px;
 
-  padding: 16px;
-
-  border-radius: 17px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(155,34,38,0.055),
-      rgba(233,196,106,0.09)
-    );
-
-  border: 1px solid rgba(155,34,38,0.12);
+  text-align: center;
 
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+
+  overflow: hidden;
 }
 
+.contact-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 3px;
+
+  background: #b89452;
+
+  transform: scaleX(0);
+  transform-origin: center;
+
+  transition: transform 0.3s ease;
+}
 
 .contact-card:hover {
+  transform: translateY(-5px);
 
-  transform: translateY(-4px);
-
-  border-color: rgba(233,196,106,0.75);
+  border-color: #cdb17b;
 
   box-shadow:
-    0 12px 30px rgba(100,20,20,0.12);
+    0 16px 35px rgba(0, 0, 0, 0.09);
+}
+
+.contact-card:hover::before {
+  transform: scaleX(1);
 }
 
 
-/* Card Icon */
+/* ---------- CARD ICON ---------- */
 
 .contact-card-icon {
-
   width: 48px;
   height: 48px;
 
-  flex-shrink: 0;
+  margin: 0 auto 15px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
-  border-radius: 14px;
+  border-radius: 50%;
 
-  background: #fff;
+  background: #f4efe5;
 
-  border: 1px solid rgba(233,196,106,0.6);
+  color: #a07b3d;
 
-  font-size: 21px;
+  font-size: 20px;
 
-  box-shadow:
-    0 5px 15px rgba(0,0,0,0.07);
+  border: 1px solid #e5d7bd;
 }
 
 
-/* Card Content */
+/* ---------- CARD TEXT ---------- */
 
-.contact-card-content {
+.contact-card h3 {
+  margin: 0 0 9px;
 
+  font-family: "Laila", serif;
+
+  font-size: 18px;
+  line-height: 1.4;
+
+  color: #292929;
+}
+
+.contact-card .designation {
+  margin-bottom: 4px;
+
+  font-family: "Noto Sans", sans-serif;
+
+  font-size: 12px;
+  color: #918c83;
+}
+
+.contact-card .person {
+  margin: 0 0 18px;
+
+  font-family: "Noto Sans", sans-serif;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #3a3a3a;
+}
+
+
+/* ---------- ACTION BUTTONS ---------- */
+
+.contact-actions {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+}
+
+.contact-actions a {
   flex: 1;
 
-  min-width: 0;
-}
+  min-height: 38px;
 
-
-.contact-card-content h3 {
-
-  margin: 0 0 5px;
-
-  color: #7f1a1d;
-
-  font-family:
-    'Tiro Devanagari Hindi',
-    'Laila',
-    serif;
-
-  font-size: 17px;
-}
-
-
-.contact-card-content p {
-
-  margin: 0 0 11px;
-
-  color: #604b4b;
-
-  font-size: 13px;
-
-  line-height: 1.5;
-}
-
-
-.contact-card-content p span {
-
-  font-weight: 700;
-
-  color: #9b2226;
-}
-
-
-/* =========================================================
-   ACTION BUTTONS
-   ========================================================= */
-
-.contact-action {
-
-  display: inline-flex;
-
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  gap: 6px;
-
-  min-width: 105px;
-
-  padding: 7px 12px;
-
-  margin-right: 6px;
+  padding: 0 10px;
 
   border-radius: 9px;
 
   text-decoration: none;
 
-  font-size: 12px;
+  font-family: "Poppins", sans-serif;
 
+  font-size: 11px;
   font-weight: 600;
 
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: all 0.22s ease;
 }
 
 
-.contact-action:hover {
+/* CALL */
+
+.contact-call {
+  background: #252525;
+  color: #ffffff;
+
+  border: 1px solid #252525;
+}
+
+.contact-call:hover {
+  background: #000000;
+  transform: translateY(-2px);
+}
+
+
+/* WHATSAPP */
+
+.contact-whatsapp {
+  background: #f8f5ee;
+  color: #80622e;
+
+  border: 1px solid #d9c7a5;
+}
+
+.contact-whatsapp:hover {
+  background: #eee6d7;
 
   transform: translateY(-2px);
-
 }
 
 
-/* Call */
+/* ---------- FOOTER ---------- */
 
-.call-action {
+.contact-modal-footer {
+  margin-top: 27px;
 
-  background: #9b2226;
+  padding-top: 20px;
 
-  color: #fff;
-
-  box-shadow:
-    0 5px 14px rgba(155,34,38,0.22);
-}
-
-
-.call-action:hover {
-
-  box-shadow:
-    0 8px 20px rgba(155,34,38,0.35);
-}
-
-
-/* WhatsApp */
-
-.whatsapp-action {
-
-  background: #f4ead2;
-
-  color: #6d4b00;
-
-  border: 1px solid #e9c46a;
-}
-
-
-.whatsapp-action:hover {
-
-  background: #e9c46a;
-
-  color: #4d3200;
-}
-
-
-/* =========================================================
-   FOOTER MESSAGE
-   ========================================================= */
-
-.contact-footer {
-
-  position: relative;
-  z-index: 2;
-
-  margin-top: 20px;
-
-  padding: 12px 15px;
-
-  border-radius: 12px;
+  border-top: 1px solid #e6e0d6;
 
   text-align: center;
 
-  font-family:
-    'Tiro Devanagari Hindi',
-    'Laila',
-    serif;
+  font-family: "Noto Sans", sans-serif;
 
   font-size: 12px;
 
-  line-height: 1.6;
+  color: #858078;
+}
 
-  color: #795548;
-
-  background:
-    rgba(233,196,106,0.12);
-
-  border: 1px dashed rgba(155,34,38,0.2);
+.contact-modal-footer strong {
+  color: #8d6b35;
+  font-weight: 600;
 }
 
 
@@ -839,145 +725,222 @@ document.addEventListener("keydown", function(e) {
    MOBILE
    ========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 760px) {
 
-  .contact-modal {
-
-    padding: 12px;
-
-    align-items: center;
-
+  #contactModal {
+    padding: 15px;
   }
 
+  .contact-modal-content {
+    width: 100%;
 
-  .contact-modal-box {
+    max-height: calc(100vh - 30px);
 
-    max-height: 92vh;
-
-    padding: 23px 17px;
+    padding: 35px 18px 20px;
 
     border-radius: 20px;
 
+    /*
+      Modal itself NEVER scrolls.
+      Content is compact enough to fit.
+    */
+    overflow: hidden;
   }
 
-
-  .contact-header {
-
-    gap: 12px;
-
+  .contact-modal-header {
+    margin-bottom: 22px;
   }
 
-
-  .contact-icon {
-
-    width: 50px;
-    height: 50px;
-
-    border-radius: 15px;
-
-    font-size: 23px;
-
+  .contact-modal-header h2 {
+    font-size: 27px;
   }
 
-
-  .contact-header h2 {
-
-    font-size: 24px;
-
+  .contact-modal-header p {
+    font-size: 12px;
+    line-height: 1.6;
   }
 
-
-  .contact-header p {
-
-    font-size: 11px;
-
-  }
-
-
-  .contact-card {
-
-    padding: 13px;
+  .contact-committee-grid {
+    grid-template-columns: 1fr;
 
     gap: 11px;
-
-    align-items: flex-start;
-
   }
 
+  .contact-card {
+    display: grid;
+
+    grid-template-columns: 45px 1fr auto;
+
+    column-gap: 13px;
+
+    align-items: center;
+
+    padding: 14px;
+
+    text-align: left;
+  }
+
+  .contact-card::before {
+    height: 2px;
+  }
 
   .contact-card-icon {
+    grid-row: span 2;
 
     width: 42px;
     height: 42px;
 
-    border-radius: 12px;
-
-    font-size: 18px;
-
+    margin: 0;
   }
 
-
-  .contact-card-content h3 {
+  .contact-card h3 {
+    margin: 0;
 
     font-size: 15px;
-
   }
 
+  .contact-card .designation {
+    margin: 2px 0 0;
 
-  .contact-card-content p {
-
-    font-size: 12px;
-
+    font-size: 10px;
   }
 
-
-  .contact-action {
-
-    min-width: 88px;
-
-    padding: 7px 9px;
-
-    font-size: 11px;
-
+  .contact-card .person {
+    display: none;
   }
 
+  .contact-actions {
+    grid-column: 3;
 
-  .contact-footer {
+    grid-row: 1 / span 2;
 
-    font-size: 11px;
+    flex-direction: column;
 
+    width: 72px;
   }
 
+  .contact-actions a {
+    min-height: 31px;
+
+    font-size: 9px;
+
+    padding: 0 6px;
+  }
+
+  .contact-modal-footer {
+    margin-top: 15px;
+
+    padding-top: 13px;
+
+    font-size: 10px;
+  }
+
+  .contact-modal-content .close {
+    top: 12px;
+    right: 12px;
+
+    width: 32px;
+    height: 32px;
+
+    font-size: 20px;
+  }
 }
-    
+
+
+/* VERY SMALL MOBILE */
+
+@media (max-width: 400px) {
+
+  .contact-modal-content {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .contact-card {
+    grid-template-columns: 38px 1fr auto;
+
+    gap: 9px;
+
+    padding: 12px;
+  }
+
+  .contact-card-icon {
+    width: 36px;
+    height: 36px;
+
+    font-size: 16px;
+  }
+
+  .contact-card h3 {
+    font-size: 13px;
+  }
+
+  .contact-actions {
+    width: 64px;
+  }
+}
+
+
+/* =========================================================
+   BODY LOCK WHEN MODAL IS OPEN
+   ========================================================= */
+
+body.contact-modal-open {
+  overflow: hidden !important;
+}
   </style>
 
 <script>
 
+/* =========================================================
+   DONATION MODAL
+   ========================================================= */
+
 function openDonation() {
-  document.getElementById("donationModal").style.display = "flex";
+
+  const modal = document.getElementById("donationModal");
+
+  if (!modal) return;
+
+  modal.style.display = "flex";
+
+  // Prevent background page scrolling
+  document.body.style.overflow = "hidden";
 }
 
 
 function closeDonation() {
-  document.getElementById("donationModal").style.display = "none";
+
+  const modal = document.getElementById("donationModal");
+
+  if (!modal) return;
+
+  modal.style.display = "none";
+
+  // Restore background scrolling
+  document.body.style.overflow = "";
 }
 
 
-/* ================= CONTACT MODAL ================= */
+/* =========================================================
+   CONTACT MODAL
+   ========================================================= */
 
 function openContact() {
 
   const modal = document.getElementById("contactModal");
 
+  if (!modal) return;
+
+  // Show modal
   modal.style.display = "flex";
 
-  // Animation trigger
+  // Trigger opening animation
   requestAnimationFrame(() => {
     modal.classList.add("show");
   });
 
-  // Prevent background scrolling
+  // Prevent background page scrolling
   document.body.style.overflow = "hidden";
 }
 
@@ -986,38 +949,112 @@ function closeContact() {
 
   const modal = document.getElementById("contactModal");
 
+  if (!modal) return;
+
+  // Start closing animation
   modal.classList.remove("show");
 
+  // Hide after animation completes
   setTimeout(() => {
+
     modal.style.display = "none";
+
   }, 350);
 
+  // Restore background scrolling
   document.body.style.overflow = "";
 }
 
 
-/* Close when clicking outside */
+/* =========================================================
+   CLOSE MODALS WHEN CLICKING OUTSIDE
+   ========================================================= */
 
 window.addEventListener("click", function(e) {
 
-  const contactModal = document.getElementById("contactModal");
+  /* Donation Modal */
 
-  if (e.target === contactModal) {
+  const donationModal =
+    document.getElementById("donationModal");
+
+  if (
+    donationModal &&
+    e.target === donationModal
+  ) {
+
+    closeDonation();
+
+  }
+
+
+  /* Contact Modal */
+
+  const contactModal =
+    document.getElementById("contactModal");
+
+  if (
+    contactModal &&
+    e.target === contactModal
+  ) {
+
     closeContact();
+
   }
 
 });
 
 
-/* Close with ESC key */
+/* =========================================================
+   CLOSE MODALS WITH ESCAPE KEY
+   ========================================================= */
 
 document.addEventListener("keydown", function(e) {
 
-  if (e.key === "Escape") {
+  if (e.key !== "Escape") return;
+
+
+  /* Close Contact Modal */
+
+  const contactModal =
+    document.getElementById("contactModal");
+
+  if (
+    contactModal &&
+    contactModal.style.display === "flex"
+  ) {
+
     closeContact();
+
+  }
+
+
+  /* Close Donation Modal */
+
+  const donationModal =
+    document.getElementById("donationModal");
+
+  if (
+    donationModal &&
+    donationModal.style.display === "flex"
+  ) {
+
+    closeDonation();
+
   }
 
 });
+
+
+/* =========================================================
+   SAFETY — RESTORE SCROLL IF PAGE IS CLOSED/RELOADED
+   ========================================================= */
+
+window.addEventListener("beforeunload", function() {
+
+  document.body.style.overflow = "";
+
+});
+
 
 </script>
   <!-- ABOUT -->
