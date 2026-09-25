@@ -173,19 +173,55 @@ document.addEventListener("keydown", function(e) {
 </script>
 
 
- <!-- PREMIUM CONTACT MODAL -->
+<!-- =====================================================
+     PREMIUM CONTACT MODAL
+     ===================================================== -->
 
 <div id="contactModal" class="contact-modal">
 
   <div class="contact-modal-content">
 
-    <span class="close" onclick="closeContact()">&times;</span>
+    <!-- Decorative top line -->
+    <div class="contact-gold-line"></div>
+
+    <!-- Close -->
+    <button
+      class="contact-close"
+      onclick="closeContact()"
+      aria-label="Close">
+      &times;
+    </button>
+
+
+    <!-- LOGO -->
+    <div class="contact-logo-wrap">
+
+      <div class="contact-logo-ring">
+
+        <img
+          src="https://baal-durga-puja-samiti.netlify.app/verify/photos/LOGO-4.png"
+          alt="बाल दुर्गा पूजा समिति लोगो">
+
+      </div>
+
+    </div>
+
+
+    <!-- HEADER -->
 
     <div class="contact-modal-header">
 
-      <span class="eyebrow">BAL DURGA PUJA SAMITI</span>
+      <span class="contact-eyebrow">
+        बाल दुर्गा पूजा समिति
+      </span>
 
       <h2>संपर्क करें</h2>
+
+      <div class="contact-heading-line">
+        <span></span>
+        <i>✦</i>
+        <span></span>
+      </div>
 
       <p>
         समिति एवं आयोजन से संबंधित जानकारी के लिए
@@ -195,6 +231,8 @@ document.addEventListener("keydown", function(e) {
     </div>
 
 
+    <!-- COMMITTEE CARDS -->
+
     <div class="contact-committee-grid">
 
 
@@ -202,20 +240,28 @@ document.addEventListener("keydown", function(e) {
 
       <div class="contact-card">
 
-        <div class="contact-card-icon">
-          ☎
+        <div class="contact-card-top">
+
+          <div class="contact-card-icon">
+            ☎
+          </div>
+
+          <span class="committee-number">
+            01
+          </span>
+
         </div>
 
-        <div>
-          <h3>बाल दुर्गा पूजा समिति</h3>
+        <h3>
+          बाल दुर्गा पूजा समिति
+        </h3>
 
-          <div class="designation">
-            अध्यक्ष
-          </div>
+        <div class="contact-role">
+          अध्यक्ष
+        </div>
 
-          <div class="person">
-            समस्त बेनीगद्दौपुर बाजारवासी
-          </div>
+        <div class="contact-person">
+          समस्त बेनीगद्दौपुर बाजारवासी
         </div>
 
         <div class="contact-actions">
@@ -223,12 +269,14 @@ document.addEventListener("keydown", function(e) {
           <a
             href="tel:8400020058"
             class="contact-call">
-            कॉल
+            <span>☎</span>
+            कॉल करें
           </a>
 
           <a
             href="https://wa.me/918400020058"
             target="_blank"
+            rel="noopener"
             class="contact-whatsapp">
             WhatsApp
           </a>
@@ -242,20 +290,28 @@ document.addEventListener("keydown", function(e) {
 
       <div class="contact-card">
 
-        <div class="contact-card-icon">
-          ☎
+        <div class="contact-card-top">
+
+          <div class="contact-card-icon">
+            ☎
+          </div>
+
+          <span class="committee-number">
+            02
+          </span>
+
         </div>
 
-        <div>
-          <h3>नव बाल दुर्गा पूजा समिति</h3>
+        <h3>
+          नव बाल दुर्गा पूजा समिति
+        </h3>
 
-          <div class="designation">
-            अध्यक्ष
-          </div>
+        <div class="contact-role">
+          अध्यक्ष
+        </div>
 
-          <div class="person">
-            विकास विश्वकर्मा
-          </div>
+        <div class="contact-person">
+          विकास विश्वकर्मा
         </div>
 
         <div class="contact-actions">
@@ -263,12 +319,14 @@ document.addEventListener("keydown", function(e) {
           <a
             href="tel:7620199864"
             class="contact-call">
-            कॉल
+            <span>☎</span>
+            कॉल करें
           </a>
 
           <a
             href="https://wa.me/917620199864"
             target="_blank"
+            rel="noopener"
             class="contact-whatsapp">
             WhatsApp
           </a>
@@ -282,20 +340,28 @@ document.addEventListener("keydown", function(e) {
 
       <div class="contact-card">
 
-        <div class="contact-card-icon">
-          ☎
+        <div class="contact-card-top">
+
+          <div class="contact-card-icon">
+            ☎
+          </div>
+
+          <span class="committee-number">
+            03
+          </span>
+
         </div>
 
-        <div>
-          <h3>श्री नव दुर्गा पूजा समिति</h3>
+        <h3>
+          श्री नव दुर्गा पूजा समिति
+        </h3>
 
-          <div class="designation">
-            अध्यक्ष
-          </div>
+        <div class="contact-role">
+          अध्यक्ष
+        </div>
 
-          <div class="person">
-            अनमोल सिंह
-          </div>
+        <div class="contact-person">
+          अनमोल सिंह
         </div>
 
         <div class="contact-actions">
@@ -303,12 +369,14 @@ document.addEventListener("keydown", function(e) {
           <a
             href="tel:1000000000"
             class="contact-call">
-            कॉल
+            <span>☎</span>
+            कॉल करें
           </a>
 
           <a
             href="https://wa.me/911000000000"
             target="_blank"
+            rel="noopener"
             class="contact-whatsapp">
             WhatsApp
           </a>
@@ -320,9 +388,18 @@ document.addEventListener("keydown", function(e) {
     </div>
 
 
+    <!-- FOOTER -->
+
     <div class="contact-modal-footer">
-      <strong>बाल दुर्गा पूजा समिति</strong>
-      · बेनीगद्दौपुर, अयोध्या
+
+      <span class="footer-diya">ॐ</span>
+
+      <span>
+        बेनीगद्दौपुर · अयोध्या
+      </span>
+
+      <span class="footer-diya">ॐ</span>
+
     </div>
 
   </div>
@@ -330,98 +407,197 @@ document.addEventListener("keydown", function(e) {
 </div>
 
   <style>
-
 /* =========================================================
-   PREMIUM CONTACT MODAL — CLEAN LUXURY THEME
+   PREMIUM CONTACT MODAL
+   BAL DURGA PUJA SAMITI
+   BURGUNDY + GOLD + IVORY THEME
    ========================================================= */
 
 #contactModal {
   position: fixed;
   inset: 0;
+
   width: 100%;
   height: 100%;
+
   display: none;
   align-items: center;
   justify-content: center;
 
-  background: rgba(18, 18, 18, 0.58);
+  padding: 20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(130, 0, 25, 0.16),
+      transparent 45%
+    ),
+    rgba(25, 8, 10, 0.72);
+
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
   z-index: 99999;
 
-  /* IMPORTANT — NO MODAL SCROLLBAR */
   overflow: hidden;
 
   opacity: 0;
+
   transition: opacity 0.3s ease;
 }
+
 
 #contactModal.show {
   opacity: 1;
 }
 
 
-/* ---------- MAIN MODAL ---------- */
+/* =========================================================
+   MAIN MODAL
+   ========================================================= */
 
 .contact-modal-content {
+
   position: relative;
 
-  width: min(920px, calc(100% - 32px));
+  width: min(930px, 100%);
+
   max-height: calc(100vh - 40px);
 
-  background: #f8f6f1;
+  padding: 38px 40px 24px;
 
-  border: 1px solid rgba(183, 148, 82, 0.35);
-  border-radius: 24px;
+  background:
 
-  padding: 42px;
+    linear-gradient(
+      145deg,
+      #fffdf8 0%,
+      #fffaf0 100%
+    );
+
+  border-radius: 26px;
+
+  border: 1px solid rgba(160, 115, 25, 0.30);
 
   box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.28),
-    0 8px 30px rgba(0, 0, 0, 0.10);
+
+    0 35px 100px rgba(0, 0, 0, 0.35),
+
+    0 10px 35px rgba(114, 0, 24, 0.15);
 
   overflow: hidden;
 
-  transform: translateY(25px) scale(0.97);
-  transition:
-    transform 0.35s cubic-bezier(.2,.8,.2,1),
-    opacity 0.35s ease;
+  transform:
+    translateY(25px)
+    scale(0.97);
 
   opacity: 0;
+
+  transition:
+    transform 0.4s cubic-bezier(.2,.8,.2,1),
+    opacity 0.35s ease;
 }
 
-#contactModal.show .contact-modal-content {
-  transform: translateY(0) scale(1);
+
+#contactModal.show
+.contact-modal-content {
+
+  transform:
+    translateY(0)
+    scale(1);
+
   opacity: 1;
 }
 
 
-/* ---------- TOP DECORATIVE LINE ---------- */
+/* =========================================================
+   SUBTLE BACKGROUND DECORATION
+   ========================================================= */
 
 .contact-modal-content::before {
+
   content: "";
+
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  top: -150px;
+  left: -130px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(151, 0, 30, 0.09),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+
+.contact-modal-content::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  bottom: -180px;
+  right: -150px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(212, 160, 23, 0.12),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   TOP GOLD BAR
+   ========================================================= */
+
+.contact-gold-line {
+
   position: absolute;
 
   top: 0;
   left: 50%;
+
   transform: translateX(-50%);
 
-  width: 110px;
-  height: 3px;
+  width: 150px;
+  height: 4px;
 
-  background: #b89452;
-  border-radius: 0 0 5px 5px;
+  background:
+    linear-gradient(
+      90deg,
+      #8d001c,
+      #f0c44c,
+      #8d001c
+    );
+
+  border-radius:
+    0 0 10px 10px;
 }
 
 
-/* ---------- CLOSE BUTTON ---------- */
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
 
-.contact-modal-content .close {
+.contact-close {
+
   position: absolute;
 
-  top: 18px;
-  right: 20px;
+  top: 17px;
+  right: 18px;
 
   width: 38px;
   height: 38px;
@@ -432,116 +608,270 @@ document.addEventListener("keydown", function(e) {
 
   border-radius: 50%;
 
-  background: #ffffff;
-  color: #252525;
+  background: #fff;
 
-  border: 1px solid #ded8ca;
+  border:
+    1px solid
+    rgba(114, 0, 24, 0.16);
+
+  color: #5b1721;
 
   font-size: 24px;
   font-weight: 300;
-  line-height: 1;
 
   cursor: pointer;
 
-  transition: all 0.25s ease;
+  z-index: 20;
 
-  z-index: 10;
+  transition:
+    all 0.25s ease;
 }
 
-.contact-modal-content .close:hover {
-  background: #242424;
-  color: #ffffff;
-  border-color: #242424;
+
+.contact-close:hover {
+
+  background: #720018;
+
+  color: #fff;
+
+  border-color: #720018;
 
   transform: rotate(90deg);
 }
 
 
-/* ---------- HEADER ---------- */
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.contact-logo-wrap {
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+
+  margin-top: -5px;
+
+  margin-bottom: 12px;
+
+  z-index: 2;
+}
+
+
+.contact-logo-ring {
+
+  width: 92px;
+  height: 92px;
+
+  padding: 5px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #720018,
+      #d4a017,
+      #720018
+    );
+
+  box-shadow:
+    0 8px 25px rgba(114, 0, 24, 0.18);
+}
+
+
+.contact-logo-ring img {
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  background: #720018;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .contact-modal-header {
+
+  position: relative;
+
   text-align: center;
-  margin-bottom: 32px;
+
+  z-index: 2;
+
+  margin-bottom: 28px;
 }
 
-.contact-modal-header .eyebrow {
-  display: inline-block;
 
-  margin-bottom: 8px;
+.contact-eyebrow {
+
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #9b761f;
 
   font-family: "Poppins", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
 
-  letter-spacing: 3px;
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 2.8px;
+
   text-transform: uppercase;
-
-  color: #a07b3d;
 }
 
+
 .contact-modal-header h2 {
+
   margin: 0;
+
+  color: #720018;
 
   font-family: "Laila", serif;
 
-  font-size: clamp(27px, 4vw, 38px);
+  font-size: clamp(28px, 4vw, 37px);
+
   font-weight: 700;
 
-  color: #242424;
-
-  letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
-.contact-modal-header p {
-  max-width: 560px;
 
-  margin: 10px auto 0;
+/* =========================================================
+   DECORATIVE HEADING LINE
+   ========================================================= */
+
+.contact-heading-line {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  margin: 8px 0 9px;
+}
+
+
+.contact-heading-line span {
+
+  width: 55px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d2a53b
+    );
+}
+
+
+.contact-heading-line span:last-child {
+
+  background:
+    linear-gradient(
+      90deg,
+      #d2a53b,
+      transparent
+    );
+}
+
+
+.contact-heading-line i {
+
+  color: #d09c20;
+
+  font-size: 13px;
+
+  font-style: normal;
+}
+
+
+.contact-modal-header p {
+
+  max-width: 570px;
+
+  margin: auto;
+
+  color: #746d67;
 
   font-family: "Noto Sans", sans-serif;
 
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 13px;
 
-  color: #77736b;
+  line-height: 1.7;
 }
 
 
-/* ---------- COMMITTEE GRID ---------- */
+/* =========================================================
+   COMMITTEE GRID
+   ========================================================= */
 
 .contact-committee-grid {
+
+  position: relative;
+
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns:
+    repeat(3, 1fr);
 
-  gap: 18px;
+  gap: 17px;
 
-  width: 100%;
+  z-index: 2;
 }
 
 
-/* ---------- COMMITTEE CARD ---------- */
+/* =========================================================
+   CARD
+   ========================================================= */
 
 .contact-card {
+
   position: relative;
 
-  background: #ffffff;
+  padding: 20px 18px 18px;
 
-  border: 1px solid #e7e1d6;
-  border-radius: 18px;
+  background: rgba(255,255,255,0.88);
 
-  padding: 25px 20px 21px;
+  border:
+
+    1px solid
+    rgba(114, 0, 24, 0.12);
+
+  border-radius: 17px;
 
   text-align: center;
+
+  box-shadow:
+    0 8px 25px rgba(40, 20, 10, 0.055);
+
+  overflow: hidden;
 
   transition:
     transform 0.28s ease,
     box-shadow 0.28s ease,
     border-color 0.28s ease;
-
-  overflow: hidden;
 }
 
+
+/* Top accent */
+
 .contact-card::before {
+
   content: "";
 
   position: absolute;
@@ -552,35 +882,50 @@ document.addEventListener("keydown", function(e) {
 
   height: 3px;
 
-  background: #b89452;
+  background:
+    linear-gradient(
+      90deg,
+      #720018,
+      #d4a017,
+      #720018
+    );
 
-  transform: scaleX(0);
-  transform-origin: center;
-
-  transition: transform 0.3s ease;
+  opacity: 0.75;
 }
+
 
 .contact-card:hover {
+
   transform: translateY(-5px);
 
-  border-color: #cdb17b;
+  border-color:
+    rgba(212, 160, 23, 0.55);
 
   box-shadow:
-    0 16px 35px rgba(0, 0, 0, 0.09);
-}
-
-.contact-card:hover::before {
-  transform: scaleX(1);
+    0 18px 38px
+    rgba(70, 25, 20, 0.11);
 }
 
 
-/* ---------- CARD ICON ---------- */
+/* =========================================================
+   CARD TOP
+   ========================================================= */
+
+.contact-card-top {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+}
+
 
 .contact-card-icon {
-  width: 48px;
-  height: 48px;
 
-  margin: 0 auto 15px;
+  width: 43px;
+  height: 43px;
 
   display: flex;
   align-items: center;
@@ -588,78 +933,126 @@ document.addEventListener("keydown", function(e) {
 
   border-radius: 50%;
 
-  background: #f4efe5;
+  background:
+    linear-gradient(
+      145deg,
+      #fff4d5,
+      #f7e5b8
+    );
 
-  color: #a07b3d;
+  border:
+    1px solid
+    rgba(184, 137, 35, 0.30);
 
-  font-size: 20px;
+  color: #82001d;
 
-  border: 1px solid #e5d7bd;
+  font-size: 17px;
 }
 
 
-/* ---------- CARD TEXT ---------- */
+.committee-number {
+
+  color: #b79b62;
+
+  font-family: "Poppins", sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
 
 .contact-card h3 {
-  margin: 0 0 9px;
+
+  margin: 0 0 6px;
+
+  color: #5f071a;
 
   font-family: "Laila", serif;
 
-  font-size: 18px;
-  line-height: 1.4;
+  font-size: 17px;
 
-  color: #292929;
+  line-height: 1.45;
 }
 
-.contact-card .designation {
-  margin-bottom: 4px;
+
+.contact-role {
+
+  display: inline-block;
+
+  margin-bottom: 5px;
+
+  padding: 3px 9px;
+
+  border-radius: 20px;
+
+  background: #fff4d8;
+
+  color: #9a741c;
+
+  font-family: "Noto Sans", sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+
+.contact-person {
+
+  min-height: 40px;
+
+  margin-bottom: 15px;
+
+  color: #55504b;
 
   font-family: "Noto Sans", sans-serif;
 
   font-size: 12px;
-  color: #918c83;
-}
 
-.contact-card .person {
-  margin: 0 0 18px;
-
-  font-family: "Noto Sans", sans-serif;
-
-  font-size: 15px;
-  font-weight: 600;
-
-  color: #3a3a3a;
+  line-height: 1.6;
 }
 
 
-/* ---------- ACTION BUTTONS ---------- */
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
 
 .contact-actions {
+
   display: flex;
 
-  justify-content: center;
-
-  gap: 8px;
+  gap: 7px;
 }
 
+
 .contact-actions a {
+
   flex: 1;
 
-  min-height: 38px;
+  height: 36px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  padding: 0 10px;
+  gap: 5px;
 
-  border-radius: 9px;
+  border-radius: 8px;
 
   text-decoration: none;
 
   font-family: "Poppins", sans-serif;
 
-  font-size: 11px;
+  font-size: 10px;
+
   font-weight: 600;
 
   transition: all 0.22s ease;
@@ -669,14 +1062,21 @@ document.addEventListener("keydown", function(e) {
 /* CALL */
 
 .contact-call {
-  background: #252525;
-  color: #ffffff;
 
-  border: 1px solid #252525;
+  background: #720018;
+
+  border: 1px solid #720018;
+
+  color: #fff;
 }
 
+
 .contact-call:hover {
-  background: #000000;
+
+  background: #560014;
+
+  border-color: #560014;
+
   transform: translateY(-2px);
 }
 
@@ -684,40 +1084,65 @@ document.addEventListener("keydown", function(e) {
 /* WHATSAPP */
 
 .contact-whatsapp {
-  background: #f8f5ee;
-  color: #80622e;
 
-  border: 1px solid #d9c7a5;
+  background: #fffaf0;
+
+  border:
+    1px solid
+    #d8bd7b;
+
+  color: #795c20;
 }
 
+
 .contact-whatsapp:hover {
-  background: #eee6d7;
+
+  background: #f8edcf;
+
+  border-color: #cda84f;
 
   transform: translateY(-2px);
 }
 
 
-/* ---------- FOOTER ---------- */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 .contact-modal-footer {
-  margin-top: 27px;
 
-  padding-top: 20px;
+  position: relative;
 
-  border-top: 1px solid #e6e0d6;
+  display: flex;
 
-  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+  gap: 13px;
+
+  margin-top: 21px;
+
+  padding-top: 15px;
+
+  border-top:
+    1px solid
+    rgba(114, 0, 24, 0.10);
+
+  color: #8a8178;
 
   font-family: "Noto Sans", sans-serif;
 
-  font-size: 12px;
+  font-size: 10px;
 
-  color: #858078;
+  z-index: 2;
 }
 
-.contact-modal-footer strong {
-  color: #8d6b35;
-  font-weight: 600;
+
+.footer-diya {
+
+  color: #b58a2b;
+
+  font-size: 12px;
 }
 
 
@@ -728,116 +1153,180 @@ document.addEventListener("keydown", function(e) {
 @media (max-width: 760px) {
 
   #contactModal {
-    padding: 15px;
+
+    padding: 12px;
   }
 
+
   .contact-modal-content {
+
     width: 100%;
 
-    max-height: calc(100vh - 30px);
+    max-height:
+      calc(100vh - 24px);
 
-    padding: 35px 18px 20px;
+    padding:
+      30px 15px 16px;
 
     border-radius: 20px;
 
-    /*
-      Modal itself NEVER scrolls.
-      Content is compact enough to fit.
-    */
     overflow: hidden;
   }
 
-  .contact-modal-header {
-    margin-bottom: 22px;
+
+  .contact-logo-ring {
+
+    width: 70px;
+    height: 70px;
   }
 
+
+  .contact-logo-wrap {
+
+    margin-bottom: 8px;
+  }
+
+
+  .contact-modal-header {
+
+    margin-bottom: 17px;
+  }
+
+
+  .contact-eyebrow {
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+  }
+
+
   .contact-modal-header h2 {
+
     font-size: 27px;
   }
 
-  .contact-modal-header p {
-    font-size: 12px;
-    line-height: 1.6;
+
+  .contact-heading-line {
+
+    margin: 5px 0 6px;
   }
+
+
+  .contact-modal-header p {
+
+    font-size: 11px;
+
+    line-height: 1.55;
+  }
+
 
   .contact-committee-grid {
+
     grid-template-columns: 1fr;
 
-    gap: 11px;
+    gap: 9px;
   }
 
+
   .contact-card {
+
     display: grid;
 
-    grid-template-columns: 45px 1fr auto;
+    grid-template-columns:
+      43px 1fr 72px;
 
-    column-gap: 13px;
+    column-gap: 11px;
 
     align-items: center;
 
-    padding: 14px;
-
-    text-align: left;
+    padding: 12px;
   }
 
-  .contact-card::before {
-    height: 2px;
-  }
 
-  .contact-card-icon {
+  .contact-card-top {
+
     grid-row: span 2;
 
-    width: 42px;
-    height: 42px;
-
     margin: 0;
   }
 
-  .contact-card h3 {
-    margin: 0;
+
+  .contact-card-top .committee-number {
+
+    display: none;
+  }
+
+
+  .contact-card-icon {
+
+    width: 40px;
+    height: 40px;
 
     font-size: 15px;
   }
 
-  .contact-card .designation {
-    margin: 2px 0 0;
 
-    font-size: 10px;
+  .contact-card h3 {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.35;
   }
 
-  .contact-card .person {
+
+  .contact-role {
+
+    margin: 2px 0 0;
+
+    padding: 2px 7px;
+
+    font-size: 8px;
+  }
+
+
+  .contact-person {
+
     display: none;
   }
 
+
   .contact-actions {
+
     grid-column: 3;
 
     grid-row: 1 / span 2;
 
     flex-direction: column;
 
-    width: 72px;
+    gap: 4px;
   }
+
 
   .contact-actions a {
-    min-height: 31px;
 
-    font-size: 9px;
+    height: 29px;
 
-    padding: 0 6px;
+    font-size: 8px;
   }
+
 
   .contact-modal-footer {
-    margin-top: 15px;
 
-    padding-top: 13px;
+    margin-top: 12px;
 
-    font-size: 10px;
+    padding-top: 10px;
+
+    font-size: 9px;
   }
 
-  .contact-modal-content .close {
-    top: 12px;
-    right: 12px;
+
+  .contact-close {
+
+    top: 10px;
+    right: 10px;
 
     width: 32px;
     height: 32px;
@@ -847,45 +1336,56 @@ document.addEventListener("keydown", function(e) {
 }
 
 
-/* VERY SMALL MOBILE */
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
 
-@media (max-width: 400px) {
+@media (max-width: 380px) {
 
   .contact-modal-content {
-    padding-left: 13px;
-    padding-right: 13px;
+
+    padding-left: 10px;
+    padding-right: 10px;
   }
+
 
   .contact-card {
-    grid-template-columns: 38px 1fr auto;
 
-    gap: 9px;
+    grid-template-columns:
+      38px 1fr 65px;
 
-    padding: 12px;
+    column-gap: 8px;
+
+    padding: 10px;
   }
+
 
   .contact-card-icon {
-    width: 36px;
-    height: 36px;
 
-    font-size: 16px;
+    width: 35px;
+    height: 35px;
   }
+
 
   .contact-card h3 {
-    font-size: 13px;
+
+    font-size: 12px;
   }
 
-  .contact-actions {
-    width: 64px;
+
+  .contact-actions a {
+
+    font-size: 7px;
   }
 }
 
 
 /* =========================================================
-   BODY LOCK WHEN MODAL IS OPEN
+   BODY SCROLL LOCK
    ========================================================= */
 
 body.contact-modal-open {
+
   overflow: hidden !important;
 }
   </style>
@@ -893,32 +1393,52 @@ body.contact-modal-open {
 <script>
 
 /* =========================================================
+   BAL DURGA PUJA SAMITI
+   FINAL MODAL JAVASCRIPT
+   ========================================================= */
+
+
+/* =========================================================
+   COMMON BODY SCROLL LOCK
+   ========================================================= */
+
+function lockBodyScroll() {
+  document.body.classList.add("contact-modal-open");
+  document.body.style.overflow = "hidden";
+}
+
+function unlockBodyScroll() {
+  document.body.classList.remove("contact-modal-open");
+  document.body.style.overflow = "";
+}
+
+
+/* =========================================================
    DONATION MODAL
    ========================================================= */
 
 function openDonation() {
-
   const modal = document.getElementById("donationModal");
 
-  if (!modal) return;
+  if (!modal) {
+    console.warn("Donation modal not found.");
+    return;
+  }
 
   modal.style.display = "flex";
 
-  // Prevent background page scrolling
-  document.body.style.overflow = "hidden";
+  lockBodyScroll();
 }
 
 
 function closeDonation() {
-
   const modal = document.getElementById("donationModal");
 
   if (!modal) return;
 
   modal.style.display = "none";
 
-  // Restore background scrolling
-  document.body.style.overflow = "";
+  unlockBodyScroll();
 }
 
 
@@ -927,118 +1447,147 @@ function closeDonation() {
    ========================================================= */
 
 function openContact() {
-
   const modal = document.getElementById("contactModal");
 
-  if (!modal) return;
+  if (!modal) {
+    console.warn("Contact modal not found.");
+    return;
+  }
 
-  // Show modal
+  /* Show modal first */
   modal.style.display = "flex";
 
-  // Trigger opening animation
+  /* Allow browser to render before animation */
   requestAnimationFrame(() => {
     modal.classList.add("show");
   });
 
-  // Prevent background page scrolling
-  document.body.style.overflow = "hidden";
+  lockBodyScroll();
 }
 
 
 function closeContact() {
-
   const modal = document.getElementById("contactModal");
 
   if (!modal) return;
 
-  // Start closing animation
+  /* Start closing animation */
   modal.classList.remove("show");
 
-  // Hide after animation completes
+  /* Hide after animation */
   setTimeout(() => {
-
     modal.style.display = "none";
-
   }, 350);
 
-  // Restore background scrolling
-  document.body.style.overflow = "";
+  unlockBodyScroll();
 }
 
 
 /* =========================================================
-   CLOSE MODALS WHEN CLICKING OUTSIDE
+   CLOSE MODAL WHEN CLICKING OUTSIDE
    ========================================================= */
 
-window.addEventListener("click", function(e) {
+window.addEventListener("click", function (event) {
 
   /* Donation Modal */
-
-  const donationModal =
-    document.getElementById("donationModal");
+  const donationModal = document.getElementById("donationModal");
 
   if (
     donationModal &&
-    e.target === donationModal
+    event.target === donationModal
   ) {
-
     closeDonation();
-
+    return;
   }
 
 
   /* Contact Modal */
-
-  const contactModal =
-    document.getElementById("contactModal");
+  const contactModal = document.getElementById("contactModal");
 
   if (
     contactModal &&
-    e.target === contactModal
+    event.target === contactModal
   ) {
-
     closeContact();
-
+    return;
   }
 
 });
 
 
 /* =========================================================
-   CLOSE MODALS WITH ESCAPE KEY
+   ESCAPE KEY SUPPORT
    ========================================================= */
 
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown", function (event) {
 
-  if (e.key !== "Escape") return;
+  if (event.key !== "Escape") return;
 
 
   /* Close Contact Modal */
-
-  const contactModal =
-    document.getElementById("contactModal");
+  const contactModal = document.getElementById("contactModal");
 
   if (
     contactModal &&
     contactModal.style.display === "flex"
   ) {
-
     closeContact();
-
+    return;
   }
 
 
   /* Close Donation Modal */
-
-  const donationModal =
-    document.getElementById("donationModal");
+  const donationModal = document.getElementById("donationModal");
 
   if (
     donationModal &&
     donationModal.style.display === "flex"
   ) {
-
     closeDonation();
+    return;
+  }
+
+});
+
+
+/* =========================================================
+   PREVENT BACKGROUND SCROLL / SAFETY
+   ========================================================= */
+
+window.addEventListener("beforeunload", function () {
+  document.body.classList.remove("contact-modal-open");
+  document.body.style.overflow = "";
+});
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  /*
+   * This section safely handles common mobile-menu setups.
+   * If your existing mobile menu already has its own JS,
+   * it will not interfere unless matching IDs exist.
+   */
+
+  const menuToggle =
+    document.querySelector(".menu-toggle") ||
+    document.querySelector(".hamburger") ||
+    document.querySelector("#menuToggle");
+
+  const mobileMenu =
+    document.querySelector(".mobile-menu") ||
+    document.querySelector("#mobileMenu");
+
+  if (menuToggle && mobileMenu) {
+
+    menuToggle.addEventListener("click", function () {
+
+      mobileMenu.classList.toggle("active");
+
+    });
 
   }
 
@@ -1046,14 +1595,99 @@ document.addEventListener("keydown", function(e) {
 
 
 /* =========================================================
-   SAFETY — RESTORE SCROLL IF PAGE IS CLOSED/RELOADED
+   CLOSE MOBILE MENU AFTER CLICKING A LINK
    ========================================================= */
 
-window.addEventListener("beforeunload", function() {
+document.addEventListener("click", function (event) {
 
+  const clickedLink = event.target.closest(
+    ".mobile-menu a, #mobileMenu a"
+  );
+
+  if (!clickedLink) return;
+
+  const mobileMenu =
+    document.querySelector(".mobile-menu") ||
+    document.querySelector("#mobileMenu");
+
+  if (mobileMenu) {
+    mobileMenu.classList.remove("active");
+  }
+
+});
+
+
+/* =========================================================
+   CONTACT / DONATION MODAL INITIAL SAFETY
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const contactModal =
+    document.getElementById("contactModal");
+
+  const donationModal =
+    document.getElementById("donationModal");
+
+
+  /* Ensure both modals start hidden */
+
+  if (contactModal) {
+    contactModal.style.display = "none";
+    contactModal.classList.remove("show");
+  }
+
+  if (donationModal) {
+    donationModal.style.display = "none";
+  }
+
+
+  /* Make sure page scrolling is enabled initially */
+
+  document.body.classList.remove("contact-modal-open");
   document.body.style.overflow = "";
 
 });
+
+
+/* =========================================================
+   PREVENT MODAL STATE FROM BREAKING ON RESIZE
+   ========================================================= */
+
+window.addEventListener("resize", function () {
+
+  const contactModal =
+    document.getElementById("contactModal");
+
+  const donationModal =
+    document.getElementById("donationModal");
+
+  const contactOpen =
+    contactModal &&
+    contactModal.style.display === "flex";
+
+  const donationOpen =
+    donationModal &&
+    donationModal.style.display === "flex";
+
+
+  if (contactOpen || donationOpen) {
+    document.body.style.overflow = "hidden";
+  }
+
+});
+
+
+/* =========================================================
+   GLOBAL ERROR-SAFE MODAL FUNCTIONS
+   ========================================================= */
+
+window.openDonation = openDonation;
+window.closeDonation = closeDonation;
+
+window.openContact = openContact;
+window.closeContact = closeContact;
+
 
 
 </script>
