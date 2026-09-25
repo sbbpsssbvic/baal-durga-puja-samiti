@@ -1146,239 +1146,169 @@ document.addEventListener("keydown", function(e) {
 }
 
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
 @media (max-width: 760px) {
 
   #contactModal {
-
     padding: 12px;
   }
 
-
   .contact-modal-content {
-
     width: 100%;
-
-    max-height:
-      calc(100vh - 24px);
-
-    padding:
-      30px 15px 16px;
-
+    max-height: calc(100vh - 24px);
+    padding: 30px 14px 16px;
     border-radius: 20px;
-
-    overflow: hidden;
+    overflow-y: auto;
   }
 
-
   .contact-logo-ring {
-
     width: 70px;
     height: 70px;
   }
 
-
   .contact-logo-wrap {
-
     margin-bottom: 8px;
   }
 
-
   .contact-modal-header {
-
-    margin-bottom: 17px;
+    margin-bottom: 18px;
   }
 
-
   .contact-eyebrow {
-
     font-size: 8px;
-
     letter-spacing: 2px;
   }
 
-
   .contact-modal-header h2 {
-
     font-size: 27px;
   }
 
-
   .contact-heading-line {
-
     margin: 5px 0 6px;
   }
 
-
   .contact-modal-header p {
-
     font-size: 11px;
-
     line-height: 1.55;
   }
 
 
+  /* ================================
+     MOBILE COMMITTEE CARDS
+     ================================ */
+
   .contact-committee-grid {
-
-    grid-template-columns: 1fr;
-
-    gap: 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
   }
-
 
   .contact-card {
-
-    display: grid;
-
-    grid-template-columns:
-      43px 1fr 72px;
-
-    column-gap: 11px;
-
-    align-items: center;
-
-    padding: 12px;
+    width: 100%;
+    display: block;
+    padding: 16px 14px;
+    text-align: center;
+    border-radius: 15px;
   }
-
 
   .contact-card-top {
-
-    grid-row: span 2;
-
-    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 9px;
   }
-
-
-  .contact-card-top .committee-number {
-
-    display: none;
-  }
-
 
   .contact-card-icon {
-
-    width: 40px;
-    height: 40px;
-
-    font-size: 15px;
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
   }
 
-
-  .contact-card h3 {
-
-    margin: 0;
-
-    font-size: 13px;
-
-    line-height: 1.35;
-  }
-
-
-  .contact-role {
-
-    margin: 2px 0 0;
-
-    padding: 2px 7px;
-
-    font-size: 8px;
-  }
-
-
-  .contact-person {
-
+  .contact-card-top .committee-number {
     display: none;
   }
 
-
-  .contact-actions {
-
-    grid-column: 3;
-
-    grid-row: 1 / span 2;
-
-    flex-direction: column;
-
-    gap: 4px;
+  .contact-card h3 {
+    margin: 0 0 5px;
+    font-size: 14px;
+    line-height: 1.4;
   }
 
-
-  .contact-actions a {
-
-    height: 29px;
-
+  .contact-role {
+    margin-bottom: 6px;
+    padding: 3px 9px;
     font-size: 8px;
   }
 
+  .contact-person {
+    display: block;
+    min-height: auto;
+    margin: 0 0 12px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
 
-  .contact-modal-footer {
+  .contact-actions {
+    display: flex;
+    width: 100%;
+    gap: 7px;
+  }
 
-    margin-top: 12px;
-
-    padding-top: 10px;
-
+  .contact-actions a {
+    flex: 1;
+    height: 34px;
     font-size: 9px;
   }
 
 
-  .contact-close {
+  /* ================================
+     FOOTER
+     ================================ */
 
+  .contact-modal-footer {
+    margin-top: 13px;
+    padding-top: 10px;
+    font-size: 9px;
+  }
+
+  .contact-close {
     top: 10px;
     right: 10px;
-
     width: 32px;
     height: 32px;
-
     font-size: 20px;
   }
 }
 
 
-/* =========================================================
+/* ===================================
    VERY SMALL MOBILE
-   ========================================================= */
+   =================================== */
 
 @media (max-width: 380px) {
 
   .contact-modal-content {
-
     padding-left: 10px;
     padding-right: 10px;
   }
 
-
   .contact-card {
-
-    grid-template-columns:
-      38px 1fr 65px;
-
-    column-gap: 8px;
-
-    padding: 10px;
+    padding: 14px 12px;
   }
-
-
-  .contact-card-icon {
-
-    width: 35px;
-    height: 35px;
-  }
-
 
   .contact-card h3 {
-
-    font-size: 12px;
+    font-size: 13px;
   }
 
+  .contact-person {
+    font-size: 10px;
+  }
 
   .contact-actions a {
-
-    font-size: 7px;
+    height: 32px;
+    font-size: 8px;
   }
 }
-
 
 /* =========================================================
    BODY SCROLL LOCK
