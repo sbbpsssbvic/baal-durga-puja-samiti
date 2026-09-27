@@ -9,7 +9,7 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Laila:wght@300;400;500;600;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Martel:wght@200;300;400;600;700;800;900&family=Tiro+Devanagari+Hindi:ital@0;1&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="main.css">
- <link rel="icon" type="image/x-icon" href="/photos/favicon-192x192.png">
+  <link rel="icon" type="image/x-icon" href="/photos/favicon-192x192.png">
 
   <!-----Meta---->
 
@@ -50,7 +50,7 @@
 
 
 
-  
+
 </head>
 
 <body>
@@ -133,1502 +133,262 @@
   </section>
 
 
-<!-- DONATION MODAL -->
-<!-- DONATION MODAL -->
-<div id="donationModal" class="donation-modal">
-  <div class="donation-modal-content">
-    <span class="close" onclick="closeDonation()">&times;</span>
-    <h2>दान एवं सहयोग</h2>
-    <iframe src="https://script.google.com/macros/s/AKfycbwQ7JcV1V9I7JqdugrtzK6neb3aARsZX4yWh3C-OhnUGrNzf0wPdnyLzvhK4Nvv0wrVbg/exec" 
-            style="width:100%; height:600px; border:2px; border-radius:10px;"></iframe>
+  <!-- DONATION MODAL -->
+  <!-- DONATION MODAL -->
+  <div id="donationModal" class="donation-modal">
+    <div class="donation-modal-content">
+      <span class="close" onclick="closeDonation()">&times;</span>
+      <h2>दान एवं सहयोग</h2>
+      <iframe
+        src="https://script.google.com/macros/s/AKfycbwQ7JcV1V9I7JqdugrtzK6neb3aARsZX4yWh3C-OhnUGrNzf0wPdnyLzvhK4Nvv0wrVbg/exec"
+        style="width:100%; height:600px; border:2px; border-radius:10px;"></iframe>
+    </div>
   </div>
-</div>
 
-<script>
-function openDonation(){ document.getElementById("donationModal").style.display="flex"; }
-function closeDonation(){ document.getElementById("donationModal").style.display="none"; }
-window.addEventListener("click", function(e) {
+  <script>
+    function openDonation() { document.getElementById("donationModal").style.display = "flex"; }
+    function closeDonation() { document.getElementById("donationModal").style.display = "none"; }
+    window.addEventListener("click", function (e) {
 
-  // Donation modal ke bahar click
-  if (e.target.id === "donationModal") {
-    closeDonation();
-  }
+      // Donation modal ke bahar click
+      if (e.target.id === "donationModal") {
+        closeDonation();
+      }
 
-  // Contact modal ke bahar click
-  if (e.target.id === "contactModal") {
-    closeContact();
-  }
+      // Contact modal ke bahar click
+      if (e.target.id === "contactModal") {
+        closeContact();
+      }
 
-});
-  /* ================= ESC KEY ================= */
+    });
+    /* ================= ESC KEY ================= */
 
-document.addEventListener("keydown", function(e) {
+    document.addEventListener("keydown", function (e) {
 
-  if (e.key === "Escape") {
-    closeContact();
+      if (e.key === "Escape") {
+        closeContact();
 
-  }
+      }
 
-});
-</script>
+    });
+  </script>
 
 
-<!-- =====================================================
+  <!-- =====================================================
      PREMIUM CONTACT MODAL
      ===================================================== -->
 
-<div id="contactModal" class="contact-modal">
+  <div id="contactModal" class="contact-modal">
 
-  <div class="contact-modal-content">
+    <div class="contact-modal-content">
 
-    <!-- Decorative top line -->
-    <div class="contact-gold-line"></div>
+      <!-- Decorative top line -->
+      <div class="contact-gold-line"></div>
 
-    <!-- Close -->
-    <button
-      class="contact-close"
-      onclick="closeContact()"
-      aria-label="Close">
-      &times;
-    </button>
+      <!-- Close -->
+      <button class="contact-close" onclick="closeContact()" aria-label="Close">
+        &times;
+      </button>
 
 
-    <!-- LOGO -->
-    <div class="contact-logo-wrap">
+      <!-- LOGO -->
+      <div class="contact-logo-wrap">
 
-      <div class="contact-logo-ring">
+        <div class="contact-logo-ring">
 
-        <img
-          src="https://baal-durga-puja-samiti.netlify.app/verify/photos/LOGO-4.png"
-          alt="बाल दुर्गा पूजा समिति लोगो">
-
-      </div>
-
-    </div>
-
-
-    <!-- HEADER -->
-
-    <div class="contact-modal-header">
-
-      <span class="contact-eyebrow">
-        बाल दुर्गा पूजा समिति
-      </span>
-
-      <h2>संपर्क करें</h2>
-
-      <div class="contact-heading-line">
-        <span></span>
-        <i>✦</i>
-        <span></span>
-      </div>
-
-      <p>
-        समिति एवं आयोजन से संबंधित जानकारी के लिए
-        हमारे पदाधिकारियों से सीधे संपर्क करें।
-      </p>
-
-    </div>
-
-
-    <!-- COMMITTEE CARDS -->
-
-    <div class="contact-committee-grid">
-
-
-      <!-- CARD 1 -->
-
-      <div class="contact-card">
-
-        <div class="contact-card-top">
-
-          <div class="contact-card-icon">
-            ☎
-          </div>
-
-          <span class="committee-number">
-            01
-          </span>
+          <img src="https://baal-durga-puja-samiti.netlify.app/verify/photos/LOGO-4.png"
+            alt="बाल दुर्गा पूजा समिति लोगो">
 
         </div>
 
-        <h3>
+      </div>
+
+
+      <!-- HEADER -->
+
+      <div class="contact-modal-header">
+
+        <span class="contact-eyebrow">
           बाल दुर्गा पूजा समिति
-        </h3>
+        </span>
 
-        <div class="contact-role">
-          अध्यक्ष
+        <h2>संपर्क करें</h2>
+
+        <div class="contact-heading-line">
+          <span></span>
+          <i>✦</i>
+          <span></span>
         </div>
 
-        <div class="contact-person">
-          समस्त बेनीगद्दौपुर बाजारवासी
-        </div>
-
-        <div class="contact-actions">
-
-          <a
-            href="tel:8400020058"
-            class="contact-call">
-            <span>☎</span>
-            कॉल करें
-          </a>
-
-          <a
-            href="https://wa.me/918400020058"
-            target="_blank"
-            rel="noopener"
-            class="contact-whatsapp">
-            WhatsApp
-          </a>
-
-        </div>
+        <p>
+          समिति एवं आयोजन से संबंधित जानकारी के लिए
+          हमारे पदाधिकारियों से सीधे संपर्क करें।
+        </p>
 
       </div>
 
 
+      <!-- COMMITTEE CARDS -->
+
+      <div class="contact-committee-grid">
 
 
-      <!-- CARD 2 -->
+        <!-- CARD 1 -->
 
-      <div class="contact-card">
+        <div class="contact-card">
 
-        <div class="contact-card-top">
+          <div class="contact-card-top">
 
-          <div class="contact-card-icon">
-            ☎
+            <div class="contact-card-icon">
+              ☎
+            </div>
+
+            <span class="committee-number">
+              01
+            </span>
+
           </div>
 
-          <span class="committee-number">
-            03
-          </span>
+          <h3>
+            बाल दुर्गा पूजा समिति
+          </h3>
 
-        </div>
-
-        <h3>
-          श्री नव बाल दुर्गा पूजा समिति
-        </h3>
-
-        <div class="contact-role">
-          अध्यक्ष
-        </div>
-
-        <div class="contact-person">
-          अंश सिंह 
-        </div>
-
-        <div class="contact-actions">
-
-          <a
-            href="tel:1000000000"
-            class="contact-call">
-            <span>☎</span>
-            कॉल करें
-          </a>
-
-          <a
-            href="https://wa.me/911000000000"
-            target="_blank"
-            rel="noopener"
-            class="contact-whatsapp">
-            WhatsApp
-          </a>
-
-        </div>
-
-      </div>
-
-      <!-- CARD 3 -->
-
-      <div class="contact-card">
-
-        <div class="contact-card-top">
-
-          <div class="contact-card-icon">
-            ☎
+          <div class="contact-role">
+            अध्यक्ष
           </div>
 
-          <span class="committee-number">
-            02
-          </span>
+          <div class="contact-person">
+            समस्त बेनीगद्दौपुर बाजारवासी
+          </div>
+
+          <div class="contact-actions">
+
+            <a href="tel:8400020058" class="contact-call">
+              <span>☎</span>
+              कॉल करें
+            </a>
+
+            <a href="https://wa.me/918400020058" target="_blank" rel="noopener" class="contact-whatsapp">
+              WhatsApp
+            </a>
+
+          </div>
 
         </div>
 
-        <h3>
-          नव बाल दुर्गा पूजा समिति
-        </h3>
 
-        <div class="contact-role">
-          अध्यक्ष
+
+
+        <!-- CARD 2 -->
+
+        <div class="contact-card">
+
+          <div class="contact-card-top">
+
+            <div class="contact-card-icon">
+              ☎
+            </div>
+
+            <span class="committee-number">
+              03
+            </span>
+
+          </div>
+
+          <h3>
+            श्री नव बाल दुर्गा पूजा समिति
+          </h3>
+
+          <div class="contact-role">
+            अध्यक्ष
+          </div>
+
+          <div class="contact-person">
+            अंश सिंह
+          </div>
+
+          <div class="contact-actions">
+
+            <a href="tel:1000000000" class="contact-call">
+              <span>☎</span>
+              कॉल करें
+            </a>
+
+            <a href="https://wa.me/911000000000" target="_blank" rel="noopener" class="contact-whatsapp">
+              WhatsApp
+            </a>
+
+          </div>
+
         </div>
 
-        <div class="contact-person">
-          विकास विश्वकर्मा
+        <!-- CARD 3 -->
+
+        <div class="contact-card">
+
+          <div class="contact-card-top">
+
+            <div class="contact-card-icon">
+              ☎
+            </div>
+
+            <span class="committee-number">
+              02
+            </span>
+
+          </div>
+
+          <h3>
+            नव बाल दुर्गा पूजा समिति
+          </h3>
+
+          <div class="contact-role">
+            अध्यक्ष
+          </div>
+
+          <div class="contact-person">
+            विकास विश्वकर्मा
+          </div>
+
+          <div class="contact-actions">
+
+            <a href="tel:7620199864" class="contact-call">
+              <span>☎</span>
+              कॉल करें
+            </a>
+
+            <a href="https://wa.me/917620199864" target="_blank" rel="noopener" class="contact-whatsapp">
+              WhatsApp
+            </a>
+
+          </div>
+
         </div>
 
-        <div class="contact-actions">
-
-          <a
-            href="tel:7620199864"
-            class="contact-call">
-            <span>☎</span>
-            कॉल करें
-          </a>
-
-          <a
-            href="https://wa.me/917620199864"
-            target="_blank"
-            rel="noopener"
-            class="contact-whatsapp">
-            WhatsApp
-          </a>
-
-        </div>
 
       </div>
 
-      
-    </div>
 
+      <!-- FOOTER -->
 
-    <!-- FOOTER -->
+      <div class="contact-modal-footer">
 
-    <div class="contact-modal-footer">
+        <span class="footer-diya">ॐ</span>
 
-      <span class="footer-diya">ॐ</span>
+        <span>
+          बेनीगद्दौपुर · अयोध्या
+        </span>
 
-      <span>
-        बेनीगद्दौपुर · अयोध्या
-      </span>
+        <span class="footer-diya">ॐ</span>
 
-      <span class="footer-diya">ॐ</span>
+      </div>
 
     </div>
 
   </div>
 
-</div>
 
-  <style>
-/* =========================================================
-   PREMIUM CONTACT MODAL
-   BAL DURGA PUJA SAMITI
-   BURGUNDY + GOLD + IVORY THEME
-   ========================================================= */
 
-#contactModal {
-  position: fixed;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  display: none;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  background:
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(130, 0, 25, 0.16),
-      transparent 45%
-    ),
-    rgba(25, 8, 10, 0.72);
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  z-index: 99999;
-
-  overflow: hidden;
-
-  opacity: 0;
-
-  transition: opacity 0.3s ease;
-}
-
-
-#contactModal.show {
-  opacity: 1;
-}
-
-
-/* =========================================================
-   MAIN MODAL
-   ========================================================= */
-
-.contact-modal-content {
-
-  position: relative;
-
-  width: min(930px, 100%);
-
-  max-height: calc(100vh - 40px);
-
-  padding: 38px 40px 24px;
-
-  background:
-
-    linear-gradient(
-      145deg,
-      #fffdf8 0%,
-      #fffaf0 100%
-    );
-
-  border-radius: 26px;
-
-  border: 1px solid rgba(160, 115, 25, 0.30);
-
-  box-shadow:
-
-    0 35px 100px rgba(0, 0, 0, 0.35),
-
-    0 10px 35px rgba(114, 0, 24, 0.15);
-
-  overflow: hidden;
-
-  transform:
-    translateY(25px)
-    scale(0.97);
-
-  opacity: 0;
-
-  transition:
-    transform 0.4s cubic-bezier(.2,.8,.2,1),
-    opacity 0.35s ease;
-}
-
-
-#contactModal.show
-.contact-modal-content {
-
-  transform:
-    translateY(0)
-    scale(1);
-
-  opacity: 1;
-}
-
-
-/* =========================================================
-   SUBTLE BACKGROUND DECORATION
-   ========================================================= */
-
-.contact-modal-content::before {
-
-  content: "";
-
-  position: absolute;
-
-  width: 260px;
-  height: 260px;
-
-  top: -150px;
-  left: -130px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(151, 0, 30, 0.09),
-      transparent 68%
-    );
-
-  pointer-events: none;
-}
-
-
-.contact-modal-content::after {
-
-  content: "";
-
-  position: absolute;
-
-  width: 300px;
-  height: 300px;
-
-  bottom: -180px;
-  right: -150px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(212, 160, 23, 0.12),
-      transparent 68%
-    );
-
-  pointer-events: none;
-}
-
-
-/* =========================================================
-   TOP GOLD BAR
-   ========================================================= */
-
-.contact-gold-line {
-
-  position: absolute;
-
-  top: 0;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  width: 150px;
-  height: 4px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #8d001c,
-      #f0c44c,
-      #8d001c
-    );
-
-  border-radius:
-    0 0 10px 10px;
-}
-
-
-/* =========================================================
-   CLOSE BUTTON
-   ========================================================= */
-
-.contact-close {
-
-  position: absolute;
-
-  top: 17px;
-  right: 18px;
-
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #fff;
-
-  border:
-    1px solid
-    rgba(114, 0, 24, 0.16);
-
-  color: #5b1721;
-
-  font-size: 24px;
-  font-weight: 300;
-
-  cursor: pointer;
-
-  z-index: 20;
-
-  transition:
-    all 0.25s ease;
-}
-
-
-.contact-close:hover {
-
-  background: #720018;
-
-  color: #fff;
-
-  border-color: #720018;
-
-  transform: rotate(90deg);
-}
-
-
-/* =========================================================
-   LOGO
-   ========================================================= */
-
-.contact-logo-wrap {
-
-  position: relative;
-
-  display: flex;
-  justify-content: center;
-
-  margin-top: -5px;
-
-  margin-bottom: 12px;
-
-  z-index: 2;
-}
-
-
-.contact-logo-ring {
-
-  width: 50px;
-  height: 50px;
-
-  padding: 5px;
-
-  border-radius: 50%;
-
-  background:
-    linear-gradient(
-      135deg,
-      #720018,
-      #d4a017,
-      #720018
-    );
-
-  box-shadow:
-    0 8px 25px rgba(114, 0, 24, 0.18);
-}
-
-
-.contact-logo-ring img {
-
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  border-radius: 50%;
-
-  background: #720018;
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.contact-modal-header {
-
-  position: relative;
-
-  text-align: center;
-
-  z-index: 2;
-
-  margin-bottom: 28px;
-}
-
-
-.contact-eyebrow {
-
-  display: block;
-
-  margin-bottom: 4px;
-
-  color: #9b761f;
-
-  font-family: "Poppins", sans-serif;
-
-  font-size: 15px;
-
-  font-weight: 700;
-
-  text-transform: uppercase;
-}
-
-
-.contact-modal-header h2 {
-
-  margin: 0;
-
-  color: #720018;
-
-  font-family: "Laila", serif;
-
-  font-size: clamp(28px, 4vw, 37px);
-
-  font-weight: 700;
-
-  line-height: 1.3;
-}
-
-
-/* =========================================================
-   DECORATIVE HEADING LINE
-   ========================================================= */
-
-.contact-heading-line {
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 9px;
-
-  margin: 8px 0 9px;
-}
-
-
-.contact-heading-line span {
-
-  width: 55px;
-  height: 1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #d2a53b
-    );
-}
-
-
-.contact-heading-line span:last-child {
-
-  background:
-    linear-gradient(
-      90deg,
-      #d2a53b,
-      transparent
-    );
-}
-
-
-.contact-heading-line i {
-
-  color: #d09c20;
-
-  font-size: 13px;
-
-  font-style: normal;
-}
-
-
-.contact-modal-header p {
-
-  max-width: 570px;
-
-  margin: auto;
-
-  color: #746d67;
-
-  font-family: "Noto Sans", sans-serif;
-
-  font-size: 13px;
-
-  line-height: 1.7;
-}
-
-
-/* =========================================================
-   COMMITTEE GRID
-   ========================================================= */
-
-.contact-committee-grid {
-
-  position: relative;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 17px;
-
-  z-index: 2;
-}
-
-
-/* =========================================================
-   CARD
-   ========================================================= */
-
-.contact-card {
-
-  position: relative;
-
-  padding: 20px 18px 18px;
-
-  background: rgba(255,255,255,0.88);
-
-  border:
-
-    1px solid
-    rgba(114, 0, 24, 0.12);
-
-  border-radius: 17px;
-
-  text-align: center;
-
-  box-shadow:
-    0 8px 25px rgba(40, 20, 10, 0.055);
-
-  overflow: hidden;
-
-  transition:
-    transform 0.28s ease,
-    box-shadow 0.28s ease,
-    border-color 0.28s ease;
-}
-
-
-/* Top accent */
-
-.contact-card::before {
-
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  left: 0;
-  right: 0;
-
-  height: 3px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #720018,
-      #d4a017,
-      #720018
-    );
-
-  opacity: 0.75;
-}
-
-
-.contact-card:hover {
-
-  transform: translateY(-5px);
-
-  border-color:
-    rgba(212, 160, 23, 0.55);
-
-  box-shadow:
-    0 18px 38px
-    rgba(70, 25, 20, 0.11);
-}
-
-
-/* =========================================================
-   CARD TOP
-   ========================================================= */
-
-.contact-card-top {
-
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 12px;
-}
-
-
-.contact-card-icon {
-
-  width: 43px;
-  height: 43px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background:
-    linear-gradient(
-      145deg,
-      #fff4d5,
-      #f7e5b8
-    );
-
-  border:
-    1px solid
-    rgba(184, 137, 35, 0.30);
-
-  color: #82001d;
-
-  font-size: 17px;
-}
-
-
-.committee-number {
-
-  color: #b79b62;
-
-  font-family: "Poppins", sans-serif;
-
-  font-size: 10px;
-
-  font-weight: 700;
-
-  letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   CARD CONTENT
-   ========================================================= */
-
-.contact-card h3 {
-
-  margin: 0 0 6px;
-
-  color: #5f071a;
-
-  font-family: "Laila", serif;
-
-  font-size: 21px;
-
-  line-height: 2.1;
-}
-
-
-.contact-role {
-
-  display: inline-block;
-
-  margin-bottom: 5px;
-
-  padding: 3px 9px;
-
-  border-radius: 20px;
-
-  background: #fff4d8;
-
-  color: #9a741c;
-
-  font-family: "Noto Sans", sans-serif;
-
-  font-size: 12px;
-
-  font-weight: 700;
-}
-
-
-.contact-person {
-
-  min-height: 40px;
-
-  margin-bottom: 15px;
-
-  color: #55504b;
-
-  font-family: "Noto Sans", sans-serif;
-
-  font-size: 12px;
-
-  line-height: 1.6;
-}
-
-
-/* =========================================================
-   ACTION BUTTONS
-   ========================================================= */
-
-.contact-actions {
-
-  display: flex;
-
-  gap: 7px;
-}
-
-
-.contact-actions a {
-
-  flex: 1;
-
-  height: 36px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 5px;
-
-  border-radius: 8px;
-
-  text-decoration: none;
-
-  font-family: "Poppins", sans-serif;
-
-  font-size: 12px;
-
-  font-weight: 600;
-
-  transition: all 0.22s ease;
-}
-
-
-/* CALL */
-
-.contact-call {
-
-  background: #720018;
-
-  border: 1px solid #720018;
-
-  color: #fff;
-}
-
-
-.contact-call:hover {
-
-  background: #560014;
-
-  border-color: #560014;
-
-  transform: translateY(-2px);
-}
-
-
-/* WHATSAPP */
-
-.contact-whatsapp {
-
-  background: #fffaf0;
-
-  border:
-    1px solid
-    #d8bd7b;
-
-  color: #795c20;
-}
-
-
-.contact-whatsapp:hover {
-
-  background: #f8edcf;
-
-  border-color: #cda84f;
-
-  transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.contact-modal-footer {
-
-  position: relative;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 13px;
-
-  margin-top: 21px;
-
-  padding-top: 15px;
-
-  border-top:
-    1px solid
-    rgba(114, 0, 24, 0.10);
-
-  color: #8a8178;
-
-  font-family: "Noto Sans", sans-serif;
-
-  font-size: 10px;
-
-  z-index: 2;
-}
-
-
-.footer-diya {
-
-  color: #b58a2b;
-
-  font-size: 15px;
-}
-
-
-@media (max-width: 760px) {
-
-
-
-
-
-
-
-
-
-  
-  #contactModal {
-    padding: 12px;
-  }
-
-  .contact-modal-content {
-    width: 100%;
-    max-height: calc(100vh - 90px);
-    padding: 30px 14px 16px;
-    border-radius: 20px;
-    overflow-y: auto;
-  }
-
-  .contact-logo-ring {
-    width: 70px;
-    height: 70px;
-  }
-
-  .contact-logo-wrap {
-    margin-bottom: 8px;
-  }
-
-  .contact-modal-header {
-    margin-bottom: 18px;
-  }
-
-  .contact-eyebrow {
-    font-size: 14px;
-  }
-
-  .contact-modal-header h2 {
-    font-size: 30px;
-  }
-
-  .contact-heading-line {
-    margin: 5px 0 6px;
-  }
-
-  .contact-modal-header p {
-    font-size: 11px;
-    line-height: 1.55;
-  }
-
-
-  /* ================================
-     MOBILE COMMITTEE CARDS
-     ================================ */
-
-  .contact-committee-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-  }
-
-  .contact-card {
-    width: 100%;
-    display: block;
-    padding: 16px 14px;
-    text-align: center;
-    border-radius: 15px;
-  }
-
-  .contact-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 9px;
-  }
-
-  .contact-card-icon {
-    width: 42px;
-    height: 42px;
-    font-size: 16px;
-  }
-
-  .contact-card-top .committee-number {
-    display: none;
-  }
-
-  .contact-card h3 {
-    margin: 0 0 5px;
-    font-size: 18px;
-    line-height: 1.8;
-  }
-
-  .contact-role {
-    margin-bottom: 6px;
-    padding: 3px 9px;
-    font-size: 12px;
-  }
-
-  .contact-person {
-    display: block;
-    min-height: auto;
-    margin: 0 0 12px;
-    font-size: 12px;
-    line-height: 1.5;
-  }
-
-  .contact-actions {
-    display: flex;
-    width: 100%;
-    gap: 7px;
-  }
-
-  .contact-actions a {
-    flex: 1;
-    height: 34px;
-    font-size: 12px;
-  }
-
-
-  /* ================================
-     FOOTER
-     ================================ */
-
-  .contact-modal-footer {
-    margin-top: 13px;
-    padding-top: 10px;
-    font-size: 13px;
-  }
-
-  .contact-close {
-    top: 10px;
-    right: 10px;
-    width: 32px;
-    height: 32px;
-    font-size: 20px;
-  }
-}
-
-
-/* ===================================
-   VERY SMALL MOBILE
-   =================================== */
-
-@media (max-width: 380px) {
-
-  .contact-modal-content {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .contact-card {
-    padding: 14px 12px;
-  }
-
-  .contact-card h3 {
-    font-size: 13px;
-  }
-
-  .contact-person {
-    font-size: 10px;
-  }
-
-  .contact-actions a {
-    height: 32px;
-    font-size: 8px;
-  }
-}
-
-/* =========================================================
-   BODY SCROLL LOCK
-   ========================================================= */
-
-body.contact-modal-open {
-
-  overflow: hidden !important;
-}
-  </style>
-
-<script>
-
-/* =========================================================
-   BAL DURGA PUJA SAMITI
-   FINAL MODAL JAVASCRIPT
-   ========================================================= */
-
-
-/* =========================================================
-   COMMON BODY SCROLL LOCK
-   ========================================================= */
-
-function lockBodyScroll() {
-  document.body.classList.add("contact-modal-open");
-  document.body.style.overflow = "hidden";
-}
-
-function unlockBodyScroll() {
-  document.body.classList.remove("contact-modal-open");
-  document.body.style.overflow = "";
-}
-
-
-/* =========================================================
-   DONATION MODAL
-   ========================================================= */
-
-function openDonation() {
-  const modal = document.getElementById("donationModal");
-
-  if (!modal) {
-    console.warn("Donation modal not found.");
-    return;
-  }
-
-  modal.style.display = "flex";
-
-  lockBodyScroll();
-}
-
-
-function closeDonation() {
-  const modal = document.getElementById("donationModal");
-
-  if (!modal) return;
-
-  modal.style.display = "none";
-
-  unlockBodyScroll();
-}
-
-
-/* =========================================================
-   CONTACT MODAL
-   ========================================================= */
-
-function openContact() {
-  const modal = document.getElementById("contactModal");
-
-  if (!modal) {
-    console.warn("Contact modal not found.");
-    return;
-  }
-
-  /* Show modal first */
-  modal.style.display = "flex";
-
-  /* Allow browser to render before animation */
-  requestAnimationFrame(() => {
-    modal.classList.add("show");
-  });
-
-  lockBodyScroll();
-}
-
-
-function closeContact() {
-  const modal = document.getElementById("contactModal");
-
-  if (!modal) return;
-
-  /* Start closing animation */
-  modal.classList.remove("show");
-
-  /* Hide after animation */
-  setTimeout(() => {
-    modal.style.display = "none";
-  }, 350);
-
-  unlockBodyScroll();
-}
-
-
-/* =========================================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
-   ========================================================= */
-
-window.addEventListener("click", function (event) {
-
-  /* Donation Modal */
-  const donationModal = document.getElementById("donationModal");
-
-  if (
-    donationModal &&
-    event.target === donationModal
-  ) {
-    closeDonation();
-    return;
-  }
-
-
-  /* Contact Modal */
-  const contactModal = document.getElementById("contactModal");
-
-  if (
-    contactModal &&
-    event.target === contactModal
-  ) {
-    closeContact();
-    return;
-  }
-
-});
-
-
-/* =========================================================
-   ESCAPE KEY SUPPORT
-   ========================================================= */
-
-document.addEventListener("keydown", function (event) {
-
-  if (event.key !== "Escape") return;
-
-
-  /* Close Contact Modal */
-  const contactModal = document.getElementById("contactModal");
-
-  if (
-    contactModal &&
-    contactModal.style.display === "flex"
-  ) {
-    closeContact();
-    return;
-  }
-
-
-  /* Close Donation Modal */
-  const donationModal = document.getElementById("donationModal");
-
-  if (
-    donationModal &&
-    donationModal.style.display === "flex"
-  ) {
-    closeDonation();
-    return;
-  }
-
-});
-
-
-/* =========================================================
-   PREVENT BACKGROUND SCROLL / SAFETY
-   ========================================================= */
-
-window.addEventListener("beforeunload", function () {
-  document.body.classList.remove("contact-modal-open");
-  document.body.style.overflow = "";
-});
-
-
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  /*
-   * This section safely handles common mobile-menu setups.
-   * If your existing mobile menu already has its own JS,
-   * it will not interfere unless matching IDs exist.
-   */
-
-  const menuToggle =
-    document.querySelector(".menu-toggle") ||
-    document.querySelector(".hamburger") ||
-    document.querySelector("#menuToggle");
-
-  const mobileMenu =
-    document.querySelector(".mobile-menu") ||
-    document.querySelector("#mobileMenu");
-
-  if (menuToggle && mobileMenu) {
-
-    menuToggle.addEventListener("click", function () {
-
-      mobileMenu.classList.toggle("active");
-
-    });
-
-  }
-
-});
-
-
-/* =========================================================
-   CLOSE MOBILE MENU AFTER CLICKING A LINK
-   ========================================================= */
-
-document.addEventListener("click", function (event) {
-
-  const clickedLink = event.target.closest(
-    ".mobile-menu a, #mobileMenu a"
-  );
-
-  if (!clickedLink) return;
-
-  const mobileMenu =
-    document.querySelector(".mobile-menu") ||
-    document.querySelector("#mobileMenu");
-
-  if (mobileMenu) {
-    mobileMenu.classList.remove("active");
-  }
-
-});
-
-
-/* =========================================================
-   CONTACT / DONATION MODAL INITIAL SAFETY
-   ========================================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const contactModal =
-    document.getElementById("contactModal");
-
-  const donationModal =
-    document.getElementById("donationModal");
-
-
-  /* Ensure both modals start hidden */
-
-  if (contactModal) {
-    contactModal.style.display = "none";
-    contactModal.classList.remove("show");
-  }
-
-  if (donationModal) {
-    donationModal.style.display = "none";
-  }
-
-
-  /* Make sure page scrolling is enabled initially */
-
-  document.body.classList.remove("contact-modal-open");
-  document.body.style.overflow = "";
-
-});
-
-
-/* =========================================================
-   PREVENT MODAL STATE FROM BREAKING ON RESIZE
-   ========================================================= */
-
-window.addEventListener("resize", function () {
-
-  const contactModal =
-    document.getElementById("contactModal");
-
-  const donationModal =
-    document.getElementById("donationModal");
-
-  const contactOpen =
-    contactModal &&
-    contactModal.style.display === "flex";
-
-  const donationOpen =
-    donationModal &&
-    donationModal.style.display === "flex";
-
-
-  if (contactOpen || donationOpen) {
-    document.body.style.overflow = "hidden";
-  }
-
-});
-
-
-/* =========================================================
-   GLOBAL ERROR-SAFE MODAL FUNCTIONS
-   ========================================================= */
-
-window.openDonation = openDonation;
-window.closeDonation = closeDonation;
-
-window.openContact = openContact;
-window.closeContact = closeContact;
-
-
-
-</script>
   <!-- ABOUT -->
   <section id="about" class="section">
     <div class="split">
@@ -1639,12 +399,15 @@ window.closeContact = closeContact;
         <p class=" font-1">
           बेनीगद्दौपुर में मुख्यतः <b>बाल दुर्गा पूजा समिति (मेन बाज़ार)</b> द्वारा नवरात्रि का यह पावन पर्व
           विगत
-          <b>38 वर्षों</b> से (सन 1988 से) हर साल विशेष रूप से मनाया जाता है। तहसील बीकापुर अथवा जनपद श्री अयोध्या जी से मूर्तियाँ लाने
+          <b>38 वर्षों</b> से (सन 1988 से) हर साल विशेष रूप से मनाया जाता है। तहसील बीकापुर अथवा जनपद श्री अयोध्या जी से
+          मूर्तियाँ लाने
           से लेकर बाबा पल्टुवीर में
           विसर्जन तक पूरा गाँव माता रानी की भक्ति में सराबोर रहता है।
         </p>
         <p class=" font-1">
-          वहीं बेनीगद्दौपुर में अन्य समितियों (जैसे - <b>श्री नव बाल दुर्गा पूजा समिति</b> और <b>नव बाल दुर्गा पूजा समिति</b> ) द्वारा भी माँ दुर्गा की नवरात्री का आयोजन व विभिन्न भक्ति कार्यक्रम बहुत धूम धाम से किया जाता है।  
+          वहीं बेनीगद्दौपुर में अन्य समितियों (जैसे - <b>श्री नव बाल दुर्गा पूजा समिति</b> और <b>नव बाल दुर्गा पूजा
+            समिति</b> ) द्वारा भी माँ दुर्गा की नवरात्री का आयोजन व विभिन्न भक्ति कार्यक्रम बहुत धूम धाम से किया जाता
+          है।
         </p>
         <p class=" font-1">
           दुर्गा, गणेश, कार्तिकेय, सरस्वती और लक्ष्मी की सुंदर प्रतिमाओं की स्थापना हर साल <b>विभिन्न थीम</b>
@@ -1830,12 +593,12 @@ window.closeContact = closeContact;
         ...data[key]
       }));
 
-  // Oldest member first, newest member last
-  allMembers.sort((a, b) => {
-    const numA = parseInt(a.id.replace("MEM", ""), 10);
-    const numB = parseInt(b.id.replace("MEM", ""), 10);
-    return numA - numB;
-  });
+      // Oldest member first, newest member last
+      allMembers.sort((a, b) => {
+        const numA = parseInt(a.id.replace("MEM", ""), 10);
+        const numB = parseInt(b.id.replace("MEM", ""), 10);
+        return numA - numB;
+      });
       // Initial render
       renderMembers();
     }
@@ -1911,5 +674,3 @@ window.closeContact = closeContact;
 </body>
 
 </html>
-
-
