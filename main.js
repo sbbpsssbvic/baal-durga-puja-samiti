@@ -564,3 +564,1857 @@ window.closeContact = closeContact;
 // HERO SLIDER JS AREA 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   BAAL DURGA PUJA SAMITI
+   PREMIUM GOOGLE DRIVE GALLERY
+   - Year filter
+   - Category filter
+   - 10 photos per page
+   - Pagination
+   - Premium lightbox
+   - Parent folder name
+   - Keyboard navigation
+   - Mobile swipe
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    /* =====================================================
+       1. GOOGLE APPS SCRIPT API
+    ===================================================== */
+
+    const GALLERY_API_URL =
+        "https://script.google.com/macros/s/AKfycbw7hYQud0Uepb8ZxzFW1dD-BdvVx8hNRpyrnYxKYIWBAFwC_BqKsu-weCrfu6zDWfskMQ/exec";
+
+
+    /* =====================================================
+       2. SETTINGS
+    ===================================================== */
+
+    const PHOTOS_PER_PAGE = 10;
+
+
+    /* =====================================================
+       3. STATE
+    ===================================================== */
+
+    let galleryData = {};
+
+    let allImages = [];
+
+    let filteredImages = [];
+
+    let currentYear = "all";
+
+    let currentCategory = "all";
+
+    let currentPage = 1;
+
+    let currentLightboxIndex = 0;
+
+    let touchStartX = 0;
+
+    let touchStartY = 0;
+
+
+    /* =====================================================
+       4. DOM ELEMENTS
+    ===================================================== */
+
+    const galleryGrid =
+        document.getElementById("galleryGrid");
+
+    const galleryStatus =
+        document.getElementById("galleryStatus");
+
+    const galleryYearFilters =
+        document.getElementById("galleryYearFilters");
+
+    const galleryCategoryFilters =
+        document.getElementById("galleryCategoryFilters");
+
+    const galleryPagination =
+        document.getElementById("galleryPagination");
+
+    const galleryCount =
+        document.getElementById("galleryCount");
+
+
+    const lightbox =
+        document.getElementById("galleryLightbox");
+
+    const lightboxImage =
+        document.getElementById("lightboxImage");
+
+    const lightboxCurrent =
+        document.getElementById("lightboxCurrent");
+
+    const lightboxTotal =
+        document.getElementById("lightboxTotal");
+
+    const lightboxFolder =
+        document.getElementById("lightboxFolder");
+
+    const lightboxYear =
+        document.getElementById("lightboxYear");
+
+    const lightboxTitle =
+        document.getElementById("lightboxTitle");
+
+    const lightboxClose =
+        document.getElementById("lightboxClose");
+
+    const lightboxPrev =
+        document.getElementById("lightboxPrev");
+
+    const lightboxNext =
+        document.getElementById("lightboxNext");
+
+
+    /* =====================================================
+       5. CATEGORY ORDER
+    ===================================================== */
+
+    const CATEGORY_ORDER = [
+        "Pandal",
+        "Programs",
+        "Puja/Aarti",
+        "Samiti",
+        "Visarjan",
+        "Other"
+    ];
+
+
+    /* =====================================================
+       6. START GALLERY
+    ===================================================== */
+
+    function initGallery() {
+
+        if (!galleryGrid) {
+            return;
+        }
+
+        showGalleryLoading();
+
+        fetchGallery();
+
+    }
+
+
+    /* =====================================================
+       7. FETCH API
+    ===================================================== */
+
+    async function fetchGallery() {
+
+        try {
+
+            if (
+                !GALLERY_API_URL ||
+                GALLERY_API_URL ===
+                "YOUR_APPS_SCRIPT_EXEC_URL"
+            ) {
+
+                throw new Error(
+                    "Gallery API URL is not configured."
+                );
+
+            }
+
+
+            const response =
+                await fetch(
+                    GALLERY_API_URL,
+                    {
+                        method: "GET",
+                        cache: "no-store"
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Gallery API request failed."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                !data ||
+                data.success !== true
+            ) {
+
+                throw new Error(
+                    data?.error ||
+                    "Gallery API returned an invalid response."
+                );
+
+            }
+
+
+            galleryData =
+                data.gallery || {};
+
+
+            prepareGalleryData();
+
+        } catch (error) {
+
+            console.error(
+                "Gallery Error:",
+                error
+            );
+
+            showGalleryError();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       8. PREPARE ALL IMAGES
+    ===================================================== */
+
+    function prepareGalleryData() {
+
+        allImages = [];
+
+
+        Object.keys(galleryData).forEach(
+            function (year) {
+
+                const categories =
+                    galleryData[year] || {};
+
+
+                Object.keys(categories).forEach(
+                    function (category) {
+
+                        const images =
+                            categories[category] || [];
+
+
+                        images.forEach(
+                            function (image) {
+
+                                if (!image) {
+                                    return;
+                                }
+
+
+                                const normalizedImage = {
+
+                                    ...image,
+
+                                    year:
+                                        image.year ||
+                                        year,
+
+                                    category:
+                                        image.category ||
+                                        category,
+
+                                    parentFolder:
+                                        image.parentFolder ||
+                                        image.category ||
+                                        category
+
+                                };
+
+
+                                if (
+                                    normalizedImage.url ||
+                                    normalizedImage.thumbnail
+                                ) {
+
+                                    allImages.push(
+                                        normalizedImage
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /*
+         * Newest year first
+         */
+
+        allImages.sort(
+            function (a, b) {
+
+                const yearA =
+                    Number(a.year) || 0;
+
+                const yearB =
+                    Number(b.year) || 0;
+
+                return yearB - yearA;
+
+            }
+        );
+
+
+        renderYearFilters();
+
+        renderCategoryFilters();
+
+        applyGalleryFilters();
+
+    }
+
+
+    /* =====================================================
+       9. YEAR FILTERS
+    ===================================================== */
+
+    function renderYearFilters() {
+
+        if (!galleryYearFilters) {
+            return;
+        }
+
+
+        galleryYearFilters.innerHTML = "";
+
+
+        const allButton =
+            createFilterButton(
+                "सभी",
+                "all",
+                true
+            );
+
+
+        galleryYearFilters.appendChild(
+            allButton
+        );
+
+
+        const years =
+            Object.keys(galleryData)
+                .sort(
+                    function (a, b) {
+                        return Number(b) - Number(a);
+                    }
+                );
+
+
+        years.forEach(
+            function (year) {
+
+                const button =
+                    createFilterButton(
+                        year,
+                        year,
+                        false
+                    );
+
+
+                galleryYearFilters.appendChild(
+                    button
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       10. CATEGORY FILTERS
+    ===================================================== */
+
+    function renderCategoryFilters() {
+
+        if (!galleryCategoryFilters) {
+            return;
+        }
+
+
+        galleryCategoryFilters.innerHTML = "";
+
+
+        const allButton =
+            createFilterButton(
+                "सभी",
+                "all",
+                true
+            );
+
+
+        galleryCategoryFilters.appendChild(
+            allButton
+        );
+
+
+        CATEGORY_ORDER.forEach(
+            function (category) {
+
+                const exists =
+                    allImages.some(
+                        function (image) {
+                            return (
+                                image.category ===
+                                category
+                            );
+                        }
+                    );
+
+
+                if (!exists) {
+                    return;
+                }
+
+
+                const button =
+                    createFilterButton(
+                        category,
+                        category,
+                        false
+                    );
+
+
+                galleryCategoryFilters.appendChild(
+                    button
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       11. CREATE FILTER BUTTON
+    ===================================================== */
+
+    function createFilterButton(
+        label,
+        value,
+        active
+    ) {
+
+        const button =
+            document.createElement("button");
+
+
+        button.type = "button";
+
+        button.className =
+            "gallery-filter-btn";
+
+
+        if (active) {
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+
+        button.textContent = label;
+
+
+        button.dataset.value =
+            value;
+
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const parent =
+                    button.parentElement;
+
+
+                parent
+                    .querySelectorAll(
+                        ".gallery-filter-btn"
+                    )
+                    .forEach(
+                        function (btn) {
+
+                            btn.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                if (
+                    parent ===
+                    galleryYearFilters
+                ) {
+
+                    currentYear =
+                        value;
+
+                } else {
+
+                    currentCategory =
+                        value;
+
+                }
+
+
+                currentPage = 1;
+
+
+                applyGalleryFilters();
+
+            }
+        );
+
+
+        return button;
+
+    }
+
+
+    /* =====================================================
+       12. APPLY FILTERS
+    ===================================================== */
+
+    function applyGalleryFilters() {
+
+        filteredImages =
+            allImages.filter(
+                function (image) {
+
+                    const yearMatch =
+                        currentYear === "all" ||
+                        String(image.year) ===
+                        String(currentYear);
+
+
+                    const categoryMatch =
+                        currentCategory === "all" ||
+                        image.category ===
+                        currentCategory;
+
+
+                    return (
+                        yearMatch &&
+                        categoryMatch
+                    );
+
+                }
+            );
+
+
+        currentPage = 1;
+
+
+        updateGalleryCount();
+
+        renderGallery();
+
+        renderPagination();
+
+    }
+
+
+    /* =====================================================
+       13. TOTAL COUNTER
+    ===================================================== */
+
+    function updateGalleryCount() {
+
+        if (!galleryCount) {
+            return;
+        }
+
+
+        const total =
+            filteredImages.length;
+
+
+        galleryCount.textContent =
+            String(total).padStart(2, "0");
+
+    }
+
+
+    /* =====================================================
+       14. RENDER GALLERY
+    ===================================================== */
+
+    function renderGallery() {
+
+        if (!galleryGrid) {
+            return;
+        }
+
+
+        galleryGrid.innerHTML = "";
+
+
+        if (!filteredImages.length) {
+
+            galleryGrid.innerHTML = `
+
+                <div class="gallery-empty">
+
+                    <div class="gallery-empty-icon">
+                        ✦
+                    </div>
+
+                    <strong>
+                        इस चयन में कोई तस्वीर उपलब्ध नहीं है
+                    </strong>
+
+                    <span>
+                        कृपया कोई दूसरा वर्ष या श्रेणी चुनें।
+                    </span>
+
+                </div>
+
+            `;
+
+
+            updateStatus(
+                "कोई तस्वीर नहीं मिली"
+            );
+
+
+            return;
+
+        }
+
+
+        const startIndex =
+            (currentPage - 1) *
+            PHOTOS_PER_PAGE;
+
+
+        const endIndex =
+            startIndex +
+            PHOTOS_PER_PAGE;
+
+
+        const pageImages =
+            filteredImages.slice(
+                startIndex,
+                endIndex
+            );
+
+
+        pageImages.forEach(
+            function (image, index) {
+
+                const globalIndex =
+                    startIndex + index;
+
+
+                const card =
+                    createGalleryCard(
+                        image,
+                        globalIndex
+                    );
+
+
+                galleryGrid.appendChild(
+                    card
+                );
+
+            }
+        );
+
+
+        const total =
+            filteredImages.length;
+
+
+        const first =
+            startIndex + 1;
+
+
+        const last =
+            Math.min(
+                endIndex,
+                total
+            );
+
+
+        updateStatus(
+            `${first}–${last} / ${total} तस्वीरें`
+        );
+
+    }
+
+
+    /* =====================================================
+       15. CREATE CARD
+    ===================================================== */
+
+    function createGalleryCard(
+        image,
+        index
+    ) {
+
+        const card =
+            document.createElement("article");
+
+
+        card.className =
+            "gallery-card";
+
+
+        card.setAttribute(
+            "role",
+            "button"
+        );
+
+
+        card.setAttribute(
+            "tabindex",
+            "0"
+        );
+
+
+        const imageSource =
+            image.thumbnail ||
+            image.url;
+
+
+        const img =
+            document.createElement("img");
+
+
+        img.loading = "lazy";
+
+        img.decoding = "async";
+
+        img.src =
+            imageSource;
+
+
+        img.alt =
+            image.name ||
+            `${image.category || "Gallery"} ${image.year || ""}`;
+
+
+        img.onerror =
+            function () {
+
+                if (
+                    image.url &&
+                    img.src !== image.url
+                ) {
+
+                    img.src =
+                        image.url;
+
+                }
+
+            };
+
+
+        card.appendChild(
+            img
+        );
+
+
+        const info =
+            document.createElement("div");
+
+
+        info.className =
+            "gallery-card-info";
+
+
+        const category =
+            document.createElement("span");
+
+
+        category.className =
+            "gallery-card-category";
+
+
+        category.textContent =
+            image.category ||
+            image.parentFolder ||
+            "Gallery";
+
+
+        info.appendChild(
+            category
+        );
+
+
+        card.appendChild(
+            info
+        );
+
+
+        card.addEventListener(
+            "click",
+            function () {
+
+                openLightbox(
+                    index
+                );
+
+            }
+        );
+
+
+        card.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    openLightbox(
+                        index
+                    );
+
+                }
+
+            }
+        );
+
+
+        return card;
+
+    }
+
+
+    /* =====================================================
+       16. PAGINATION
+    ===================================================== */
+
+    function renderPagination() {
+
+        if (!galleryPagination) {
+            return;
+        }
+
+
+        galleryPagination.innerHTML = "";
+
+
+        const totalPages =
+            Math.ceil(
+                filteredImages.length /
+                PHOTOS_PER_PAGE
+            );
+
+
+        if (totalPages <= 1) {
+            return;
+        }
+
+
+        /*
+         * Previous
+         */
+
+        const previous =
+            createPageButton(
+                "‹",
+                currentPage - 1,
+                true
+            );
+
+
+        previous.classList.add(
+            "gallery-page-arrow"
+        );
+
+
+        previous.disabled =
+            currentPage === 1;
+
+
+        galleryPagination.appendChild(
+            previous
+        );
+
+
+        /*
+         * Page numbers
+         */
+
+        const pages =
+            getPaginationPages(
+                currentPage,
+                totalPages
+            );
+
+
+        pages.forEach(
+            function (page) {
+
+                if (page === "...") {
+
+                    const dots =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    dots.className =
+                        "gallery-page-dots";
+
+
+                    dots.textContent =
+                        "…";
+
+
+                    galleryPagination.appendChild(
+                        dots
+                    );
+
+
+                    return;
+
+                }
+
+
+                const button =
+                    createPageButton(
+                        page,
+                        page,
+                        false
+                    );
+
+
+                if (
+                    page === currentPage
+                ) {
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                }
+
+
+                galleryPagination.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+        /*
+         * Next
+         */
+
+        const next =
+            createPageButton(
+                "›",
+                currentPage + 1,
+                true
+            );
+
+
+        next.classList.add(
+            "gallery-page-arrow"
+        );
+
+
+        next.disabled =
+            currentPage === totalPages;
+
+
+        galleryPagination.appendChild(
+            next
+        );
+
+    }
+
+
+    /* =====================================================
+       17. PAGINATION RANGE
+    ===================================================== */
+
+    function getPaginationPages(
+        current,
+        total
+    ) {
+
+        if (total <= 7) {
+
+            return Array.from(
+                {
+                    length: total
+                },
+                function (_, index) {
+                    return index + 1;
+                }
+            );
+
+        }
+
+
+        const pages = [];
+
+
+        pages.push(1);
+
+
+        if (current > 4) {
+
+            pages.push("...");
+
+        }
+
+
+        const start =
+            Math.max(
+                2,
+                current - 1
+            );
+
+
+        const end =
+            Math.min(
+                total - 1,
+                current + 1
+            );
+
+
+        for (
+            let page = start;
+            page <= end;
+            page++
+        ) {
+
+            pages.push(page);
+
+        }
+
+
+        if (current < total - 3) {
+
+            pages.push("...");
+
+        }
+
+
+        pages.push(total);
+
+
+        return pages;
+
+    }
+
+
+    /* =====================================================
+       18. PAGE BUTTON
+    ===================================================== */
+
+    function createPageButton(
+        text,
+        page,
+        isArrow
+    ) {
+
+        const button =
+            document.createElement("button");
+
+
+        button.type = "button";
+
+
+        button.className =
+            "gallery-page-btn";
+
+
+        button.textContent =
+            text;
+
+
+        if (!isArrow) {
+
+            button.setAttribute(
+                "aria-label",
+                `Page ${page}`
+            );
+
+        }
+
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    page < 1 ||
+                    page >
+                    Math.ceil(
+                        filteredImages.length /
+                        PHOTOS_PER_PAGE
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                currentPage =
+                    page;
+
+
+                renderGallery();
+
+                renderPagination();
+
+
+                /*
+                 * Smoothly move to gallery
+                 */
+
+                const section =
+                    document.getElementById(
+                        "gallery"
+                    );
+
+
+                if (section) {
+
+                    const top =
+                        section.getBoundingClientRect().top +
+                        window.scrollY -
+                        85;
+
+
+                    window.scrollTo({
+                        top: top,
+                        behavior: "smooth"
+                    });
+
+                }
+
+            }
+        );
+
+
+        return button;
+
+    }
+
+
+    /* =====================================================
+       19. LIGHTBOX OPEN
+    ===================================================== */
+
+    function openLightbox(
+        index
+    ) {
+
+        if (
+            !filteredImages.length ||
+            !lightbox
+        ) {
+
+            return;
+
+        }
+
+
+        currentLightboxIndex =
+            index;
+
+
+        updateLightbox();
+
+
+        lightbox.classList.add(
+            "open"
+        );
+
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+
+        /*
+         * Focus close button
+         */
+
+        if (lightboxClose) {
+
+            setTimeout(
+                function () {
+
+                    lightboxClose.focus();
+
+                },
+                100
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       20. LIGHTBOX UPDATE
+    ===================================================== */
+
+    function updateLightbox() {
+
+        const image =
+            filteredImages[
+                currentLightboxIndex
+            ];
+
+
+        if (!image) {
+            return;
+        }
+
+
+        /*
+         * Counter
+         */
+
+        if (lightboxCurrent) {
+
+            lightboxCurrent.textContent =
+                String(
+                    currentLightboxIndex + 1
+                ).padStart(2, "0");
+
+        }
+
+
+        if (lightboxTotal) {
+
+            lightboxTotal.textContent =
+                String(
+                    filteredImages.length
+                ).padStart(2, "0");
+
+        }
+
+
+        /*
+         * Parent Drive Folder
+         *
+         * Example:
+         * 2026 / Pandal / image.jpg
+         *
+         * Parent folder = Pandal
+         */
+
+        if (lightboxFolder) {
+
+            lightboxFolder.textContent =
+                image.parentFolder ||
+                image.category ||
+                "Gallery";
+
+        }
+
+
+        /*
+         * Year
+         */
+
+        if (lightboxYear) {
+
+            lightboxYear.textContent =
+                image.year ||
+                "";
+
+        }
+
+
+        /*
+         * File name
+         */
+
+        if (lightboxTitle) {
+
+            lightboxTitle.textContent =
+                cleanFileName(
+                    image.name ||
+                    "Gallery Image"
+                );
+
+        }
+
+
+        /*
+         * Load image safely
+         */
+
+        loadLightboxImage(
+            image
+        );
+
+    }
+
+
+    /* =====================================================
+       21. SAFE LIGHTBOX IMAGE LOADING
+    ===================================================== */
+
+    function loadLightboxImage(
+        image
+    ) {
+
+        if (!lightboxImage) {
+            return;
+        }
+
+
+        const sources = [];
+
+
+        /*
+         * Prefer high-quality Drive thumbnail.
+         * Then original URL as fallback.
+         */
+
+        if (image.thumbnail) {
+
+            sources.push(
+                image.thumbnail
+            );
+
+        }
+
+
+        if (
+            image.url &&
+            image.url !== image.thumbnail
+        ) {
+
+            sources.push(
+                image.url
+            );
+
+        }
+
+
+        let sourceIndex = 0;
+
+
+        lightboxImage.onerror =
+            function () {
+
+                sourceIndex++;
+
+
+                if (
+                    sourceIndex <
+                    sources.length
+                ) {
+
+                    lightboxImage.src =
+                        sources[
+                            sourceIndex
+                        ];
+
+                }
+
+            };
+
+
+        if (sources.length) {
+
+            lightboxImage.src =
+                sources[0];
+
+        }
+
+
+        lightboxImage.alt =
+            image.name ||
+            "Gallery Image";
+
+    }
+
+
+    /* =====================================================
+       22. CLEAN FILE NAME
+    ===================================================== */
+
+    function cleanFileName(
+        name
+    ) {
+
+        return String(name)
+            .replace(
+                /\.(jpg|jpeg|png|webp|gif|avif)$/i,
+                ""
+            )
+            .replace(
+                /[_-]+/g,
+                " "
+            )
+            .trim();
+
+    }
+
+
+    /* =====================================================
+       23. NEXT LIGHTBOX
+    ===================================================== */
+
+    function nextLightbox() {
+
+        if (
+            !filteredImages.length
+        ) {
+
+            return;
+
+        }
+
+
+        currentLightboxIndex =
+            (
+                currentLightboxIndex + 1
+            ) %
+            filteredImages.length;
+
+
+        updateLightbox();
+
+    }
+
+
+    /* =====================================================
+       24. PREVIOUS LIGHTBOX
+    ===================================================== */
+
+    function previousLightbox() {
+
+        if (
+            !filteredImages.length
+        ) {
+
+            return;
+
+        }
+
+
+        currentLightboxIndex =
+            (
+                currentLightboxIndex - 1 +
+                filteredImages.length
+            ) %
+            filteredImages.length;
+
+
+        updateLightbox();
+
+    }
+
+
+    /* =====================================================
+       25. CLOSE LIGHTBOX
+    ===================================================== */
+
+    function closeLightbox() {
+
+        if (!lightbox) {
+            return;
+        }
+
+
+        lightbox.classList.remove(
+            "open"
+        );
+
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        /*
+         * Restore page scrolling
+         */
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    /* =====================================================
+       26. LIGHTBOX BUTTONS
+    ===================================================== */
+
+    if (lightboxClose) {
+
+        lightboxClose.addEventListener(
+            "click",
+            closeLightbox
+        );
+
+    }
+
+
+    if (lightboxPrev) {
+
+        lightboxPrev.addEventListener(
+            "click",
+            previousLightbox
+        );
+
+    }
+
+
+    if (lightboxNext) {
+
+        lightboxNext.addEventListener(
+            "click",
+            nextLightbox
+        );
+
+    }
+
+
+    /*
+     * Click backdrop to close
+     */
+
+    if (lightbox) {
+
+        lightbox.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target ===
+                    lightbox ||
+                    event.target.classList.contains(
+                        "gallery-lightbox-backdrop"
+                    )
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       27. KEYBOARD NAVIGATION
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                !lightbox ||
+                !lightbox.classList.contains(
+                    "open"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                event.key ===
+                "ArrowRight"
+            ) {
+
+                event.preventDefault();
+
+                nextLightbox();
+
+            }
+
+
+            if (
+                event.key ===
+                "ArrowLeft"
+            ) {
+
+                event.preventDefault();
+
+                previousLightbox();
+
+            }
+
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                event.preventDefault();
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       28. MOBILE SWIPE
+    ===================================================== */
+
+    if (lightbox) {
+
+        lightbox.addEventListener(
+            "touchstart",
+            function (event) {
+
+                const touch =
+                    event.changedTouches[0];
+
+
+                touchStartX =
+                    touch.clientX;
+
+
+                touchStartY =
+                    touch.clientY;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        lightbox.addEventListener(
+            "touchend",
+            function (event) {
+
+                const touch =
+                    event.changedTouches[0];
+
+
+                const deltaX =
+                    touch.clientX -
+                    touchStartX;
+
+
+                const deltaY =
+                    touch.clientY -
+                    touchStartY;
+
+
+                const minimumSwipe =
+                    45;
+
+
+                /*
+                 * Only horizontal swipe
+                 */
+
+                if (
+                    Math.abs(deltaX) >
+                    minimumSwipe &&
+                    Math.abs(deltaX) >
+                    Math.abs(deltaY)
+                ) {
+
+                    if (deltaX < 0) {
+
+                        nextLightbox();
+
+                    } else {
+
+                        previousLightbox();
+
+                    }
+
+                }
+
+            },
+            {
+                passive: true
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       29. STATUS
+    ===================================================== */
+
+    function updateStatus(
+        text
+    ) {
+
+        if (!galleryStatus) {
+            return;
+        }
+
+
+        galleryStatus.textContent =
+            text;
+
+    }
+
+
+    /* =====================================================
+       30. LOADING STATE
+    ===================================================== */
+
+    function showGalleryLoading() {
+
+        if (!galleryGrid) {
+            return;
+        }
+
+
+        galleryGrid.innerHTML = "";
+
+
+        for (
+            let i = 0;
+            i < PHOTOS_PER_PAGE;
+            i++
+        ) {
+
+            const skeleton =
+                document.createElement("div");
+
+
+            skeleton.className =
+                "gallery-skeleton";
+
+
+            galleryGrid.appendChild(
+                skeleton
+            );
+
+        }
+
+
+        updateStatus(
+            "गैलरी लोड हो रही है..."
+        );
+
+    }
+
+
+    /* =====================================================
+       31. ERROR STATE
+    ===================================================== */
+
+    function showGalleryError() {
+
+        if (!galleryGrid) {
+            return;
+        }
+
+
+        galleryGrid.innerHTML = `
+
+            <div class="gallery-empty">
+
+                <div class="gallery-empty-icon">
+                    !
+                </div>
+
+                <strong>
+                    गैलरी लोड नहीं हो सकी
+                </strong>
+
+                <span>
+                    कृपया कुछ समय बाद दोबारा प्रयास करें।
+                </span>
+
+            </div>
+
+        `;
+
+
+        updateStatus(
+            "Gallery unavailable"
+        );
+
+    }
+
+
+    /* =====================================================
+       32. INIT
+    ===================================================== */
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initGallery
+        );
+
+    } else {
+
+        initGallery();
+
+    }
+
+
+})();
