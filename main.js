@@ -93,6 +93,92 @@ showHero(0);
 heroAuto();
 
 
+/* =========================================================
+   MOBILE HERO TOUCH / SWIPE SUPPORT
+   ========================================================= */
+
+let heroTouchStartX = 0;
+let heroTouchStartY = 0;
+let heroTouchEndX = 0;
+let heroTouchEndY = 0;
+
+const heroSwipeArea = document.getElementById('heroSlider');
+
+if (heroSwipeArea) {
+
+    heroSwipeArea.addEventListener(
+        'touchstart',
+        function (e) {
+
+            const touch = e.changedTouches[0];
+
+            heroTouchStartX = touch.clientX;
+            heroTouchStartY = touch.clientY;
+
+            heroTouchEndX = touch.clientX;
+            heroTouchEndY = touch.clientY;
+
+        },
+        { passive: true }
+    );
+
+
+    heroSwipeArea.addEventListener(
+        'touchmove',
+        function (e) {
+
+            const touch = e.changedTouches[0];
+
+            heroTouchEndX = touch.clientX;
+            heroTouchEndY = touch.clientY;
+
+        },
+        { passive: true }
+    );
+
+
+    heroSwipeArea.addEventListener(
+        'touchend',
+        function () {
+
+            const deltaX = heroTouchEndX - heroTouchStartX;
+            const deltaY = heroTouchEndY - heroTouchStartY;
+
+            const minSwipeDistance = 45;
+
+            /*
+             * Sirf horizontal swipe ko slider action maana jayega.
+             * Vertical scrolling par slider change nahi hoga.
+             */
+
+            if (
+                Math.abs(deltaX) > minSwipeDistance &&
+                Math.abs(deltaX) > Math.abs(deltaY)
+            ) {
+
+                if (deltaX < 0) {
+
+                    // Swipe Left → Next
+                    nextHero();
+
+                } else {
+
+                    // Swipe Right → Previous
+                    prevHero();
+
+                }
+
+            }
+
+        },
+        { passive: true }
+    );
+}
+
+
+
+
+
 /* ---------- Program Carousel ---------- */
 const track = document.getElementById('progTrack');
 let progIndex = 0;
@@ -171,5 +257,310 @@ function copyUPI() {
     alert("UPI ID कॉपी हो गया!");
   });
 }
+
+
+//------------- MODAL JS AREA
+
+
+
+/* =========================================================
+   BAL DURGA PUJA SAMITI
+   FINAL MODAL JAVASCRIPT
+   ========================================================= */
+
+
+/* =========================================================
+   COMMON BODY SCROLL LOCK
+   ========================================================= */
+
+function lockBodyScroll() {
+  document.body.classList.add("contact-modal-open");
+  document.body.style.overflow = "hidden";
+}
+
+function unlockBodyScroll() {
+  document.body.classList.remove("contact-modal-open");
+  document.body.style.overflow = "";
+}
+
+
+/* =========================================================
+   DONATION MODAL
+   ========================================================= */
+
+function openDonation() {
+  const modal = document.getElementById("donationModal");
+
+  if (!modal) {
+    console.warn("Donation modal not found.");
+    return;
+  }
+
+  modal.style.display = "flex";
+
+  lockBodyScroll();
+}
+
+
+function closeDonation() {
+  const modal = document.getElementById("donationModal");
+
+  if (!modal) return;
+
+  modal.style.display = "none";
+
+  unlockBodyScroll();
+}
+
+
+/* =========================================================
+   CONTACT MODAL
+   ========================================================= */
+
+function openContact() {
+  const modal = document.getElementById("contactModal");
+
+  if (!modal) {
+    console.warn("Contact modal not found.");
+    return;
+  }
+
+  /* Show modal first */
+  modal.style.display = "flex";
+
+  /* Allow browser to render before animation */
+  requestAnimationFrame(() => {
+    modal.classList.add("show");
+  });
+
+  lockBodyScroll();
+}
+
+
+function closeContact() {
+  const modal = document.getElementById("contactModal");
+
+  if (!modal) return;
+
+  /* Start closing animation */
+  modal.classList.remove("show");
+
+  /* Hide after animation */
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 350);
+
+  unlockBodyScroll();
+}
+
+
+/* =========================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+   ========================================================= */
+
+window.addEventListener("click", function (event) {
+
+  /* Donation Modal */
+  const donationModal = document.getElementById("donationModal");
+
+  if (
+    donationModal &&
+    event.target === donationModal
+  ) {
+    closeDonation();
+    return;
+  }
+
+
+  /* Contact Modal */
+  const contactModal = document.getElementById("contactModal");
+
+  if (
+    contactModal &&
+    event.target === contactModal
+  ) {
+    closeContact();
+    return;
+  }
+
+});
+
+
+/* =========================================================
+   ESCAPE KEY SUPPORT
+   ========================================================= */
+
+document.addEventListener("keydown", function (event) {
+
+  if (event.key !== "Escape") return;
+
+
+  /* Close Contact Modal */
+  const contactModal = document.getElementById("contactModal");
+
+  if (
+    contactModal &&
+    contactModal.style.display === "flex"
+  ) {
+    closeContact();
+    return;
+  }
+
+
+  /* Close Donation Modal */
+  const donationModal = document.getElementById("donationModal");
+
+  if (
+    donationModal &&
+    donationModal.style.display === "flex"
+  ) {
+    closeDonation();
+    return;
+  }
+
+});
+
+
+/* =========================================================
+   PREVENT BACKGROUND SCROLL / SAFETY
+   ========================================================= */
+
+window.addEventListener("beforeunload", function () {
+  document.body.classList.remove("contact-modal-open");
+  document.body.style.overflow = "";
+});
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  /*
+   * This section safely handles common mobile-menu setups.
+   * If your existing mobile menu already has its own JS,
+   * it will not interfere unless matching IDs exist.
+   */
+
+  const menuToggle =
+    document.querySelector(".menu-toggle") ||
+    document.querySelector(".hamburger") ||
+    document.querySelector("#menuToggle");
+
+  const mobileMenu =
+    document.querySelector(".mobile-menu") ||
+    document.querySelector("#mobileMenu");
+
+  if (menuToggle && mobileMenu) {
+
+    menuToggle.addEventListener("click", function () {
+
+      mobileMenu.classList.toggle("active");
+
+    });
+
+  }
+
+});
+
+
+/* =========================================================
+   CLOSE MOBILE MENU AFTER CLICKING A LINK
+   ========================================================= */
+
+document.addEventListener("click", function (event) {
+
+  const clickedLink = event.target.closest(
+    ".mobile-menu a, #mobileMenu a"
+  );
+
+  if (!clickedLink) return;
+
+  const mobileMenu =
+    document.querySelector(".mobile-menu") ||
+    document.querySelector("#mobileMenu");
+
+  if (mobileMenu) {
+    mobileMenu.classList.remove("active");
+  }
+
+});
+
+
+/* =========================================================
+   CONTACT / DONATION MODAL INITIAL SAFETY
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const contactModal =
+    document.getElementById("contactModal");
+
+  const donationModal =
+    document.getElementById("donationModal");
+
+
+  /* Ensure both modals start hidden */
+
+  if (contactModal) {
+    contactModal.style.display = "none";
+    contactModal.classList.remove("show");
+  }
+
+  if (donationModal) {
+    donationModal.style.display = "none";
+  }
+
+
+  /* Make sure page scrolling is enabled initially */
+
+  document.body.classList.remove("contact-modal-open");
+  document.body.style.overflow = "";
+
+});
+
+
+/* =========================================================
+   PREVENT MODAL STATE FROM BREAKING ON RESIZE
+   ========================================================= */
+
+window.addEventListener("resize", function () {
+
+  const contactModal =
+    document.getElementById("contactModal");
+
+  const donationModal =
+    document.getElementById("donationModal");
+
+  const contactOpen =
+    contactModal &&
+    contactModal.style.display === "flex";
+
+  const donationOpen =
+    donationModal &&
+    donationModal.style.display === "flex";
+
+
+  if (contactOpen || donationOpen) {
+    document.body.style.overflow = "hidden";
+  }
+
+});
+
+
+/* =========================================================
+   GLOBAL ERROR-SAFE MODAL FUNCTIONS
+   ========================================================= */
+
+window.openDonation = openDonation;
+window.closeDonation = closeDonation;
+
+window.openContact = openContact;
+window.closeContact = closeContact;
+
+
+
+// HERO SLIDER JS AREA 
 
 
