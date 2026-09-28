@@ -781,131 +781,498 @@
   <!---------- JS AREA  ---------->
   <script src="main.js"></script>
   <!-- MEMBERS LIST JS  -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+<!-- MEMBERS LIST JS -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import {
+    getDatabase,
+    ref,
+    get
+  } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
 
-    // === Firebase Config ===
-    const firebaseConfig = {
-      apiKey: "AIzaSyDHzkE5CtKL--MsguovrjqIYphCy48seEY",
-      authDomain: "baaldurgapujasamiti.firebaseapp.com",
-      databaseURL: "https://baaldurgapujasamiti-default-rtdb.firebaseio.com",
-      projectId: "baaldurgapujasamiti",
-      storageBucket: "baaldurgapujasamiti.firebasestorage.app",
-      messagingSenderId: "158315013465",
-      appId: "1:158315013465:web:8a185574b043c65e1c1848",
-      measurementId: "G-L6GZVMJGVB"
-    };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+  /* =====================================================
+     FIREBASE CONFIG
+  ===================================================== */
 
-    // DOM Elements
-    const membersList = document.getElementById("membersList");
-    const searchInput = document.getElementById("memberSearch");
-    const loadMoreBtn = document.getElementById("loadMoreBtn");
+  const firebaseConfig = {
+    apiKey: "AIzaSyDHzkE5CtKL--MsguovrjqIYphCy48seEY",
+    authDomain: "baaldurgapujasamiti.firebaseapp.com",
+    databaseURL: "https://baaldurgapujasamiti-default-rtdb.firebaseio.com",
+    projectId: "baaldurgapujasamiti",
+    storageBucket: "baaldurgapujasamiti.firebasestorage.app",
+    messagingSenderId: "158315013465",
+    appId: "1:158315013465:web:8a185574b043c65e1c1848",
+    measurementId: "G-L6GZVMJGVB"
+  };
 
-    // Variables
-    let allMembers = [];
-    let visibleCount = 0;
-    const PAGE_SIZE = 3;
 
-    /**
-     * Fetch all members from Firebase at once
-     */
-    async function fetchAllMembers() {
-      const snapshot = await get(ref(db, "members"));
+  /* =====================================================
+     INITIALIZE FIREBASE
+  ===================================================== */
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+
+  /* =====================================================
+     DOM
+  ===================================================== */
+
+  const membersList =
+    document.getElementById("membersList");
+
+  const searchInput =
+    document.getElementById("memberSearch");
+
+  const loadMoreBtn =
+    document.getElementById("loadMoreBtn");
+
+
+  /* =====================================================
+     VARIABLES
+  ===================================================== */
+
+  let allMembers = [];
+
+  let visibleCount = 0;
+
+  const PAGE_SIZE = 3;
+
+
+  /* =====================================================
+     FETCH MEMBERS
+  ===================================================== */
+
+  async function fetchAllMembers() {
+
+    try {
+
+      const snapshot =
+        await get(
+          ref(db, "members")
+        );
+
 
       if (!snapshot.exists()) {
-        membersList.innerHTML = `<li style="text-align:center; padding:10px;">कोई सदस्य नहीं मिला</li>`;
-        loadMoreBtn.style.display = "none";
+
+        membersList.innerHTML = `
+          <li style="
+            text-align:center;
+            padding:10px;
+          ">
+            कोई सदस्य नहीं मिला
+          </li>
+        `;
+
+        loadMoreBtn.style.display =
+          "none";
+
         return;
       }
 
-      const data = snapshot.val();
-      allMembers = Object.keys(data).map(key => ({
-        id: key,
-        ...data[key]
-      }));
 
-      // Oldest member first, newest member last
+      const data =
+        snapshot.val();
+
+
+      /*
+        Firebase key ko stable ID maana jaayega.
+
+        Example:
+
+        Firebase key:
+        MEM007
+
+        Member:
+        {
+          name: "Rahul",
+          order: 1
+        }
+
+        Yahan display/order ke liye
+        "order" use hoga.
+      */
+
+      allMembers =
+        Object.keys(data).map(key => ({
+
+          id: key,
+
+          ...data[key]
+
+        }));
+
+
+      /* =================================================
+         SORT BY DASHBOARD ORDER
+      ================================================= */
+
       allMembers.sort((a, b) => {
-        const numA = parseInt(a.id.replace("MEM", ""), 10);
-        const numB = parseInt(b.id.replace("MEM", ""), 10);
-        return numA - numB;
+
+        const orderA =
+          Number.isFinite(
+            Number(a.order)
+          )
+            ? Number(a.order)
+            : getOldMemberNumber(a.id);
+
+
+        const orderB =
+          Number.isFinite(
+            Number(b.order)
+          )
+            ? Number(b.order)
+            : getOldMemberNumber(b.id);
+
+
+        return orderA - orderB;
+
       });
-      // Initial render
+
+
+      /* =================================================
+         INITIAL RENDER
+      ================================================= */
+
       renderMembers();
+
     }
 
-    /**
-     * Render members in list view with pagination
-     */
-    function renderMembers() {
-      const searchTerm = searchInput.value.toLowerCase().trim();
-      membersList.innerHTML = "";
+    catch (error) {
 
-      // Filter by search term
-      const filtered = allMembers.filter(member => {
-        if (!searchTerm) return true;
+      console.error(
+        "Error loading members:",
+        error
+      );
+
+      membersList.innerHTML = `
+        <li style="
+          text-align:center;
+          padding:10px;
+        ">
+          सदस्य लोड नहीं हो सके
+        </li>
+      `;
+
+      loadMoreBtn.style.display =
+        "none";
+
+    }
+
+  }
+
+
+  /* =====================================================
+     OLD MEMBER NUMBER FALLBACK
+  ===================================================== */
+
+  function getOldMemberNumber(id) {
+
+    const match =
+      String(id)
+        .match(/MEM(\d+)/i);
+
+
+    if (!match) {
+
+      return 999999;
+
+    }
+
+
+    return parseInt(
+      match[1],
+      10
+    );
+
+  }
+
+
+  /* =====================================================
+     GENERATE DISPLAY MEMBER ID
+     
+     IMPORTANT:
+     Firebase key change nahi hoga.
+     Sirf displayed ID position ke according hogi.
+  ===================================================== */
+
+  function getDisplayMemberId(index) {
+
+    return (
+      "MEM" +
+      String(index + 1)
+        .padStart(3, "0")
+    );
+
+  }
+
+
+  /* =====================================================
+     RENDER MEMBERS
+  ===================================================== */
+
+  function renderMembers() {
+
+    const searchTerm =
+      searchInput.value
+        .toLowerCase()
+        .trim();
+
+
+    membersList.innerHTML = "";
+
+
+    /* =================================================
+       FILTER
+    ================================================= */
+
+    const filtered =
+      allMembers.filter(member => {
+
+        if (!searchTerm) {
+
+          return true;
+
+        }
+
+
         return (
-          member.name.toLowerCase().includes(searchTerm) ||
-          (member.role && member.role.toLowerCase().includes(searchTerm))
+
+          String(
+            member.name || ""
+          )
+            .toLowerCase()
+            .includes(searchTerm)
+
+          ||
+
+          String(
+            member.role || ""
+          )
+            .toLowerCase()
+            .includes(searchTerm)
+
         );
+
       });
 
-      // Slice for pagination
-      const toDisplay = filtered.slice(0, visibleCount);
 
-      toDisplay.forEach(member => {
-        const li = document.createElement("li");
-        li.className = "member-item";
+    /* =================================================
+       PAGINATION
+    ================================================= */
+
+    const toDisplay =
+      filtered.slice(
+        0,
+        visibleCount
+      );
+
+
+    /* =================================================
+       CREATE MEMBERS
+    ================================================= */
+
+    toDisplay.forEach(
+      (member) => {
+
+        /*
+          IMPORTANT:
+
+          index filtered list ka nahi,
+          allMembers ka original position
+          hona chahiye.
+
+          Isse search ke time bhi
+          Member ID correct rahegi.
+        */
+
+        const actualIndex =
+          allMembers.indexOf(member);
+
+
+        const displayMemberId =
+          getDisplayMemberId(
+            actualIndex
+          );
+
+
+        const li =
+          document.createElement("li");
+
+
+        li.className =
+          "member-item";
+
 
         li.innerHTML = `
-        <img src="${member.photo || 'https://via.placeholder.com/60'}" alt="${member.name}" class="member-photo">
-        <div class="member-details">
-          <div class="member-name">${member.name}</div>
-          <div class="member-role">${member.role || ''}</div>
-        </div>
-        <button class="call-btn" onclick="window.open('tel:${member.phone}', '_blank')">
-          Contact
-        </button>
-      `;
-        membersList.appendChild(li);
-      });
 
-      // Hide or show Load More button
-      loadMoreBtn.style.display = visibleCount >= filtered.length ? "none" : "block";
-    }
+          <img
+            src="${
+              member.photo ||
+              "https://via.placeholder.com/60"
+            }"
+            alt="${escapeHTML(member.name || "")}"
+            class="member-photo"
+            loading="lazy"
+          >
 
-    /**
-     * Search functionality
-     */
-    searchInput.addEventListener("input", () => {
-      visibleCount = PAGE_SIZE; // reset on search
+
+          <div class="member-details">
+
+            <div class="member-name">
+              ${escapeHTML(member.name || "")}
+            </div>
+
+            <div class="member-role">
+              ${escapeHTML(member.role || "")}
+            </div>
+
+          </div>
+
+
+          <button
+            class="call-btn"
+            onclick="window.open(
+              'tel:${escapeAttribute(member.phone || "")}',
+              '_blank'
+            )"
+          >
+            Contact
+          </button>
+
+        `;
+
+
+        membersList.appendChild(
+          li
+        );
+
+      }
+    );
+
+
+    /* =================================================
+       LOAD MORE
+    ================================================= */
+
+    loadMoreBtn.style.display =
+      visibleCount >= filtered.length
+        ? "none"
+        : "block";
+
+  }
+
+
+  /* =====================================================
+     HTML ESCAPE
+  ===================================================== */
+
+  function escapeHTML(value) {
+
+    return String(value)
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  function escapeAttribute(value) {
+
+    return String(value)
+
+      .replace(
+        /\\/g,
+        "\\\\"
+      )
+
+      .replace(
+        /'/g,
+        "\\'"
+      )
+
+      .replace(
+        /\r?\n/g,
+        " "
+      );
+
+  }
+
+
+  /* =====================================================
+     SEARCH
+  ===================================================== */
+
+  searchInput.addEventListener(
+    "input",
+    () => {
+
+      visibleCount =
+        PAGE_SIZE;
+
       renderMembers();
-    });
 
-    /**
-     * Load More
-     */
-    loadMoreBtn.addEventListener("click", () => {
-      visibleCount += PAGE_SIZE;
-      renderMembers();
-    });
-
-    /**
-     * Initial load
-     */
-    async function init() {
-      visibleCount = PAGE_SIZE;
-      await fetchAllMembers();
     }
+  );
 
-    init();
-  </script>
 
+  /* =====================================================
+     LOAD MORE
+  ===================================================== */
+
+  loadMoreBtn.addEventListener(
+    "click",
+    () => {
+
+      visibleCount +=
+        PAGE_SIZE;
+
+      renderMembers();
+
+    }
+  );
+
+
+  /* =====================================================
+     INITIAL LOAD
+  ===================================================== */
+
+  async function init() {
+
+    visibleCount =
+      PAGE_SIZE;
+
+    await fetchAllMembers();
+
+  }
+
+
+  init();
+
+</script>
 
 </body>
 
