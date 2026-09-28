@@ -666,21 +666,119 @@
 
 
 
-  <!-- YOUTUBE -->
-  <section id="youtube" class="section">
-    <div class="pad">
-      <h2 class="heading">हमारे YouTube चैनल की झलक</h2>
-      <p class="sub">चयनित वीडियो (Placeholder) — इन्हें अपने चैनल के वीडियो links से बदलें।</p>
-      <div class="yt-grid">
-        <iframe src="https://www.youtube.com/embed/QibXoKYFM80" title="YouTube video" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/toNbJChlFhI" title="YouTube video" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/Tj3LlRPj4Kw" title="YouTube video" allowfullscreen></iframe>
+<!-- YOUTUBE -->
+<section id="youtube" class="section">
+  <div class="pad">
+
+    <h2 class="heading">हमारे YouTube चैनल की झलक</h2>
+
+    <p class="sub">
+      हमारे चैनल से जुड़े रहें और नवीनतम वीडियो, कार्यक्रम एवं झांकियां देखें।
+    </p>
+
+    <!-- YOUTUBE CHANNEL LIVE CARD -->
+    <div class="yt-channel-card">
+
+      <div class="yt-channel-left">
+
+        <div class="yt-channel-avatar-wrap">
+          <img
+            id="ytChannelAvatar"
+            src="https://www.gstatic.com/youtube/img/branding/youtubelogo/svg/youtubelogo.svg"
+            alt="YouTube Channel"
+            class="yt-channel-avatar"
+          >
+        </div>
+
+        <div class="yt-channel-info">
+          <div class="yt-channel-name" id="ytChannelName">
+            बेनीगद्दौपुर
+          </div>
+
+          <div class="yt-channel-handle">
+            @benigaddaupur
+          </div>
+
+          <div class="yt-live-status">
+            <span class="yt-live-dot"></span>
+            LIVE CHANNEL STATS
+          </div>
+        </div>
+
       </div>
-      <div style="margin-top:12px">
-        <a class="btn" href="https://youtube.com/@benigaddaupur" target="_blank" rel="noopener">सभी वीडियो देखें</a>
+
+
+      <div class="yt-channel-stats">
+
+        <div class="yt-stat">
+          <span class="yt-stat-value" id="ytSubscribers">लोड हो रहा है...</span>
+          <span class="yt-stat-label">Subscribers</span>
+        </div>
+
+        <div class="yt-stat">
+          <span class="yt-stat-value" id="ytVideos">—</span>
+          <span class="yt-stat-label">Videos</span>
+        </div>
+
+        <div class="yt-stat">
+          <span class="yt-stat-value" id="ytViews">—</span>
+          <span class="yt-stat-label">Total Views</span>
+        </div>
+
       </div>
+
+
+      <a
+        href="https://youtube.com/@benigaddaupur"
+        target="_blank"
+        rel="noopener"
+        class="yt-subscribe-btn"
+      >
+        <span class="yt-btn-icon">▶</span>
+        Subscribe
+      </a>
+
     </div>
-  </section>
+
+
+    <!-- VIDEOS -->
+    <div class="yt-grid">
+
+      <iframe
+        src="https://www.youtube.com/embed/QibXoKYFM80"
+        title="YouTube video"
+        allowfullscreen>
+      </iframe>
+
+      <iframe
+        src="https://www.youtube.com/embed/toNbJChlFhI"
+        title="YouTube video"
+        allowfullscreen>
+      </iframe>
+
+      <iframe
+        src="https://www.youtube.com/embed/Tj3LlRPj4Kw"
+        title="YouTube video"
+        allowfullscreen>
+      </iframe>
+
+    </div>
+
+
+    <div style="margin-top:12px">
+      <a
+        class="btn"
+        href="https://youtube.com/@benigaddaupur"
+        target="_blank"
+        rel="noopener"
+      >
+        सभी वीडियो देखें
+      </a>
+    </div>
+
+  </div>
+</section>
+
 
 
   <!-- ACTIVE MEMBERS -->
@@ -1247,6 +1345,174 @@
 
   </script>
 
+
+<script>
+/* ==========================================
+   YOUTUBE LIVE CHANNEL STATS
+========================================== */
+
+const YOUTUBE_API_KEY = "AIzaSyCgNt4gP7J5vZ1DE_y6jE4jIABWtvk30vk";
+
+const YOUTUBE_HANDLE = "benigaddaupur";
+
+
+async function loadYouTubeStats() {
+
+    try {
+
+        const apiURL =
+            "https://www.googleapis.com/youtube/v3/channels" +
+            "?part=snippet,statistics" +
+            "&forHandle=" + encodeURIComponent(YOUTUBE_HANDLE) +
+            "&key=" + encodeURIComponent(YOUTUBE_API_KEY);
+
+
+        const response = await fetch(apiURL);
+
+        if (!response.ok) {
+            throw new Error("YouTube API Error");
+        }
+
+
+        const data = await response.json();
+
+
+        if (!data.items || !data.items.length) {
+            throw new Error("Channel not found");
+        }
+
+
+        const channel = data.items[0];
+
+        const snippet = channel.snippet;
+        const statistics = channel.statistics;
+
+
+        /* CHANNEL NAME */
+
+        document.getElementById("ytChannelName").textContent =
+            snippet.title;
+
+
+        /* CHANNEL LOGO */
+
+        if (snippet.thumbnails && snippet.thumbnails.high) {
+
+            document.getElementById("ytChannelAvatar").src =
+                snippet.thumbnails.high.url;
+
+        }
+
+
+        /* SUBSCRIBERS */
+
+        if (
+            statistics.hiddenSubscriberCount === true
+        ) {
+
+            document.getElementById("ytSubscribers").textContent =
+                "Hidden";
+
+        } else {
+
+            document.getElementById("ytSubscribers").textContent =
+                formatYTNumber(statistics.subscriberCount);
+
+        }
+
+
+        /* VIDEOS */
+
+        document.getElementById("ytVideos").textContent =
+            formatYTNumber(statistics.videoCount);
+
+
+        /* VIEWS */
+
+        document.getElementById("ytViews").textContent =
+            formatYTNumber(statistics.viewCount);
+
+
+    } catch (error) {
+
+        console.error(
+            "YouTube Stats Error:",
+            error
+        );
+
+
+        document.getElementById("ytSubscribers").textContent =
+            "Unavailable";
+
+
+        document.getElementById("ytVideos").textContent =
+            "—";
+
+
+        document.getElementById("ytViews").textContent =
+            "—";
+
+    }
+
+}
+
+
+/* ==========================================
+   NUMBER FORMATTER
+========================================== */
+
+function formatYTNumber(number) {
+
+    number = Number(number);
+
+    if (!Number.isFinite(number)) {
+        return "—";
+    }
+
+
+    if (number >= 10000000) {
+        return (number / 10000000)
+            .toFixed(1)
+            .replace(".0", "") + "Cr";
+    }
+
+
+    if (number >= 100000) {
+        return (number / 100000)
+            .toFixed(1)
+            .replace(".0", "") + "L";
+    }
+
+
+    if (number >= 1000) {
+        return (number / 1000)
+            .toFixed(1)
+            .replace(".0", "") + "K";
+    }
+
+
+    return number.toLocaleString("en-IN");
+
+}
+
+
+/* FIRST LOAD */
+
+loadYouTubeStats();
+
+
+/* AUTO REFRESH — EVERY 60 SECONDS */
+
+setInterval(
+    loadYouTubeStats,
+    60 * 1000
+);
+
+</script>
+
+
+
+  
 </body>
 
 </html>
