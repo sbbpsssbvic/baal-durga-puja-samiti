@@ -4,15 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="Author" content="Anurag Kasaudhan[AK]">
 
-  <title>Members Dashboard | Baal Durga Puja Samiti Benigaddaupur - 224203</title>
+  <title>Members Dashboard</title>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-  <link rel="icon" type="image/x-icon" href="/photos/favicon-192x192.png">
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
@@ -78,6 +77,23 @@
       color: var(--text);
     }
 
+
+    /* =====================================================
+       DRAG & DROP
+    ===================================================== */
+
+    #rows tr.member-row { cursor: default; }
+    #rows tr.member-row.sortable-ghost { opacity: .35; }
+    #rows tr.member-row.sortable-chosen { box-shadow: inset 0 0 0 2px rgba(212, 175, 55, .35); }
+    .drag-cell { width: 52px; text-align: center; }
+    .drag-handle {
+      width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 10px;
+      background: #fff; color: #999; display: inline-flex; align-items: center; justify-content: center;
+      cursor: grab; font-size: 18px; user-select: none; touch-action: none; transition: .2s ease;
+    }
+    .drag-handle:hover { color: var(--primary); border-color: rgba(155, 34, 38, .25); transform: translateY(-1px); }
+    .drag-handle:active { cursor: grabbing; }
+    .order-saving { opacity: .65; pointer-events: none; }
 
     /* =====================================================
        PAGE
@@ -1098,6 +1114,8 @@
 
             <tr>
 
+              <th class="drag-cell" aria-label="Drag to reorder" title="Drag to reorder">↕</th>
+
               <th>ID</th>
 
               <th>Name</th>
@@ -1121,7 +1139,7 @@
 
             <tr class="state-row">
 
-              <td colspan="7">
+              <td colspan="8">
 
                 <div class="loader"></div>
 
@@ -1541,7 +1559,7 @@
 
           <tr class="state-row">
 
-            <td colspan="7">
+            <td colspan="8">
 
               ❌ Unable to load members.
 
@@ -1564,6 +1582,76 @@
        RENDER
     ===================================================== */
 
+    function getNumericMemberNumber(id) {
+      const match = String(id || "").match(/^MEM(\d+)$/i);
+      return match ? parseInt(match[1], 10) : 0;
+    }
+
+    function getMemberOrder(id, member) {
+      const saved = Number(member?.order);
+      if (Number.isFinite(saved) && saved > 0) return saved;
+      return getNumericMemberNumber(id) || 999999;
+    }
+
+    function getDisplayMemberId(id, member) {
+      return "MEM" + String(getMemberOrder(id, member)).padStart(3, "0");
+    }
+
+    function getOrderedEntries() {
+      return Object.entries(members).sort(
+        ([idA, memberA], [idB, memberB]) => getMemberOrder(idA, memberA) - getMemberOrder(idB, memberB)
+      );
+    }
+
+    let memberSorter = null;
+
+    function setupMemberSorter() {
+      if (typeof Sortable === "undefined" || !tbody) return;
+      if (memberSorter) memberSorter.destroy();
+      memberSorter = Sortable.create(tbody, {
+        animation: 220,
+        handle: ".drag-handle",
+        draggable: "tr.member-row",
+        ghostClass: "sortable-ghost",
+        chosenClass: "sortable-chosen",
+        onEnd: async event => {
+          if (searchInput.value.trim()) {
+            renderMembers();
+            showToast("Search clear karke members reorder karein.", "error");
+            return;
+          }
+          if (event.oldIndex === event.newIndex) return;
+          await saveMemberOrder();
+        }
+      });
+      memberSorter.option("disabled", Boolean(searchInput.value.trim()));
+    }
+
+    async function saveMemberOrder() {
+      if (!auth.currentUser) {
+        window.location.replace("login.html");
+        return;
+      }
+      const rowIds = [...tbody.querySelectorAll("tr.member-row")]
+        .map(row => row.dataset.key).filter(Boolean);
+      if (!rowIds.length) return;
+      const updates = {};
+      rowIds.forEach((id, index) => { updates[id + "/order"] = index + 1; });
+      tbody.classList.add("order-saving");
+      try {
+        await membersRef.update(updates);
+        rowIds.forEach((id, index) => { if (members[id]) members[id].order = index + 1; });
+        renderMembers();
+        showToast("Member order updated successfully.", "success");
+      } catch (error) {
+        console.error("Order update failed:", error);
+        renderMembers();
+        showToast("Order update failed. Please try again.", "error");
+      } finally {
+        tbody.classList.remove("order-saving");
+      }
+    }
+
     function renderMembers() {
 
       const query =
@@ -1573,9 +1661,7 @@
 
 
       const entries =
-        Object.entries(
-          members
-        );
+        getOrderedEntries()
 
 
       totalMembers.textContent =
@@ -1589,6 +1675,8 @@
             const text = [
 
               id,
+
+              getDisplayMemberId(id, member),
 
               member.name,
 
@@ -1626,7 +1714,7 @@
 
           <tr class="state-row">
 
-            <td colspan="7">
+            <td colspan="8">
 
               ${
                 entries.length
@@ -1652,6 +1740,9 @@
 
               const safeId =
                 escapeHTML(id);
+
+              const displayId =
+                escapeHTML(getDisplayMemberId(id, member));
 
               const name =
                 escapeHTML(
@@ -1726,14 +1817,16 @@
 
               return `
 
-                <tr>
+                <tr class="member-row" data-key="${safeId}">
+
+                  <td class="drag-cell">
+                    <span class="drag-handle" title="Drag to change position" aria-label="Drag to change position">⋮⋮</span>
+                  </td>
 
                   <td>
-
                     <span class="member-id">
-                      ${safeId}
+                      ${displayId}
                     </span>
-
                   </td>
 
 
@@ -1812,6 +1905,8 @@
             }
           )
           .join("");
+
+      setupMemberSorter();
 
     }
 
@@ -2055,62 +2150,17 @@
 
     async function generateMemberId() {
 
-      const snapshot =
-        await membersRef
-          .once("value");
-
-
+      const entries = Object.entries(members);
       let highestNumber = 0;
 
+      entries.forEach(([id, member]) => {
+        const number = getMemberOrder(id, member);
+        if (Number.isFinite(number) && number > highestNumber) highestNumber = number;
+      });
 
-      snapshot.forEach(
-        child => {
-
-          const key =
-            child.key || "";
-
-
-          if (
-            key.startsWith(
-              "MEM"
-            )
-          ) {
-
-            const number =
-              parseInt(
-                key.substring(3),
-                10
-              );
-
-
-            if (
-              !isNaN(number) &&
-              number > highestNumber
-            ) {
-
-              highestNumber =
-                number;
-
-            }
-
-          }
-
-        }
-      );
-
-
-      return (
-        "MEM" +
-        String(
-          highestNumber + 1
-        ).padStart(
-          3,
-          "0"
-        )
-      );
+      return "MEM" + String(highestNumber + 1).padStart(3, "0");
 
     }
-
 
     /* =====================================================
        SAVE MEMBER
@@ -2210,6 +2260,13 @@
             await generateMemberId();
 
 
+          const highestOrder = Math.max(
+            0,
+            ...Object.entries(members).map(
+              ([id, member]) => getMemberOrder(id, member)
+            )
+          );
+
           const newMember = {
 
             name: name,
@@ -2218,7 +2275,9 @@
 
             role: role,
 
-            photo: photoURL
+            photo: photoURL,
+
+            order: highestOrder + 1
 
           };
 
