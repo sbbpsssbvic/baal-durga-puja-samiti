@@ -416,6 +416,81 @@
 
 
 
+.heading {
+    position: relative;
+    display: inline-block;
+
+    margin: 0 0 10px;
+    padding: 0 0 12px;
+
+    font-size: clamp(26px, 3vw, 25px);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.8px;
+
+    color: #751313;
+
+    /* very subtle premium text depth */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+/* Elegant gold accent */
+.heading::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 52px;
+    height: 3px;
+
+    border-radius: 3px;
+
+    background: linear-gradient(
+        90deg,
+        #9b6a18,
+        #e0b84f
+    );
+
+    transition: width .4s ease;
+}
+
+/* Small secondary accent */
+.heading:hover::after {
+    width: 95px;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .heading {
+        margin-bottom: 26px;
+        padding-bottom: 10px;
+
+        font-size: clamp(20px, 3vw, 25px);
+        letter-spacing: 0.5px;
+    }
+
+    .heading::after {
+        width: 42px;
+        height: 2.5px;
+    }
+
+    .heading:hover::after {
+        width: 70px;
+    }
+
+
+    .members-head {
+    text-align: center !important;
+    font-size: x-large !important;
+    color:#2b1000 !important;
+
+}
+
+}
 
 
 
@@ -667,86 +742,313 @@
 
 
 
-        /* Programme carousel */
-        .carousel {
-            position: relative;
-            overflow: hidden;
-        }
+/* =========================================================
+   PROGRAMME HIGHLIGHTS — PREMIUM CAROUSEL
+   ========================================================= */
 
-        .track {
-            display: flex;
-            transition: transform 0.8s ease-in-out;
-            will-change: transform;
-        }
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 4px 18px;
+}
 
-        .card {
-            flex: 0 0 calc(33.333% - 14px);
-            /* exactly 3 cards fully visible */
-            margin-right: 14px;
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 14px;
-            overflow: hidden;
-            color: #222;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+/* Sliding track */
+#progTrack {
+    display: flex;
+    gap: 18px;
+    transition: transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform;
+}
 
-        .card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
+/* Card */
+#progTrack .card {
+    position: relative;
+    flex: 0 0 calc((100% - 36px) / 3);
+    min-width: 0;
+    margin: 0;
 
-        .card .cap {
-            padding: 10px 12px;
-            font-weight: 600;
-            text-align: center;
-            color: #111;
-        }
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 18px;
+    overflow: hidden;
 
-        /* Carousel arrows */
-        .c-ar {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.55);
-            color: #fff;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.04);
 
-        .c-ar:hover {
-            background: rgba(0, 0, 0, 0.75);
-        }
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
 
-        .c-prev {
-            left: 10px;
-        }
+/* Card hover */
+#progTrack .card:hover {
+    transform: translateY(-6px);
 
-        .c-next {
-            right: 10px;
-        }
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.14),
+        0 4px 10px rgba(0, 0, 0, 0.06);
+}
 
-        /* Hide scrollbar */
-        .track::-webkit-scrollbar {
-            display: none;
-        }
+/* Image wrapper effect */
+#progTrack .card img {
+    display: block;
+    width: 100%;
+    height: 205px;
+    object-fit: cover;
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .card {
-                flex: 0 0 80%;
-            }
-        }
+    transition:
+        transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+        filter 0.4s ease;
+}
 
+#progTrack .card:hover img {
+    transform: scale(1.055);
+    filter: brightness(1.04);
+}
+
+/* Dark image gradient */
+#progTrack .card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 205px;
+
+    pointer-events: none;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 55%,
+        rgba(0, 0, 0, 0.16) 100%
+    );
+}
+
+/* Caption */
+#progTrack .card .cap {
+    position: relative;
+    z-index: 2;
+
+    min-height: 52px;
+    padding: 14px 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+
+    color: #171717;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.45;
+    text-align: center;
+}
+
+/* =========================================================
+   ARROWS
+   ========================================================= */
+
+.c-ar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+
+    background: rgba(20, 20, 20, 0.68);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    color: #fff;
+    font-size: 27px;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+
+    cursor: pointer;
+    z-index: 20;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Show arrows when carousel is hovered */
+.carousel:hover .c-ar {
+    opacity: 1;
+    visibility: visible;
+}
+
+.c-ar:hover {
+    background: rgba(15, 15, 15, 0.9);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.c-prev {
+    left: 14px;
+}
+
+.c-next {
+    right: 14px;
+}
+
+.c-prev:hover {
+    transform: translateY(-50%) scale(1.08);
+}
+
+.c-next:hover {
+    transform: translateY(-50%) scale(1.08);
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    #progTrack {
+        gap: 16px;
+    }
+
+    #progTrack .card {
+        flex: 0 0 calc((100% - 16px) / 2);
+    }
+
+    #progTrack .card img {
+        height: 190px;
+    }
+
+    #progTrack .card::after {
+        height: 190px;
+    }
+
+    .c-ar {
+        width: 42px;
+        height: 42px;
+    }
+
+    .c-prev {
+        left: 10px;
+    }
+
+    .c-next {
+        right: 10px;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .carousel {
+        padding:
+            6px
+            2px
+            14px;
+    }
+
+    #progTrack {
+        gap: 14px;
+    }
+
+    #progTrack .card {
+        flex: 0 0 100%;
+        border-radius: 16px;
+    }
+
+    #progTrack .card img {
+        height: 210px;
+    }
+
+    #progTrack .card::after {
+        height: 210px;
+    }
+
+    #progTrack .card .cap {
+        min-height: 54px;
+        padding: 13px 14px;
+
+        font-size: 14px;
+    }
+
+    .c-ar {
+        width: 38px;
+        height: 38px;
+
+        font-size: 23px;
+        background: rgba(15, 15, 15, 0.72);
+    }
+
+    .c-prev {
+        left: 8px;
+    }
+
+    .c-next {
+        right: 8px;
+    }
+
+    /* Touch devices don't need permanent arrows */
+    .carousel:active .c-ar {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    #progTrack .card img {
+        height: 185px;
+    }
+
+    #progTrack .card::after {
+        height: 185px;
+    }
+
+    #progTrack .card .cap {
+        font-size: 13px;
+        padding: 12px;
+    }
+
+    .c-ar {
+        width: 36px;
+        height: 36px;
+        font-size: 21px;
+    }
+}
+
+/* Prevent text/image selection during dragging */
+.carousel,
+.carousel * {
+    -webkit-tap-highlight-color: transparent;
+}
+
+#progTrack .card img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
 
         /* YouTube */
         .yt-grid {
