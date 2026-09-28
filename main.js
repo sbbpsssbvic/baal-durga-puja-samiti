@@ -179,38 +179,243 @@ if (heroSwipeArea) {
 
 
 
-/* ---------- Program Carousel ---------- */
-const track = document.getElementById('progTrack');
-let progIndex = 0;
-const cardCount = track.children.length;
-const cardsVisible = 3;
+/* =========================================================
+   PROGRAMME CAROUSEL — RESPONSIVE + SWIPE
+   ========================================================= */
 
-function updateCarousel() {
-  const cardWidth = track.children[0].offsetWidth + 14; 
-  track.style.transform = `translateX(-${progIndex * cardWidth}px)`;
-}
+(() => {
 
-document.querySelector('.c-next').onclick = () => {
-  if (progIndex < cardCount - cardsVisible) progIndex++;
-  else progIndex = 0;
-  updateCarousel();
-};
+    const carousel = document.querySelector('.carousel');
+    const track = document.getElementById('progTrack');
+    const prevBtn = document.querySelector('.c-prev');
+    const nextBtn = document.querySelector('.c-next');
 
-document.querySelector('.c-prev').onclick = () => {
-  if (progIndex > 0) progIndex--;
-  else progIndex = cardCount - cardsVisible;
-  updateCarousel();
-};
+    if (!carousel || !track || !prevBtn || !nextBtn) return;
 
-// Auto-slide every 4 seconds
-setInterval(() => {
-  if (progIndex < cardCount - cardsVisible) progIndex++;
-  else progIndex = 0;
-  updateCarousel();
-}, 4000);
+    const cards = Array.from(track.children);
 
-// Initial position
-updateCarousel();
+    let currentIndex = 0;
+    let cardsVisible = 3;
+    let autoSlide;
+
+    /* -----------------------------------------
+       Get responsive number of visible cards
+       ----------------------------------------- */
+
+    function getCardsVisible() {
+
+        if (window.innerWidth <= 600) {
+            return 1;
+        }
+
+        if (window.innerWidth <= 900) {
+            return 2;
+        }
+
+        return 3;
+    }
+
+    /* -----------------------------------------
+       Update carousel
+       ----------------------------------------- */
+
+    function updateCarousel(animate = true) {
+
+        cardsVisible = getCardsVisible();
+
+        const maxIndex = Math.max(
+            0,
+            cards.length - cardsVisible
+        );
+
+        /* Keep index valid after resize */
+        if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+        }
+
+        const card = cards[0];
+
+        if (!card) return;
+
+        const cardWidth = card.getBoundingClientRect().width;
+
+        const gap = parseFloat(
+            getComputedStyle(track).gap
+        ) || 0;
+
+        const moveAmount =
+            (cardWidth + gap) * currentIndex;
+
+        if (!animate) {
+            track.style.transition = 'none';
+        } else {
+            track.style.transition =
+                'transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1)';
+        }
+
+        track.style.transform =
+            `translate3d(-${moveAmount}px, 0, 0)`;
+
+        if (!animate) {
+            requestAnimationFrame(() => {
+                track.style.transition =
+                    'transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1)';
+            });
+        }
+    }
+
+    /* -----------------------------------------
+       Next
+       ----------------------------------------- */
+
+    function nextSlide() {
+
+        const maxIndex =
+            Math.max(0, cards.length - cardsVisible);
+
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+        } else {
+            currentIndex = 0;
+        }
+
+        updateCarousel();
+    }
+
+    /* -----------------------------------------
+       Previous
+       ----------------------------------------- */
+
+    function previousSlide() {
+
+        const maxIndex =
+            Math.max(0, cards.length - cardsVisible);
+
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = maxIndex;
+        }
+
+        updateCarousel();
+    }
+
+    /* -----------------------------------------
+       Buttons
+       ----------------------------------------- */
+
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        restartAutoSlide();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        previousSlide();
+        restartAutoSlide();
+    });
+
+    /* -----------------------------------------
+       Auto slide
+       ----------------------------------------- */
+
+    function startAutoSlide() {
+
+        clearInterval(autoSlide);
+
+        autoSlide = setInterval(() => {
+            nextSlide();
+        }, 4500);
+    }
+
+    function restartAutoSlide() {
+
+        clearInterval(autoSlide);
+        startAutoSlide();
+    }
+
+    /* -----------------------------------------
+       Pause while hovering
+       ----------------------------------------- */
+
+    carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoSlide);
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+        startAutoSlide();
+    });
+
+    /* -----------------------------------------
+       Touch / Swipe
+       ----------------------------------------- */
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener(
+        'touchstart',
+        (e) => {
+
+            touchStartX =
+                e.changedTouches[0].screenX;
+
+            clearInterval(autoSlide);
+
+        },
+        { passive: true }
+    );
+
+    carousel.addEventListener(
+        'touchend',
+        (e) => {
+
+            touchEndX =
+                e.changedTouches[0].screenX;
+
+            const difference =
+                touchStartX - touchEndX;
+
+            /* Minimum swipe distance */
+            if (Math.abs(difference) > 45) {
+
+                if (difference > 0) {
+                    nextSlide();
+                } else {
+                    previousSlide();
+                }
+            }
+
+            startAutoSlide();
+
+        },
+        { passive: true }
+    );
+
+    /* -----------------------------------------
+       Responsive resize
+       ----------------------------------------- */
+
+    let resizeTimer;
+
+    window.addEventListener('resize', () => {
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(() => {
+            updateCarousel(false);
+        }, 150);
+
+    });
+
+    /* -----------------------------------------
+       Initial setup
+       ----------------------------------------- */
+
+    updateCarousel(false);
+    startAutoSlide();
+
+})();
+
 
 
 
