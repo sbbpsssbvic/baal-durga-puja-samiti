@@ -1487,7 +1487,8 @@
 
     let editingId = null;
 
-
+const DEFAULT_MEMBER_PHOTO =
+  "https://baal-durga-puja-samiti.netlify.app/photos/Logo-100kb.jpeg";
     /* =====================================================
        ESCAPE HTML
     ===================================================== */
@@ -1928,34 +1929,35 @@
        ADD MODAL
     ===================================================== */
 
-    function openAddModal() {
+   function openAddModal() {
 
-      editingId = null;
+  editingId = null;
 
-      memberForm.reset();
+  memberForm.reset();
 
-      modalTitle.textContent =
-        "Add New Member";
+  modalTitle.textContent =
+    "Add New Member";
 
-      saveBtn.textContent =
-        "Add Member";
+  saveBtn.textContent =
+    "Add Member";
 
-      currentPhoto.style.display =
-        "none";
+  // Default site logo
+  currentPhotoImg.src =
+    DEFAULT_MEMBER_PHOTO;
 
-      currentPhotoImg.src = "";
+  currentPhoto.style.display =
+    "flex";
 
-      modal.classList.add(
-        "show"
-      );
+  modal.classList.add(
+    "show"
+  );
 
-      setTimeout(
-        () => memberName.focus(),
-        100
-      );
+  setTimeout(
+    () => memberName.focus(),
+    100
+  );
 
-    }
-
+}
 
     /* =====================================================
        EDIT MODAL
@@ -2218,16 +2220,7 @@
          ADD MEMBER
       --------------------------------------------- */
 
-      if (!editingId && !file) {
 
-        showToast(
-          "Please select a member photo.",
-          "error"
-        );
-
-        return;
-
-      }
 
 
       saveBtn.disabled =
@@ -2243,24 +2236,30 @@
            ADD
         ------------------------------------------- */
 
-        if (!editingId) {
+if (!editingId) {
 
-          saveBtn.textContent =
-            "Uploading Photo...";
+  // If user selected a photo, upload it.
+  // Otherwise use the default site logo.
+  if (file) {
 
+    saveBtn.textContent =
+      "Uploading Photo...";
 
-          photoURL =
-            await uploadPhoto(
-              file
-            );
+    photoURL =
+      await uploadPhoto(file);
 
+  } else {
 
-          saveBtn.textContent =
-            "Saving Member...";
+    photoURL =
+      DEFAULT_MEMBER_PHOTO;
 
+  }
 
-          const newId =
-            await generateMemberId();
+  saveBtn.textContent =
+    "Saving Member...";
+
+  const newId =
+    await generateMemberId();
 
 
           const highestOrder = Math.max(
