@@ -55,6 +55,345 @@
 
 <body>
 
+
+<!-- ================================
+     AUTO IMAGE POPUP
+================================ -->
+
+<div id="imagePopup" class="image-popup" aria-hidden="true">
+
+  <div class="popup-backdrop"></div>
+
+  <div class="popup-box">
+
+    <!-- CLOSE BUTTON -->
+    <button
+      type="button"
+      class="popup-close"
+      id="popupClose"
+      aria-label="Close popup"
+    >
+      &times;
+    </button>
+
+    <!-- POPUP IMAGE -->
+    <img
+      src="https://res.cloudinary.com/da0bxa4am/image/fetch/f_auto,q_auto/https://drive.google.com/uc%3Fid%3D1OF7TEZj1bpTq7W2arcadj9PtSon3nJvW"
+      alt="Notification Image"
+      class="popup-image"
+    >
+
+  </div>
+
+</div>
+
+
+<style>
+/* =========================================
+   POPUP OVERLAY
+========================================= */
+
+.image-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+
+/* OPEN STATE */
+
+.image-popup.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* =========================================
+   DARK BACKDROP
+========================================= */
+
+.popup-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+
+/* =========================================
+   POPUP BOX
+========================================= */
+
+.popup-box {
+  position: relative;
+  z-index: 2;
+
+  max-width: min(92vw, 900px);
+  max-height: 92vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: scale(0.72);
+  opacity: 0;
+
+  transition:
+    transform 0.45s cubic-bezier(.16, 1, .3, 1),
+    opacity 0.35s ease;
+}
+
+
+/* OPEN ANIMATION */
+
+.image-popup.active .popup-box {
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.popup-image {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 92vw;
+  max-height: 88vh;
+
+  object-fit: contain;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.55);
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.popup-close {
+  position: absolute;
+
+  top: -16px;
+  right: -16px;
+
+  width: 42px;
+  height: 42px;
+
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+
+  background: rgba(20, 20, 20, 0.9);
+  color: #fff;
+
+  font-size: 29px;
+  line-height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 10;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.popup-close:hover {
+  transform: rotate(90deg) scale(1.08);
+
+  background: #000;
+
+  border-color: #fff;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .image-popup {
+    padding: 14px;
+  }
+
+  .popup-box {
+    max-width: 94vw;
+    max-height: 90vh;
+  }
+
+  .popup-image {
+    max-width: 94vw;
+    max-height: 82vh;
+
+    border-radius: 10px;
+  }
+
+  .popup-close {
+    top: -14px;
+    right: -8px;
+
+    width: 38px;
+    height: 38px;
+
+    font-size: 26px;
+  }
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+  .popup-image {
+    max-width: 95vw;
+    max-height: 78vh;
+  }
+
+  .popup-close {
+    width: 35px;
+    height: 35px;
+
+    font-size: 24px;
+  }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .image-popup,
+  .popup-box,
+  .popup-close {
+    transition: none !important;
+  }
+}
+</style>
+
+
+<script>
+/* =========================================
+   IMAGE POPUP JAVASCRIPT
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const popup = document.getElementById("imagePopup");
+  const closeButton = document.getElementById("popupClose");
+  const backdrop = document.querySelector(".popup-backdrop");
+
+  if (!popup || !closeButton) return;
+
+
+  /* ================================
+     OPEN POPUP
+  ================================= */
+
+  document.body.style.overflow = "hidden";
+
+  requestAnimationFrame(() => {
+    popup.classList.add("active");
+    popup.setAttribute("aria-hidden", "false");
+  });
+
+
+  /* ================================
+     CLOSE POPUP
+  ================================= */
+
+  function closePopup() {
+
+    popup.classList.remove("active");
+    popup.setAttribute("aria-hidden", "true");
+
+    document.body.style.overflow = "";
+
+
+    /* Remove from accessibility tree
+       after closing animation */
+
+    setTimeout(() => {
+      popup.style.visibility = "hidden";
+    }, 400);
+  }
+
+
+  /* ================================
+     CLOSE BUTTON
+  ================================= */
+
+  closeButton.addEventListener("click", closePopup);
+
+
+  /* ================================
+     CLICK OUTSIDE IMAGE
+  ================================= */
+
+  backdrop.addEventListener("click", closePopup);
+
+
+  /* ================================
+     ESC KEY
+  ================================= */
+
+  document.addEventListener("keydown", function (event) {
+
+    if (event.key === "Escape") {
+      closePopup();
+    }
+
+  });
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+  
+
   <!-- NAV -->
   <!-- ✅ HEADER -->
   <header class="nav">
